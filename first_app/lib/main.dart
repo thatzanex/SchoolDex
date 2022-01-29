@@ -26,22 +26,24 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.normal);
+  static const TextStyle secondStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Home',
-      style: TextStyle(fontStyle: FontStyle.italic),
+      style: secondStyle,
     ),
     Text(
-      'Business',
+      'AG',
       style: optionStyle,
     ),
     Text(
-      'School',
-      style: optionStyle,
+      'Nachhilfe',
+      style: secondStyle,
     ),
     Text(
-      'Settings',
+      'Einstellungen',
       style: optionStyle,
     ),
   ];
@@ -70,17 +72,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            label: 'Business',
+            label: 'AG',
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: 'School',
+            label: 'Nachhilfe',
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: 'Einstellungen',
             backgroundColor: Colors.blue,
           ),
         ],
