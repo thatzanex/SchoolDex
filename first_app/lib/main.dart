@@ -29,19 +29,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Home',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Business',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'School',
       style: optionStyle,
     ),
     Text(
-      'Index 3: Settings',
+      'Settings',
       style: optionStyle,
     ),
   ];
@@ -56,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: const Text('SchoolDex'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -66,22 +66,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: 'Business',
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'School',
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
-            backgroundColor: Colors.pink,
+            backgroundColor: Colors.blue,
           ),
         ],
         currentIndex: _selectedIndex,
