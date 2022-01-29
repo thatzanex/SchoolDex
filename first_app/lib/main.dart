@@ -30,7 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Home',
-      style: optionStyle,
+      style: TextStyle(fontStyle: FontStyle.italic),
     ),
     Text(
       'Business',
