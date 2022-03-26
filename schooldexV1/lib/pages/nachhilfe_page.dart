@@ -42,7 +42,6 @@ class _NachhilfepageState extends State<Nachhilfepage> {
     );
   }
 
-  final String nachhilfeueberschrift = 'Nachhilfeanebot';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
