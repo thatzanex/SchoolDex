@@ -10,7 +10,7 @@ class Mensapage extends StatelessWidget {
           title: Text('Speiseplan'),
           actions: <Widget>[MyAccountbottom()],
         ),
-        body: Text('Der Speiseplan deiner Schule'),
+        body: Text('Speiseplan'),
         bottomNavigationBar: MyBottomNavigationBar(
             Colors.white, Colors.white, Colors.white, Colors.orange));
   }
