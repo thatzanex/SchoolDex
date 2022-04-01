@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 
 class AGs {
   String thema;
   String jahrgang;
-  String beschreibung;
+  String? beschreibung;
   String termin;
 
   AGs({
     required this.thema,
     required this.jahrgang,
-    required this.beschreibung,
+    this.beschreibung,
     required this.termin,
   });
 }

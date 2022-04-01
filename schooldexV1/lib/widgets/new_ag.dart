@@ -18,12 +18,11 @@ class _NeueAGState extends State<NeueAG> {
   void submitData() {
     final enteredThema = themaController.text;
     final enteredJahrgang = jahrgangsstufeController.text;
-    final enteredBeschreibung = beschreibungController.text;
+    //final enteredBeschreibung = beschreibungController.text;
     final enteredTermin = terminController.text;
 
     if (enteredThema.isEmpty ||
         enteredJahrgang.isEmpty ||
-        enteredBeschreibung.isEmpty ||
         enteredTermin.isEmpty) {
       return;
     }
@@ -42,47 +41,47 @@ class _NeueAGState extends State<NeueAG> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(10, 15, 10, 5),
-          child: Text(
+          margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+          child: const Text(
             'Neues AG Angebot',
             style: TextStyle(fontSize: 28),
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: InputDecoration(labelText: 'Thema'),
+            decoration: const InputDecoration(labelText: 'Thema'),
             controller: themaController,
             onSubmitted: (_) => submitData(),
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration:
-                InputDecoration(labelText: 'Angesprochene Jahrgangsstufe'),
+            decoration: const InputDecoration(
+                labelText: 'Angesprochene Jahrgangsstufe'),
             controller: jahrgangsstufeController,
             onSubmitted: (_) => submitData(),
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: InputDecoration(labelText: 'Termin'),
+            decoration: const InputDecoration(labelText: 'Termin'),
             controller: terminController,
             onSubmitted: (_) => submitData(),
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: InputDecoration(labelText: 'Beschreibung'),
+            decoration: const InputDecoration(labelText: 'Beschreibung'),
             controller: beschreibungController,
             onSubmitted: (_) => submitData(),
           ),
         ),
         TextButton(
-          child: Text('Hinzufügen'),
+          child: const Text('Hinzufügen'),
           onPressed: submitData,
         ),
       ],

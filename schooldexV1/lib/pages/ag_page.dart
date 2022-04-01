@@ -3,7 +3,7 @@ import '../widgets/new_ag.dart';
 import '../models/ag.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
-import '../widgets/ag_liste.dart';
+import '../widgets/list_ag.dart';
 
 class AGPage extends StatefulWidget {
   @override

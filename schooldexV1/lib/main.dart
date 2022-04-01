@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:intl/intl.dart';
 import 'pages/ag_page.dart';
 import 'pages/nachhilfe_page.dart';
 import 'pages/mensa_page.dart';

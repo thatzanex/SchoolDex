@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Nachhilfe {
   String fach;
   String jahrgang;
-  String beschreibung;
+  String? beschreibung;
   Color colorcard;
 
   Nachhilfe({
     required this.fach,
     required this.jahrgang,
-    required this.beschreibung,
+    this.beschreibung,
     required this.colorcard,
   });
 }

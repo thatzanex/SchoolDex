@@ -19,12 +19,10 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
   void submitData() {
     final enteredFach = fachController.text;
     final enteredJahrgang = jahrgangsstufeController.text;
-    final enteredBeschreibung = beschreibungController.text;
+    //final enteredBeschreibung = beschreibungController.text;
     Color colorCard;
 
-    if (enteredFach.isEmpty ||
-        enteredJahrgang.isEmpty ||
-        enteredBeschreibung.isEmpty) {
+    if (enteredFach.isEmpty || enteredJahrgang.isEmpty) {
       return;
     }
 
@@ -60,8 +58,8 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(10, 15, 10, 5),
-          child: Text(
+          margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+          child: const Text(
             'Neues Angebot',
             style: TextStyle(fontSize: 28),
           ),
@@ -69,7 +67,7 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
         Container(
           margin: EdgeInsets.all(5),
           child: TextField(
-            decoration: InputDecoration(labelText: 'Fach'),
+            decoration: const InputDecoration(labelText: 'Fach'),
             controller: fachController,
             onSubmitted: (_) => submitData(),
           ),
