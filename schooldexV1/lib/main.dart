@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'SchoolDex V1',
       home: Newspage(),
       routes: {
-        '/nachhilfe': (ctx) => Nachhilfepage(),
-        '/ags': (ctx) => AGPage(),
-        '/news': (ctx) => Newspage(),
-        '/mensa': (ctx) => Mensapage(),
-        '/account': (ctx) => Accountpage()
+        Nachhilfepage.routeName: (ctx) => Nachhilfepage(),
+        AGPage.routeName: (ctx) => AGPage(),
+        Newspage.routeName: (ctx) => Newspage(),
+        Mensapage.routeName: (ctx) => Mensapage(),
+        Accountpage.routeName: (ctx) => Accountpage()
       },
     );
   }

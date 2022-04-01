@@ -15,10 +15,15 @@ class _NeueAGState extends State<NeueAG> {
   final jahrgangsstufeController = TextEditingController();
   final terminController = TextEditingController();
 
+  final _jahrgangFocusNode = FocusNode();
+  final _terminFocusNode = FocusNode();
+  final _beschreibungFocusNode = FocusNode();
+
   void submitData() {
     final enteredThema = themaController.text;
     final enteredJahrgang = jahrgangsstufeController.text;
     //final enteredBeschreibung = beschreibungController.text;
+    //ist unnötig geworden, da die Beschreibung nicht mehr zwingend ist
     final enteredTermin = terminController.text;
 
     if (enteredThema.isEmpty ||
@@ -50,33 +55,39 @@ class _NeueAGState extends State<NeueAG> {
         Container(
           margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: const InputDecoration(labelText: 'Thema'),
-            controller: themaController,
-            onSubmitted: (_) => submitData(),
-          ),
+              decoration: const InputDecoration(labelText: 'Thema'),
+              controller: themaController,
+              onSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_jahrgangFocusNode);
+              }),
         ),
         Container(
           margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: const InputDecoration(
-                labelText: 'Angesprochene Jahrgangsstufe'),
-            controller: jahrgangsstufeController,
-            onSubmitted: (_) => submitData(),
-          ),
+              decoration: const InputDecoration(
+                  labelText: 'Angesprochene Jahrgangsstufe'),
+              controller: jahrgangsstufeController,
+              focusNode: _jahrgangFocusNode,
+              onSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_terminFocusNode);
+              }),
         ),
         Container(
           margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: const InputDecoration(labelText: 'Termin'),
-            controller: terminController,
-            onSubmitted: (_) => submitData(),
-          ),
+              decoration: const InputDecoration(labelText: 'Termin'),
+              controller: terminController,
+              focusNode: _terminFocusNode,
+              onSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_beschreibungFocusNode);
+              }),
         ),
         Container(
           margin: const EdgeInsets.all(5),
           child: TextField(
             decoration: const InputDecoration(labelText: 'Beschreibung'),
             controller: beschreibungController,
+            focusNode: _beschreibungFocusNode,
             onSubmitted: (_) => submitData(),
           ),
         ),

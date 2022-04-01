@@ -6,6 +6,7 @@ import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
 
 class Nachhilfepage extends StatefulWidget {
+  static const routeName = '/nachhilfe';
   @override
   State<Nachhilfepage> createState() => _NachhilfepageState();
 }
@@ -46,7 +47,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nachhilfeangebot'),
+        title: const Text('Nachhilfeangebot'),
         actions: <Widget>[MyAccountbottom()],
       ),
       body: SingleChildScrollView(
@@ -57,7 +58,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => _startAddNeueNachhilfe(context),
       ),
       bottomNavigationBar: MyBottomNavigationBar(

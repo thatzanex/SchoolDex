@@ -12,19 +12,18 @@ class NeueNews extends StatefulWidget {
 
 class _NeueNewsState extends State<NeueNews> {
   final ueberschriftenController = TextEditingController();
-
   final inhaltController = TextEditingController();
 
-  //final jahrgangsstufeController = TextEditingController();
+  final _newsFocusNode = FocusNode();
 
   void submitData() {
     final enteredUeberschrift = ueberschriftenController.text;
     final enteredInhalt = inhaltController.text;
     String datum = DateFormat('dd.MM.yyyy').format(DateTime.now());
 
-    if (enteredUeberschrift.isEmpty || enteredInhalt.isEmpty) {
-      return;
-    }
+    //if (enteredUeberschrift.isEmpty || enteredInhalt.isEmpty) {
+    //return;
+    // }
 
     widget.addNx(
       ueberschriftenController.text,
@@ -48,16 +47,18 @@ class _NeueNewsState extends State<NeueNews> {
         Container(
           margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: const InputDecoration(labelText: 'Überschrift'),
-            controller: ueberschriftenController,
-            onSubmitted: (_) => submitData(),
-          ),
+              decoration: const InputDecoration(labelText: 'Überschrift'),
+              controller: ueberschriftenController,
+              onSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_newsFocusNode);
+              }),
         ),
         Container(
           margin: const EdgeInsets.all(5),
           child: TextField(
             decoration: const InputDecoration(labelText: 'Inhalt'),
             controller: inhaltController,
+            focusNode: _newsFocusNode,
             onSubmitted: (_) => submitData(),
           ),
         ),

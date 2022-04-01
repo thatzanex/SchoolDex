@@ -6,6 +6,7 @@ import '../widgets/account_bottom.dart';
 import '../widgets/list_ag.dart';
 
 class AGPage extends StatefulWidget {
+  static const routeName = '/ags';
   @override
   _AGPageState createState() => _AGPageState();
 }
@@ -56,7 +57,7 @@ class _AGPageState extends State<AGPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => _startAddNeueAG(context),
       ),
       bottomNavigationBar: MyBottomNavigationBar(

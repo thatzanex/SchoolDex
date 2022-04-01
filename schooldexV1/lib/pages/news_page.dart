@@ -7,6 +7,7 @@ import '../widgets/list_news.dart';
 import '../widgets/new_news.dart';
 
 class Newspage extends StatefulWidget {
+  static const routeName = '/news';
   @override
   _NewspageState createState() => _NewspageState();
 }
@@ -54,7 +55,7 @@ class _NewspageState extends State<Newspage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => _startAddNeueNews(context),
       ),
       bottomNavigationBar: MyBottomNavigationBar(

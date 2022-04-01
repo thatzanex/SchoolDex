@@ -16,6 +16,9 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
 
   final jahrgangsstufeController = TextEditingController();
 
+  final _jahrgangFocusNode = FocusNode();
+  final _beschreibungFocusNode = FocusNode();
+
   void submitData() {
     final enteredFach = fachController.text;
     final enteredJahrgang = jahrgangsstufeController.text;
@@ -65,32 +68,38 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
             decoration: const InputDecoration(labelText: 'Fach'),
             controller: fachController,
-            onSubmitted: (_) => submitData(),
+            onSubmitted: (_) {
+              FocusScope.of(context).requestFocus(_jahrgangFocusNode);
+            },
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration:
-                InputDecoration(labelText: 'Angesprochene Jahrgangsstufe'),
+            decoration: const InputDecoration(
+                labelText: 'Angesprochene Jahrgangsstufe'),
             controller: jahrgangsstufeController,
-            onSubmitted: (_) => submitData(),
+            focusNode: _jahrgangFocusNode,
+            onSubmitted: (_) {
+              FocusScope.of(context).requestFocus(_beschreibungFocusNode);
+            },
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
-            decoration: InputDecoration(labelText: 'Beschreibung'),
+            decoration: const InputDecoration(labelText: 'Beschreibung'),
             controller: beschreibungController,
+            focusNode: _beschreibungFocusNode,
             onSubmitted: (_) => submitData(),
           ),
         ),
         TextButton(
-          child: Text('Hinzufügen'),
+          child: const Text('Hinzufügen'),
           onPressed: submitData,
         ),
       ],

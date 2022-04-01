@@ -9,7 +9,7 @@ class MyAccountbottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () => selectPagetoAccount(context),
-      icon: Icon(Icons.person),
+      icon: const Icon(Icons.person),
       iconSize: 40,
     );
   }
