@@ -23,7 +23,7 @@ class NachhilfeListe extends StatelessWidget {
                   ''),
             ),
             child: Card(
-              color: nachhilfen[index].colorcard,
+              color: Color(nachhilfen[index].colorcard),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -32,10 +32,17 @@ class NachhilfeListe extends StatelessWidget {
                     //crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(),
                           Container(
-                            margin: const EdgeInsets.fromLTRB(25, 20, 0, 0),
+                            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: const Text('Mustermann, Max'
+                                //nachhilfen[index].account.toString(),
+                                //style: TextStyle(),
+                                ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                             child: Text(
                               nachhilfen[index].fach.toString(),
                               style: const TextStyle(
@@ -49,7 +56,7 @@ class NachhilfeListe extends StatelessWidget {
                           5,
                           5,
                           15,
-                          5,
+                          0,
                         ),
                         padding: const EdgeInsets.fromLTRB(12, 5, 12, 5),
                         decoration: BoxDecoration(
@@ -74,7 +81,7 @@ class NachhilfeListe extends StatelessWidget {
                     margin: const EdgeInsets.all(5),
                     child: Text(
                       nachhilfen[index].beschreibung.toString(),
-                      style: const TextStyle(fontSize: 17, color: Colors.black),
+                      style: const TextStyle(fontSize: 17),
                     ),
                   ),
                 ],

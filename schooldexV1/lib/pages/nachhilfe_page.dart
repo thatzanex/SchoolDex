@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/nachhilfe.dart';
 import '../widgets/list_nachhilfe.dart';
-import '../widgets/new_Nachhilfe.dart';
+import '../widgets/new_nachhilfe.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
 
@@ -14,15 +14,16 @@ class Nachhilfepage extends StatefulWidget {
 class _NachhilfepageState extends State<Nachhilfepage> {
   final List<Nachhilfe> _userNachhilfen = [
     Nachhilfe(
-        fach: 'Mathe',
-        jahrgang: '8',
-        beschreibung:
-            'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
-        colorcard: Colors.blue.shade300)
+      fach: 'Mathematik',
+      jahrgang: '8',
+      beschreibung:
+          'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
+      colorcard: 0xFF64B5F6,
+    ),
   ];
 
   void _addNeueNachhilfe(
-      String nxFach, String nxJahrgang, String nxBeschreibung, Color nxColor) {
+      String nxFach, String nxJahrgang, String nxBeschreibung, int nxColor) {
     final newNx = Nachhilfe(
         fach: nxFach,
         jahrgang: nxJahrgang,

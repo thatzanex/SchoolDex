@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/models/news.dart';
+import '../models/news.dart';
 import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';

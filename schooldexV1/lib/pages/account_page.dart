@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/account_bottom.dart';
 
 class Accountpage extends StatelessWidget {
   static const routeName = '/account';
@@ -8,15 +7,19 @@ class Accountpage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account'),
-        actions: <Widget>[MyAccountbottom()],
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.all(5),
-            child: const Icon(Icons.person),
-          )
-        ],
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.all(5),
+              child: const Icon(
+                Icons.person,
+                size: 150,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

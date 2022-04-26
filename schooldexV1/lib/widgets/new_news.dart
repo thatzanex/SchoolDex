@@ -21,9 +21,9 @@ class _NeueNewsState extends State<NeueNews> {
     final enteredInhalt = inhaltController.text;
     String datum = DateFormat('dd.MM.yyyy').format(DateTime.now());
 
-    //if (enteredUeberschrift.isEmpty || enteredInhalt.isEmpty) {
-    //return;
-    // }
+    if (enteredUeberschrift.isEmpty || enteredInhalt.isEmpty) {
+      return;
+    }
 
     widget.addNx(
       ueberschriftenController.text,
