@@ -18,17 +18,16 @@ class _NachhilfepageState extends State<Nachhilfepage> {
       jahrgang: '8',
       beschreibung:
           'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
-      colorcard: 0xFF64B5F6,
     ),
   ];
 
   void _addNeueNachhilfe(
-      String nxFach, String nxJahrgang, String nxBeschreibung, int nxColor) {
+      String nxFach, String nxJahrgang, String nxBeschreibung) {
     final newNx = Nachhilfe(
-        fach: nxFach,
-        jahrgang: nxJahrgang,
-        beschreibung: nxBeschreibung,
-        colorcard: nxColor);
+      fach: nxFach,
+      jahrgang: nxJahrgang,
+      beschreibung: nxBeschreibung,
+    );
 
     setState(() {
       _userNachhilfen.add(newNx);
@@ -54,7 +53,8 @@ class _NachhilfepageState extends State<Nachhilfepage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            NachhilfeListe(_userNachhilfen),
+            //NachhilfeListe(_userNachhilfen),
+            NachhilfeListe(),
           ],
         ),
       ),

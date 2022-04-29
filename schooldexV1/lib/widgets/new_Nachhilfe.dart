@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services.dart';
 
 class NeueNachhilfe extends StatefulWidget {
   final Function addNx;
@@ -11,9 +12,7 @@ class NeueNachhilfe extends StatefulWidget {
 
 class _NeueNachhilfeState extends State<NeueNachhilfe> {
   final fachController = TextEditingController();
-
   final beschreibungController = TextEditingController();
-
   final jahrgangsstufeController = TextEditingController();
 
   final _jahrgangFocusNode = FocusNode();
@@ -22,36 +21,19 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
   void submitData() {
     final enteredFach = fachController.text;
     final enteredJahrgang = jahrgangsstufeController.text;
-    //final enteredBeschreibung = beschreibungController.text;
-    Color colorCard;
+    //final enteredBeschreibung = beschreibungController.text; wird nicht gebraucht, da dieser Wert Null sein darf.
 
     if (enteredFach.isEmpty || enteredJahrgang.isEmpty) {
       return;
     }
 
-    if (enteredFach.startsWith('Mathe')) {
-      colorCard = Colors.blue.shade300;
-    } else if (enteredFach.startsWith('Deutsch')) {
-      colorCard = Colors.orange;
-    } else if (enteredFach.startsWith('Fran')) {
-      colorCard = Colors.red;
-    } else if (enteredFach.startsWith('Englis')) {
-      colorCard = Colors.yellow.shade600;
-    } else if (enteredFach.startsWith('Bio')) {
-      colorCard = Colors.green.shade400;
-    } else if (enteredFach.startsWith('Chemie')) {
-      colorCard = Colors.grey;
-    } else if (enteredFach.startsWith('Physik')) {
-      colorCard = Colors.blue.shade100;
-    } else {
-      colorCard = Colors.grey.shade200;
-    }
+    Services.addNachhilfe(fachController.text, jahrgangsstufeController.text,
+        beschreibungController.text);
 
     widget.addNx(
       fachController.text,
       jahrgangsstufeController.text,
       beschreibungController.text,
-      colorCard,
     );
     Navigator.of(context).pop();
   }
