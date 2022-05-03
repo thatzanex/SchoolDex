@@ -15,19 +15,21 @@ class Services {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       final response = await http.post(ROOT, body: map);
-      print('getEmployees Response: ${response.body}');
+      print('getNachhilfe Response: ${response.body}');
       if (200 == response.statusCode) {
         print('Hi');
-        List<Nachhilfe> list = (json.decode(response.body) as List)
-            .map((data) => Nachhilfe.fromJson(data))
-            .toList();
+        //List<Nachhilfe> list = (json.decode(response.body) as List)
+        //.map((data) => Nachhilfe.fromJson(data))
+        //.toList();
+        print('list');
+        List<Nachhilfe> list = [Nachhilfe(fach: 'Deutsch', jahrgang: '8-9')];
         print(list);
         return list;
       } else {
         return <Nachhilfe>[];
       }
     } catch (e) {
-      return <Nachhilfe>[]; // return an empty list on exception/error
+      return <Nachhilfe>[];
     }
   }
 
@@ -37,7 +39,7 @@ class Services {
     String beschreibung,
   ) async {
     try {
-      var map = new Map<String, dynamic>();
+      var map = Map<String, dynamic>();
       map["action"] = _ADD_Nachhilfe_ACTION;
       map["fach"] = fach;
       map["jahrgang"] = jahrgang;
@@ -53,7 +55,7 @@ class Services {
   static Future<String> updateNachhilfe(
       int id, String fach, String jahrgang, String beschreibung) async {
     try {
-      var map = new Map<String, dynamic>();
+      var map = Map<String, dynamic>();
       map["action"] = _UPDATE_Nachhilfe_ACTION;
       map["id"] = id;
       map["fach"] = fach;
@@ -69,7 +71,7 @@ class Services {
 
   static Future<String> deleteNachhilfe(String id) async {
     try {
-      var map = new Map<String, dynamic>();
+      var map = Map<String, dynamic>();
       map["action"] = _DELETE_Nachhilfe_ACTION;
       map["id"] = id;
       final response = await http.post(ROOT, body: map);
