@@ -7,17 +7,24 @@ class Mensapage extends StatelessWidget {
   static const routeName = '/mensa';
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      initialUrl: 'https://vertretungsplan.musterschule.de',
-      javascriptMode: JavascriptMode.unrestricted,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Speiseplan'),
+        actions: <Widget>[MyAccountbottom()],
+      ),
+      body: WebView(
+        initialUrl: 'https://vertretungsplan.musterschule.de',
+        javascriptMode: JavascriptMode.unrestricted,
+        navigationDelegate: (NavigationRequest request) {
+          if (request.url.contains('youtube.de')) {
+            return NavigationDecision.prevent;
+          }
 
-      navigationDelegate: (NavigationRequest request) {
-        if (request.url.contains('youtube.de')) {
-          return NavigationDecision.prevent;
-        }
-
-        return NavigationDecision.navigate;
-      },
+          return NavigationDecision.navigate;
+        },
+      ),
+      bottomNavigationBar: MyBottomNavigationBar(
+          Colors.white, Colors.white, Colors.white, Colors.orange),
     );
   }
 }
