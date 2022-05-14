@@ -9,7 +9,7 @@ class Mensapage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Speiseplan'),
+        title: const Text('Vetretungsplan'),
         actions: <Widget>[MyAccountbottom()],
       ),
       body: WebView(
