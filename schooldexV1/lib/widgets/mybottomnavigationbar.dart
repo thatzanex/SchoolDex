@@ -62,7 +62,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                 Container(
                   width: 90,
                   child: IconButton(
-                    icon: const Icon(Icons.table_chart_rounded),
+                    icon: const Icon(Icons.sports_basketball),
                     color: agIconColor,
                     iconSize: 40,
                     onPressed: () => selectPagetoAG(context),
@@ -71,7 +71,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                 Container(
                   width: 90,
                   child: IconButton(
-                    icon: const Icon(Icons.food_bank_rounded),
+                    icon: const Icon(Icons.apps_outlined),
                     color: mensaIconColor,
                     iconSize: 40,
                     onPressed: () => selectPagetoMensa(context),
