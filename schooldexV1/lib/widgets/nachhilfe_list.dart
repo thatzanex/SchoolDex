@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/nachhilfe.dart';
 import 'popup.dart';
-import '../services.dart';
+import '../nachhilfe_services.dart';
 
 class NachhilfeListe extends StatefulWidget {
   //List<Nachhilfe> nachhilfen;

@@ -3,8 +3,8 @@ import '../models/news.dart';
 import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
-import '../widgets/list_news.dart';
-import '../widgets/new_news.dart';
+import '../widgets/news_list.dart';
+import '../widgets/news_new.dart';
 
 class Newspage extends StatefulWidget {
   static const routeName = '/news';

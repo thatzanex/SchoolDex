@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/nachhilfe.dart';
-import '../widgets/list_nachhilfe.dart';
-import '../widgets/new_nachhilfe.dart';
+import '../widgets/nachhilfe_list.dart';
+import '../widgets/nachhilfe_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/new_ag.dart';
+import '../widgets/ag_new.dart';
 import '../models/ag.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
-import '../widgets/list_ag.dart';
+import '../widgets/ag_list.dart';
 
 class AGPage extends StatefulWidget {
   static const routeName = '/ags';
