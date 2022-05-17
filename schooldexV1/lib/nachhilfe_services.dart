@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '/models/nachhilfe.dart';
 
-class Services {
+class ServicesNachhilfe {
   static final Uri ROOT =
       Uri.http('localhost', '/SchoolDexDB/nachhilfe_actions.php');
   static const _GET_ALL_ACTION = 'GET_ALL';
@@ -17,14 +17,11 @@ class Services {
       final response = await http.post(ROOT, body: map);
       print('getNachhilfe Response: ${response.body}');
       if (200 == response.statusCode) {
-        print('Hi');
-        //List<Nachhilfe> list = (json.decode(response.body) as List)
-        //.map((data) => Nachhilfe.fromJson(data))
-        //.toList();
-        print('list');
-        List<Nachhilfe> list = [Nachhilfe(fach: 'Deutsch', jahrgang: '8-9')];
-        print(list);
-        return list;
+        var resultsObjsJson = jsonDecode(response.body) as List;
+        List<Nachhilfe> listchen1 =
+            resultsObjsJson.map((e) => Nachhilfe.fromMap(e)).toList();
+        print(listchen1);
+        return listchen1;
       } else {
         return <Nachhilfe>[];
       }

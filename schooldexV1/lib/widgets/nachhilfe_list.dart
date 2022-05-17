@@ -4,10 +4,10 @@ import 'popup.dart';
 import '../services.dart';
 
 class NachhilfeListe extends StatefulWidget {
+  //List<Nachhilfe> nachhilfen;
   //NachhilfeListe(this.nachhilfen);
-
   @override
-  _NachhilfeListeState createState() => _NachhilfeListeState();
+  State<NachhilfeListe> createState() => _NachhilfeListeState();
 }
 
 class _NachhilfeListeState extends State<NachhilfeListe> {
@@ -28,7 +28,7 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
   }
 
   _getNachhilfen() {
-    Services.getNachhilfe().then((nachhilfen) {
+    ServicesNachhilfe.getNachhilfe().then((nachhilfen) {
       setState(() {
         _nachhilfen = nachhilfen;
       });

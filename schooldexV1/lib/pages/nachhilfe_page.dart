@@ -12,7 +12,7 @@ class Nachhilfepage extends StatefulWidget {
 }
 
 class _NachhilfepageState extends State<Nachhilfepage> {
-  final List<Nachhilfe> _userNachhilfen = [
+  List<Nachhilfe> _userNachhilfen = [
     Nachhilfe(
       fach: 'Mathematik',
       jahrgang: '8',

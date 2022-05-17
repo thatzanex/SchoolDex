@@ -27,8 +27,8 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
       return;
     }
 
-    Services.addNachhilfe(fachController.text, jahrgangsstufeController.text,
-        beschreibungController.text);
+    ServicesNachhilfe.addNachhilfe(fachController.text,
+        jahrgangsstufeController.text, beschreibungController.text);
 
     widget.addNx(
       fachController.text,

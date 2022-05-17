@@ -1,5 +1,5 @@
 class Nachhilfe {
-  int? id;
+  String? id;
   String fach;
   String jahrgang;
   String? beschreibung;
@@ -11,12 +11,12 @@ class Nachhilfe {
     this.beschreibung,
   });
 
-  factory Nachhilfe.fromJson(Map<String, dynamic> json) {
+  factory Nachhilfe.fromMap(Map<String, dynamic> map) {
     return Nachhilfe(
-      id: json['id'] as int,
-      fach: json['fach'] as String,
-      jahrgang: json['jahrgang'] as String,
-      beschreibung: json['beschreibung'] as String,
+      id: map['id'] as String,
+      fach: map['fach'] as String,
+      jahrgang: map['jahrgang'] as String,
+      beschreibung: map['beschreibung'] as String,
     );
   }
 }
