@@ -1,3 +1,4 @@
+import 'package:SchoolDex/db/news_services.dart';
 import 'package:flutter/material.dart';
 import '../models/news.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +14,7 @@ class Newspage extends StatefulWidget {
 }
 
 class _NewspageState extends State<Newspage> {
-  final List<News> _userNews = [
+  List<News> _userNews = [
     News(
         ueberschrift: 'Neuer Basketballkorb',
         //jahrgang: '8',
@@ -21,6 +22,20 @@ class _NewspageState extends State<Newspage> {
             'Wir haben jetzt endlich einen neuen Basketballkorb. Kommt vorbei, seht ihn euch an und benutzt ihn',
         datum: DateFormat('dd.MM.yyyy').format(DateTime.now()))
   ];
+
+  void initState() {
+    super.initState();
+    _userNews = [];
+    _getNews();
+  }
+
+  _getNews() {
+    ServicesNews.getNews().then((news1) {
+      setState(() {
+        _userNews = news1;
+      });
+    });
+  }
 
   void _addNeueNews(String nxUeberschrift, String nxInhalt, String nxDatum) {
     final newNx =

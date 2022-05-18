@@ -1,3 +1,4 @@
+import 'package:SchoolDex/db/news_services.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -24,6 +25,9 @@ class _NeueNewsState extends State<NeueNews> {
     if (enteredUeberschrift.isEmpty || enteredInhalt.isEmpty) {
       return;
     }
+
+    ServicesNews.addNews(
+        ueberschriftenController.text, inhaltController.text, datum);
 
     widget.addNx(
       ueberschriftenController.text,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../nachhilfe_services.dart';
+import '../db/nachhilfe_services.dart';
 
 class NeueNachhilfe extends StatefulWidget {
   final Function addNx;

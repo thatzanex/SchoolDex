@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import '../models/news.dart';
 import 'popup.dart';
 
-class NewsListe extends StatelessWidget {
+class NewsListe extends StatefulWidget {
   NewsListe(this.neuigkeiten);
 
   final List<News> neuigkeiten;
 
+  @override
+  State<NewsListe> createState() => _NewsListeState();
+}
+
+class _NewsListeState extends State<NewsListe> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,9 +23,9 @@ class NewsListe extends StatelessWidget {
               context: context,
               builder: (BuildContext context) => buildPopupDialog(
                   context,
-                  neuigkeiten[index].ueberschrift.toString(),
-                  neuigkeiten[index].inhalt.toString(),
-                  neuigkeiten[index].datum.toString()),
+                  widget.neuigkeiten[index].ueberschrift.toString(),
+                  widget.neuigkeiten[index].inhalt.toString(),
+                  widget.neuigkeiten[index].datum.toString()),
             ),
             child: Card(
               child: Column(
@@ -32,7 +37,7 @@ class NewsListe extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 10, 10, 5),
                         child: Text(
-                          neuigkeiten[index].ueberschrift.toString(),
+                          widget.neuigkeiten[index].ueberschrift.toString(),
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -40,7 +45,7 @@ class NewsListe extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                         child: Text(
-                          neuigkeiten[index].datum.toString(),
+                          widget.neuigkeiten[index].datum.toString(),
                           //style: TextStyle(),
                         ),
                       ),
@@ -49,7 +54,7 @@ class NewsListe extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.all(5),
                     child: Text(
-                      neuigkeiten[index].inhalt.toString(),
+                      widget.neuigkeiten[index].inhalt.toString(),
                       style: const TextStyle(fontSize: 17),
                     ),
                   ),
@@ -58,7 +63,7 @@ class NewsListe extends StatelessWidget {
             ),
           );
         },
-        itemCount: neuigkeiten.length,
+        itemCount: widget.neuigkeiten.length,
       ),
     );
   }
