@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../db/nachhilfe_services.dart';
 import '../models/nachhilfe.dart';
 import '../widgets/nachhilfe_list.dart';
 import '../widgets/nachhilfe_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
-import '../widgets/account_bottom.dart';
+//import '../widgets/account_bottom.dart';
 
 class Nachhilfepage extends StatefulWidget {
   static const routeName = '/nachhilfe';
@@ -20,6 +21,20 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
     ),
   ];
+
+  void initState() {
+    super.initState();
+    _userNachhilfen = [];
+    _getNachhilfen();
+  }
+
+  _getNachhilfen() {
+    ServicesNachhilfe.getNachhilfe().then((nachhilfen) {
+      setState(() {
+        _userNachhilfen = nachhilfen;
+      });
+    });
+  }
 
   void _addNeueNachhilfe(
       String nxFach, String nxJahrgang, String nxBeschreibung) {
@@ -48,13 +63,19 @@ class _NachhilfepageState extends State<Nachhilfepage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nachhilfeangebot'),
-        actions: <Widget>[MyAccountbottom()],
+        actions: <Widget>[
+          IconButton(
+            onPressed: () => _getNachhilfen(),
+            icon: Icon(Icons.replay_outlined),
+            iconSize: 35,
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             //NachhilfeListe(_userNachhilfen),
-            NachhilfeListe(),
+            NachhilfeListe(_userNachhilfen),
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/news.dart';
 import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
-import '../widgets/account_bottom.dart';
+//import '../widgets/account_bottom.dart';
 import '../widgets/news_list.dart';
 import '../widgets/news_new.dart';
 
@@ -60,7 +60,13 @@ class _NewspageState extends State<Newspage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('News'),
-        actions: <Widget>[MyAccountbottom()],
+        actions: <Widget>[
+          IconButton(
+            onPressed: () => _getNews(),
+            icon: Icon(Icons.replay_outlined),
+            iconSize: 35,
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

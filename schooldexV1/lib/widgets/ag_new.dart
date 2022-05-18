@@ -1,3 +1,4 @@
+import 'package:SchoolDex/db/ag_services.dart';
 import 'package:flutter/material.dart';
 
 class NeueAG extends StatefulWidget {
@@ -31,6 +32,9 @@ class _NeueAGState extends State<NeueAG> {
         enteredTermin.isEmpty) {
       return;
     }
+
+    ServicesAgs.addAgs(themaController.text, jahrgangsstufeController.text,
+        beschreibungController.text, terminController.text);
 
     widget.addAx(
       themaController.text,

@@ -16,7 +16,7 @@ class AGs {
   factory AGs.fromMap(Map<String, dynamic> map) {
     return AGs(
       id: map['id'] as String,
-      thema: map['fach'] as String,
+      thema: map['thema'] as String,
       jahrgang: map['jahrgang'] as String,
       beschreibung: map['beschreibung'] as String,
       termin: map['termin'] as String,
