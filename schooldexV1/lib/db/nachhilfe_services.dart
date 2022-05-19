@@ -15,12 +15,12 @@ class ServicesNachhilfe {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       final response = await http.post(ROOT, body: map);
-      print('getNachhilfe Response: ${response.body}');
+      //print('getNachhilfe Response: ${response.body}');
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<Nachhilfe> listchen1 =
             resultsObjsJson.map((e) => Nachhilfe.fromMap(e)).toList();
-        print(listchen1);
+        //print(listchen1);
         return listchen1;
       } else {
         return <Nachhilfe>[];

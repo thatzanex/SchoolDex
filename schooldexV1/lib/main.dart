@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:mysql1/mysql1.dart';
-import 'package:http/http.dart' as http;
 import 'pages/ag_page.dart';
 import 'pages/nachhilfe_page.dart';
-import 'pages/mensa_page.dart';
+import 'pages/vertretungs_page.dart';
 import 'pages/news_page.dart';
 import 'pages/account_page.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
         Nachhilfepage.routeName: (ctx) => Nachhilfepage(),
         AGPage.routeName: (ctx) => AGPage(),
         Newspage.routeName: (ctx) => Newspage(),
-        Mensapage.routeName: (ctx) => Mensapage(),
+        Vertretungspage.routeName: (ctx) => Vertretungspage(),
         Accountpage.routeName: (ctx) => Accountpage()
       },
     );

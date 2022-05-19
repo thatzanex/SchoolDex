@@ -39,8 +39,6 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
   Widget build(BuildContext context) {
     return Container(
       height: 700,
-      //child: GestureDetector(
-      //onTap: () => _getNachhilfen(),
       child: ListView.builder(
         itemBuilder: (cnx, index) {
           if (widget.nachhilfen[index].fach.startsWith('Mathe')) {
@@ -136,7 +134,6 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
         },
         itemCount: widget.nachhilfen.length,
       ),
-      //),
     );
   }
 }

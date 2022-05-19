@@ -31,6 +31,7 @@ class _AGlisteState extends State<AGliste> {
               ),
               child: Card(
                 //color: agangebot[index].colorcard,
+                color: Colors.orange,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

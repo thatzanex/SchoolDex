@@ -15,12 +15,12 @@ class ServicesNews {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       final response = await http.post(ROOT, body: map);
-      print('getNews Response: ${response.body}');
+      //print('getNews Response: ${response.body}');
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<News> listchen1 =
             resultsObjsJson.map((e) => News.fromMap(e)).toList();
-        print(listchen1);
+        //print(listchen1);
         return listchen1;
       } else {
         return <News>[];

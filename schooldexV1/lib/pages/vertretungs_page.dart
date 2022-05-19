@@ -3,8 +3,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
 
-class Mensapage extends StatelessWidget {
-  static const routeName = '/mensa';
+class Vertretungspage extends StatelessWidget {
+  static const routeName = '/vertretung';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -38,15 +38,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
 
   void _addNeueNachhilfe(
       String nxFach, String nxJahrgang, String nxBeschreibung) {
-    final newNx = Nachhilfe(
-      fach: nxFach,
-      jahrgang: nxJahrgang,
-      beschreibung: nxBeschreibung,
-    );
-
-    setState(() {
-      _userNachhilfen.add(newNx);
-    });
+    _getNachhilfen();
   }
 
   void _startAddNeueNachhilfe(BuildContext cnx) {

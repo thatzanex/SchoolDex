@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pages/ag_page.dart';
-import '../pages/mensa_page.dart';
+import '../pages/vertretungs_page.dart';
 import '../pages/nachhilfe_page.dart';
 import '../pages/news_page.dart';
 
@@ -8,10 +8,10 @@ class MyBottomNavigationBar extends StatelessWidget {
   final Color nachhilfeIconColor;
   final Color agIconColor;
   final Color newsIconColor;
-  final Color mensaIconColor;
+  final Color vertretungsIconColor;
 
   MyBottomNavigationBar(this.newsIconColor, this.nachhilfeIconColor,
-      this.agIconColor, this.mensaIconColor);
+      this.agIconColor, this.vertretungsIconColor);
 
   void selectPagetoNews(BuildContext ctx) {
     Navigator.of(ctx).pushReplacementNamed(Newspage.routeName);
@@ -26,7 +26,7 @@ class MyBottomNavigationBar extends StatelessWidget {
   }
 
   void selectPagetoMensa(BuildContext ctx) {
-    Navigator.of(ctx).pushReplacementNamed(Mensapage.routeName);
+    Navigator.of(ctx).pushReplacementNamed(Vertretungspage.routeName);
   }
 
   @override
@@ -72,7 +72,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   width: 90,
                   child: IconButton(
                     icon: const Icon(Icons.apps_outlined),
-                    color: mensaIconColor,
+                    color: vertretungsIconColor,
                     iconSize: 40,
                     onPressed: () => selectPagetoMensa(context),
                   ),

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import '../models/news.dart';
-import 'popup.dart';
+//import 'popup.dart';
+//import '../db/news_services.dart';
+import '../pages/news_page.dart';
 
-class NewsListe extends StatefulWidget {
+class NewsListe extends StatelessWidget {
   NewsListe(this.neuigkeiten);
 
   final List<News> neuigkeiten;
-
-  @override
-  State<NewsListe> createState() => _NewsListeState();
-}
-
-class _NewsListeState extends State<NewsListe> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,11 +19,13 @@ class _NewsListeState extends State<NewsListe> {
               context: context,
               builder: (BuildContext context) => buildPopupDialog(
                   context,
-                  widget.neuigkeiten[index].ueberschrift.toString(),
-                  widget.neuigkeiten[index].inhalt.toString(),
-                  widget.neuigkeiten[index].datum.toString()),
+                  neuigkeiten[index].id.toString(),
+                  neuigkeiten[index].ueberschrift.toString(),
+                  neuigkeiten[index].inhalt.toString(),
+                  neuigkeiten[index].datum.toString()),
             ),
             child: Card(
+              color: Colors.orange,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,7 +35,7 @@ class _NewsListeState extends State<NewsListe> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 10, 10, 5),
                         child: Text(
-                          widget.neuigkeiten[index].ueberschrift.toString(),
+                          neuigkeiten[index].ueberschrift.toString(),
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -45,7 +43,7 @@ class _NewsListeState extends State<NewsListe> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                         child: Text(
-                          widget.neuigkeiten[index].datum.toString(),
+                          neuigkeiten[index].datum.toString(),
                           //style: TextStyle(),
                         ),
                       ),
@@ -54,7 +52,7 @@ class _NewsListeState extends State<NewsListe> {
                   Container(
                     margin: const EdgeInsets.all(5),
                     child: Text(
-                      widget.neuigkeiten[index].inhalt.toString(),
+                      neuigkeiten[index].inhalt.toString(),
                       style: const TextStyle(fontSize: 17),
                     ),
                   ),
@@ -63,7 +61,7 @@ class _NewsListeState extends State<NewsListe> {
             ),
           );
         },
-        itemCount: widget.neuigkeiten.length,
+        itemCount: neuigkeiten.length,
       ),
     );
   }

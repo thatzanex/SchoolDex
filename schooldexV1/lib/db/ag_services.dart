@@ -14,12 +14,12 @@ class ServicesAgs {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       final response = await http.post(ROOT, body: map);
-      print('getAgs Response: ${response.body}');
+      //print('getAgs Response: ${response.body}');
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<AGs> listchen1 =
             resultsObjsJson.map((e) => AGs.fromMap(e)).toList();
-        print(listchen1);
+        //print(listchen1);
         return listchen1;
       } else {
         return <AGs>[];

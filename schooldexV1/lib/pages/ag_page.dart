@@ -38,15 +38,7 @@ class _AGPageState extends State<AGPage> {
 
   void _addNeueAG(String nxThema, String nxJahrgang, String nxBeschreibung,
       String nxTermin) {
-    final newAx = AGs(
-        thema: nxThema,
-        jahrgang: nxJahrgang,
-        beschreibung: nxBeschreibung,
-        termin: nxTermin);
-
-    setState(() {
-      _userAGs.add(newAx);
-    });
+    _getAgs();
   }
 
   void _startAddNeueAG(BuildContext cnx) {

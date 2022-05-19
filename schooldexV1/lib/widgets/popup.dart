@@ -17,13 +17,35 @@ Widget buildPopupDialog(
       child: Text(inhalt),
     ),
     actions: [
-      TextButton.icon(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        icon: const Icon(Icons.close),
-        label: const Text('Schließen'),
-      )
+      Row(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
+            child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.change_circle_outlined,
+                  color: Colors.blue,
+                )),
+          ),
+          TextButton.icon(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.close),
+            label: const Text('Schließen'),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+            child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: Colors.blue,
+                )),
+          )
+        ],
+      ),
     ],
   );
 }
