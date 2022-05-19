@@ -38,7 +38,17 @@ class _NachhilfepageState extends State<Nachhilfepage> {
 
   void _addNeueNachhilfe(
       String nxFach, String nxJahrgang, String nxBeschreibung) {
-    _getNachhilfen();
+    ServicesNachhilfe.addNachhilfe(
+      nxFach,
+      nxJahrgang,
+      nxBeschreibung,
+    ).then((value) {
+      ServicesNachhilfe.getNachhilfe().then((nachhilfen1) {
+        setState(() {
+          _userNachhilfen = nachhilfen1;
+        });
+      });
+    });
   }
 
   void _startAddNeueNachhilfe(BuildContext cnx) {

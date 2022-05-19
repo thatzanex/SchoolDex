@@ -50,7 +50,7 @@ class ServicesAgs {
     }
   }
 
-  static Future<String> updateAgs(int id, String thema, String jahrgang,
+  static Future<String> updateAgs(String id, String thema, String jahrgang,
       String beschreibung, String termin) async {
     try {
       var map = Map<String, dynamic>();

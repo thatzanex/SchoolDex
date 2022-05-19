@@ -1,37 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class NeueNews extends StatefulWidget {
-  final Function addNx;
+class UpdateNews extends StatefulWidget {
+  final Function updateNx;
 
-  NeueNews(this.addNx);
+  UpdateNews(
+      this.updateNx, this.id, this.ueberschrift, this.inhalt, this.datum);
+  final String id;
+  final String ueberschrift;
+  final String inhalt;
+  final String datum;
 
   @override
-  State<NeueNews> createState() => _NeueNewsState();
+  State<UpdateNews> createState() => _UpdateNewsState();
 }
 
-class _NeueNewsState extends State<NeueNews> {
-  final ueberschriftenController = TextEditingController();
-  final inhaltController = TextEditingController();
+class _UpdateNewsState extends State<UpdateNews> {
+  var ueberschriftenController = TextEditingController();
+  var inhaltController = TextEditingController();
 
   final _newsFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    ueberschriftenController.text = widget.ueberschrift;
+    inhaltController.text = widget.inhalt;
+  }
 
   void submitData() {
     final enteredUeberschrift = ueberschriftenController.text;
     final enteredInhalt = inhaltController.text;
-    String datum = DateFormat('dd.MM.yyyy').format(DateTime.now());
+    String entereddatum = DateFormat('dd.MM.yyyy').format(DateTime.now());
 
     if (enteredUeberschrift.isEmpty || enteredInhalt.isEmpty) {
       return;
     }
 
-    // ServicesNews.addNews(
-    //     ueberschriftenController.text, inhaltController.text, datum);
-
-    widget.addNx(
+    widget.updateNx(
+      widget.id,
       ueberschriftenController.text,
       inhaltController.text,
-      datum,
+      entereddatum,
     );
     Navigator.of(context).pop();
   }
@@ -43,7 +53,7 @@ class _NeueNewsState extends State<NeueNews> {
         Container(
           margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
           child: const Text(
-            'News hinzufügen',
+            'News bearbeiten',
             style: TextStyle(fontSize: 28),
           ),
         ),
@@ -66,7 +76,7 @@ class _NeueNewsState extends State<NeueNews> {
           ),
         ),
         TextButton(
-          child: const Text('Hinzufügen'),
+          child: const Text('Speichern'),
           onPressed: submitData,
         ),
       ],

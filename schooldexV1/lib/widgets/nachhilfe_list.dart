@@ -1,39 +1,39 @@
+import 'package:SchoolDex/db/nachhilfe_services.dart';
 import 'package:flutter/material.dart';
 import '../models/nachhilfe.dart';
-import 'popup.dart';
+import 'nachhilfe_update.dart';
 
 class NachhilfeListe extends StatefulWidget {
   NachhilfeListe(this.nachhilfen);
 
-  final List<Nachhilfe> nachhilfen;
+  List<Nachhilfe> nachhilfen;
   @override
   State<NachhilfeListe> createState() => _NachhilfeListeState();
 }
 
 class _NachhilfeListeState extends State<NachhilfeListe> {
-  // List<Nachhilfe> _nachhilfen = [
-  //   Nachhilfe(
-  //     fach: 'Mathematik',
-  //     jahrgang: '8',
-  //     beschreibung:
-  //         'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
-  //   ),
-  // ];
   Color colorCard = Colors.grey.shade200;
+  _deleteNachhilfe(id) {
+    ServicesNachhilfe.deleteNachhilfe(id).then((value) {
+      ServicesNachhilfe.getNachhilfe().then((nachhilfen2) {
+        setState(() {
+          widget.nachhilfen = nachhilfen2;
+        });
+      });
+    });
+  }
 
-  // void initState() {
-  //   super.initState();
-  //   _nachhilfen = [];
-  //   _getNachhilfen();
-  // }
-
-  // _getNachhilfen() {
-  //   ServicesNachhilfe.getNachhilfe().then((_nachhilfen) {
-  //     setState(() {
-  //       nachhilfen = _nachhilfen;
-  //     });
-  //   });
-  // }
+  _updateNachhilfe(
+      String id, String fach, String jahrgang, String beschreibung) {
+    ServicesNachhilfe.updateNachhilfe(id, fach, jahrgang, beschreibung)
+        .then((value) {
+      ServicesNachhilfe.getNachhilfe().then((nachhilfen1) {
+        setState(() {
+          widget.nachhilfen = nachhilfen1;
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +60,14 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
             onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) => buildPopupDialog(
-                  context,
-                  widget.nachhilfen[index].fach.toString(),
-                  widget.nachhilfen[index].beschreibung.toString(),
-                  ''),
+                context,
+                _updateNachhilfe,
+                _deleteNachhilfe,
+                widget.nachhilfen[index].id.toString(),
+                widget.nachhilfen[index].fach.toString(),
+                widget.nachhilfen[index].jahrgang.toString(),
+                widget.nachhilfen[index].beschreibung.toString(),
+              ),
             ),
             child: Card(
               color: colorCard,
@@ -136,4 +140,75 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
       ),
     );
   }
+}
+
+Widget buildPopupDialog(
+  BuildContext context,
+  Function _updateNachhilfe,
+  Function _deleteNachhilfe,
+  String id,
+  String fach,
+  String jahrgang,
+  String beschreibung,
+) {
+  _startdeleteNachhilfe() {
+    Navigator.of(context).pop();
+    _deleteNachhilfe(id);
+  }
+
+  _startupdateNachhilfe(BuildContext cnx) {
+    Navigator.of(context).pop();
+    showModalBottomSheet(
+      context: cnx,
+      builder: (_) {
+        return UpdateNachhilfe(
+            _updateNachhilfe, id, fach, jahrgang, beschreibung);
+      },
+    );
+  }
+
+  return AlertDialog(
+    title: Column(
+      children: [
+        Text(fach, style: const TextStyle(fontWeight: FontWeight.bold)),
+        Container(
+          child: Text('Jahrgang: ${jahrgang}'),
+        ),
+      ],
+    ),
+    content: Container(
+      child: Text(beschreibung),
+    ),
+    actions: [
+      Row(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
+            child: IconButton(
+                onPressed: () => _startupdateNachhilfe(context),
+                icon: Icon(
+                  Icons.change_circle_outlined,
+                  color: Colors.blue,
+                )),
+          ),
+          TextButton.icon(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.close),
+            label: const Text('Schließen'),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+            child: IconButton(
+                onPressed: () => _startdeleteNachhilfe(),
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: Colors.blue,
+                )),
+          )
+        ],
+      ),
+    ],
+  );
 }

@@ -50,7 +50,7 @@ class ServicesNachhilfe {
   }
 
   static Future<String> updateNachhilfe(
-      int id, String fach, String jahrgang, String beschreibung) async {
+      String id, String fach, String jahrgang, String beschreibung) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = _UPDATE_Nachhilfe_ACTION;

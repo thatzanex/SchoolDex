@@ -4,7 +4,6 @@ import '../widgets/ag_new.dart';
 import '../widgets/ag_list.dart';
 import '../models/ag.dart';
 import '../widgets/MyBottomNavigationBar.dart';
-//import '../widgets/account_bottom.dart';
 
 class AGPage extends StatefulWidget {
   static const routeName = '/ags';
@@ -38,7 +37,14 @@ class _AGPageState extends State<AGPage> {
 
   void _addNeueAG(String nxThema, String nxJahrgang, String nxBeschreibung,
       String nxTermin) {
-    _getAgs();
+    ServicesAgs.addAgs(nxThema, nxJahrgang, nxBeschreibung, nxTermin)
+        .then((value) {
+      ServicesAgs.getAgs().then((ags2) {
+        setState(() {
+          _userAGs = ags2;
+        });
+      });
+    });
   }
 
   void _startAddNeueAG(BuildContext cnx) {

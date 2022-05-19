@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-class NeueAG extends StatefulWidget {
-  final Function addAx;
+class UpdateAGs extends StatefulWidget {
+  final Function updateAx;
 
-  NeueAG(this.addAx);
+  UpdateAGs(this.updateAx, this.id, this.thema, this.jahrgang,
+      this.beschreibung, this.termin);
+  final String id;
+  final String thema;
+  final String jahrgang;
+  final String beschreibung;
+  final String termin;
 
   @override
-  State<NeueAG> createState() => _NeueAGState();
+  State<UpdateAGs> createState() => _UpdateAGsState();
 }
 
-class _NeueAGState extends State<NeueAG> {
+class _UpdateAGsState extends State<UpdateAGs> {
   final themaController = TextEditingController();
   final beschreibungController = TextEditingController();
   final jahrgangsstufeController = TextEditingController();
@@ -18,6 +24,15 @@ class _NeueAGState extends State<NeueAG> {
   final _jahrgangFocusNode = FocusNode();
   final _terminFocusNode = FocusNode();
   final _beschreibungFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    themaController.text = widget.thema;
+    jahrgangsstufeController.text = widget.jahrgang;
+    beschreibungController.text = widget.beschreibung;
+    terminController.text = widget.termin;
+  }
 
   void submitData() {
     final enteredThema = themaController.text;
@@ -32,7 +47,8 @@ class _NeueAGState extends State<NeueAG> {
       return;
     }
 
-    widget.addAx(
+    widget.updateAx(
+      widget.id,
       themaController.text,
       jahrgangsstufeController.text,
       beschreibungController.text,

@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
+import '../db/nachhilfe_services.dart';
 
-class NeueNachhilfe extends StatefulWidget {
-  final Function addNx;
+class UpdateNachhilfe extends StatefulWidget {
+  final Function updateNx;
 
-  NeueNachhilfe(this.addNx);
+  UpdateNachhilfe(
+      this.updateNx, this.id, this.fach, this.jahrgang, this.beschreibung);
+  final String id;
+  final String fach;
+  final String jahrgang;
+  final String beschreibung;
 
   @override
-  State<NeueNachhilfe> createState() => _NeueNachhilfeState();
+  State<UpdateNachhilfe> createState() => _UpdateNachhilfeState();
 }
 
-class _NeueNachhilfeState extends State<NeueNachhilfe> {
+class _UpdateNachhilfeState extends State<UpdateNachhilfe> {
   final fachController = TextEditingController();
   final beschreibungController = TextEditingController();
   final jahrgangsstufeController = TextEditingController();
 
   final _jahrgangFocusNode = FocusNode();
   final _beschreibungFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    fachController.text = widget.fach;
+    jahrgangsstufeController.text = widget.jahrgang;
+    beschreibungController.text = widget.beschreibung;
+  }
 
   void submitData() {
     final enteredFach = fachController.text;
@@ -26,7 +40,11 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
       return;
     }
 
-    widget.addNx(
+    ServicesNachhilfe.addNachhilfe(fachController.text,
+        jahrgangsstufeController.text, beschreibungController.text);
+
+    widget.updateNx(
+      widget.id,
       fachController.text,
       jahrgangsstufeController.text,
       beschreibungController.text,
@@ -41,7 +59,7 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
         Container(
           margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
           child: const Text(
-            'Neues Angebot',
+            'Angebot bearbeiten',
             style: TextStyle(fontSize: 28),
           ),
         ),
@@ -77,7 +95,7 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
           ),
         ),
         TextButton(
-          child: const Text('Hinzufügen'),
+          child: const Text('Speichern'),
           onPressed: submitData,
         ),
       ],

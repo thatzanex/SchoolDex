@@ -50,7 +50,7 @@ class ServicesNews {
   }
 
   static Future<String> updateNews(
-      int id, String ueberschrift, String inhalt, String datum) async {
+      String id, String ueberschrift, String inhalt, String datum) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = _UPDATE_News_ACTION;

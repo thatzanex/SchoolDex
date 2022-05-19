@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
 import '../models/news.dart';
-//import 'popup.dart';
-//import '../db/news_services.dart';
-import '../pages/news_page.dart';
+import 'news_update.dart';
+import '../db/news_services.dart';
 
-class NewsListe extends StatelessWidget {
+class NewsListe extends StatefulWidget {
   NewsListe(this.neuigkeiten);
+  List<News> neuigkeiten;
 
-  final List<News> neuigkeiten;
+  @override
+  State<NewsListe> createState() => _NewsListeState();
+}
+
+class _NewsListeState extends State<NewsListe> {
+  _deleteNews(id) {
+    ServicesNews.deleteNews(id).then((value) {
+      ServicesNews.getNews().then((news2) {
+        setState(() {
+          widget.neuigkeiten = news2;
+        });
+      });
+    });
+  }
+
+  _updateNews(String id, String ueberschrift, String inhalt, String datum) {
+    ServicesNews.updateNews(id, ueberschrift, inhalt, datum).then((value) {
+      ServicesNews.getNews().then((news1) {
+        setState(() {
+          widget.neuigkeiten = news1;
+        });
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,10 +43,12 @@ class NewsListe extends StatelessWidget {
               context: context,
               builder: (BuildContext context) => buildPopupDialog(
                   context,
-                  neuigkeiten[index].id.toString(),
-                  neuigkeiten[index].ueberschrift.toString(),
-                  neuigkeiten[index].inhalt.toString(),
-                  neuigkeiten[index].datum.toString()),
+                  _updateNews,
+                  _deleteNews,
+                  widget.neuigkeiten[index].id.toString(),
+                  widget.neuigkeiten[index].ueberschrift.toString(),
+                  widget.neuigkeiten[index].inhalt.toString(),
+                  widget.neuigkeiten[index].datum.toString()),
             ),
             child: Card(
               color: Colors.orange,
@@ -35,7 +61,7 @@ class NewsListe extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 10, 10, 5),
                         child: Text(
-                          neuigkeiten[index].ueberschrift.toString(),
+                          widget.neuigkeiten[index].ueberschrift.toString(),
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -43,7 +69,7 @@ class NewsListe extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                         child: Text(
-                          neuigkeiten[index].datum.toString(),
+                          widget.neuigkeiten[index].datum.toString(),
                           //style: TextStyle(),
                         ),
                       ),
@@ -52,7 +78,7 @@ class NewsListe extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.all(5),
                     child: Text(
-                      neuigkeiten[index].inhalt.toString(),
+                      widget.neuigkeiten[index].inhalt.toString(),
                       style: const TextStyle(fontSize: 17),
                     ),
                   ),
@@ -61,8 +87,79 @@ class NewsListe extends StatelessWidget {
             ),
           );
         },
-        itemCount: neuigkeiten.length,
+        itemCount: widget.neuigkeiten.length,
       ),
     );
   }
+}
+
+Widget buildPopupDialog(
+    BuildContext context,
+    Function _updateNews,
+    Function _deleteNews,
+    String id,
+    String ueberschrift,
+    String inhalt,
+    String datum) {
+  _startdeleteNews() {
+    Navigator.of(context).pop();
+    _deleteNews(id);
+  }
+
+  _startupdateNews(BuildContext cnx) {
+    Navigator.of(context).pop();
+    showModalBottomSheet(
+      context: cnx,
+      builder: (_) {
+        return UpdateNews(_updateNews, id, ueberschrift, inhalt, datum);
+      },
+    );
+  }
+
+  return AlertDialog(
+    title: Column(
+      children: [
+        Text(ueberschrift, style: const TextStyle(fontWeight: FontWeight.bold)),
+        Container(
+          child: datum.isEmpty
+              ? Container()
+              : Text(datum, style: const TextStyle(fontSize: 15)),
+        ),
+      ],
+    ),
+    content: Container(
+      child: Text(inhalt),
+    ),
+    actions: [
+      Row(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
+            child: IconButton(
+                onPressed: () => _startupdateNews(context),
+                icon: Icon(
+                  Icons.change_circle_outlined,
+                  color: Colors.blue,
+                )),
+          ),
+          TextButton.icon(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.close),
+            label: const Text('Schließen'),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+            child: IconButton(
+                onPressed: () => _startdeleteNews(),
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: Colors.blue,
+                )),
+          )
+        ],
+      ),
+    ],
+  );
 }
