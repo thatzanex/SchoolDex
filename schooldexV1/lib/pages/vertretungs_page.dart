@@ -23,8 +23,8 @@ class Vertretungspage extends StatelessWidget {
           return NavigationDecision.navigate;
         },
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-          Colors.white, Colors.white, Colors.white, Colors.orange),
+      bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.white,
+          Colors.white, Colors.orange, Colors.white),
     );
   }
 }

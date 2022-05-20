@@ -80,8 +80,8 @@ class _NewspageState extends State<Newspage> {
         child: const Icon(Icons.add),
         onPressed: () => _startAddNeueNews(context),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-          Colors.orange, Colors.white, Colors.white, Colors.white),
+      bottomNavigationBar: MyBottomNavigationBar(Colors.orange, Colors.white,
+          Colors.white, Colors.white, Colors.white),
     );
   }
 }

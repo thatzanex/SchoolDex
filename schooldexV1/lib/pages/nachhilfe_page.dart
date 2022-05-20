@@ -63,30 +63,29 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Nachhilfeangebot'),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => _getNachhilfen(),
-            icon: Icon(Icons.replay_outlined),
-            iconSize: 35,
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            //NachhilfeListe(_userNachhilfen),
-            NachhilfeListe(_userNachhilfen),
+        appBar: AppBar(
+          title: const Text('Nachhilfeangebot'),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () => _getNachhilfen(),
+              icon: Icon(Icons.replay_outlined),
+              iconSize: 35,
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => _startAddNeueNachhilfe(context),
-      ),
-      bottomNavigationBar: MyBottomNavigationBar(
-          Colors.white, Colors.orange, Colors.white, Colors.white),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              //NachhilfeListe(_userNachhilfen),
+              NachhilfeListe(_userNachhilfen),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => _startAddNeueNachhilfe(context),
+        ),
+        bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.orange,
+            Colors.white, Colors.white, Colors.white));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Accountpage extends StatelessWidget {
-  static const routeName = '/account';
+class Settingspage extends StatelessWidget {
+  static const routeName = '/settings';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

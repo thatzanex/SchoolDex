@@ -80,8 +80,8 @@ class _AGPageState extends State<AGPage> {
         child: const Icon(Icons.add),
         onPressed: () => _startAddNeueAG(context),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-          Colors.white, Colors.white, Colors.orange, Colors.white),
+      bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.white,
+          Colors.orange, Colors.white, Colors.white),
     );
   }
 }

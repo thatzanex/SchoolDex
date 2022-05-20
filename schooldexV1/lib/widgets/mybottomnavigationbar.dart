@@ -3,15 +3,17 @@ import '../pages/ag_page.dart';
 import '../pages/vertretungs_page.dart';
 import '../pages/nachhilfe_page.dart';
 import '../pages/news_page.dart';
+import '../pages/account_page.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
   final Color nachhilfeIconColor;
   final Color agIconColor;
   final Color newsIconColor;
   final Color vertretungsIconColor;
+  final Color settingsIconColor;
 
   MyBottomNavigationBar(this.newsIconColor, this.nachhilfeIconColor,
-      this.agIconColor, this.vertretungsIconColor);
+      this.agIconColor, this.vertretungsIconColor, this.settingsIconColor);
 
   void selectPagetoNews(BuildContext ctx) {
     Navigator.of(ctx).pushReplacementNamed(Newspage.routeName);
@@ -25,8 +27,12 @@ class MyBottomNavigationBar extends StatelessWidget {
     Navigator.of(ctx).pushReplacementNamed(AGPage.routeName);
   }
 
-  void selectPagetoMensa(BuildContext ctx) {
+  void selectPagetoVertretung(BuildContext ctx) {
     Navigator.of(ctx).pushReplacementNamed(Vertretungspage.routeName);
+  }
+
+  void selectPagetoSettings(BuildContext ctx) {
+    Navigator.of(ctx).pushReplacementNamed(Settingspage.routeName);
   }
 
   @override
@@ -42,7 +48,7 @@ class MyBottomNavigationBar extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
-                  width: 90,
+                  width: 70,
                   child: IconButton(
                     icon: const Icon(Icons.home_rounded),
                     color: newsIconColor,
@@ -51,7 +57,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 90,
+                  width: 70,
                   child: IconButton(
                     icon: const Icon(Icons.school_rounded),
                     color: nachhilfeIconColor,
@@ -60,7 +66,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 90,
+                  width: 70,
                   child: IconButton(
                     icon: const Icon(Icons.sports_basketball),
                     color: agIconColor,
@@ -69,14 +75,23 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 90,
+                  width: 70,
                   child: IconButton(
                     icon: const Icon(Icons.apps_outlined),
                     color: vertretungsIconColor,
                     iconSize: 40,
-                    onPressed: () => selectPagetoMensa(context),
+                    onPressed: () => selectPagetoVertretung(context),
                   ),
-                )
+                ),
+                Container(
+                  width: 70,
+                  child: IconButton(
+                    icon: const Icon(Icons.settings),
+                    color: settingsIconColor,
+                    iconSize: 40,
+                    onPressed: () => selectPagetoSettings(context),
+                  ),
+                ),
               ],
             ),
           ),
