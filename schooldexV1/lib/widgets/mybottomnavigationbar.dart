@@ -3,7 +3,7 @@ import '../pages/ag_page.dart';
 import '../pages/vertretungs_page.dart';
 import '../pages/nachhilfe_page.dart';
 import '../pages/news_page.dart';
-import '../pages/account_page.dart';
+import '../pages/settings_page.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
   final Color nachhilfeIconColor;
