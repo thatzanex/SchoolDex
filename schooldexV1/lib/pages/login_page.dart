@@ -1,4 +1,5 @@
 import 'package:SchoolDex/db/accounts_services.dart';
+import 'package:SchoolDex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'registrieren_page.dart';
 
@@ -17,8 +18,33 @@ class _LoginPageState extends State<LoginPage> {
   final _loginFocusNode = FocusNode();
   final _schulFocusNode = FocusNode();
 
+  clarValues() {
+    benutzernamenController.text = '';
+    passwortController.text = '';
+    schulController.text = '';
+  }
+
   void submitData() {
-    ServicesAccount.getAccount(schulController.text).then((accountlist) {});
+    List<String> matchingList = [
+      benutzernamenController.text,
+    ];
+    ServicesAccount.getAccount(schulController.text).then((accountlist) {
+      var index = accountlist
+          .indexWhere((element) => matchingList.contains(element.benutzername));
+      try {
+        if (passwortController.text == accountlist[index].passwort.toString()) {
+          print('hi, fast geschafft');
+          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+        } else {
+          clarValues();
+
+          return;
+        }
+      } catch (e) {
+        clarValues();
+        return;
+      }
+    });
   }
 
   void selectPagetoRegistrieren(BuildContext ctx) {
@@ -90,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(labelText: 'Schule'),
                   controller: schulController,
                   focusNode: _schulFocusNode,
-                  obscureText: true,
+                  obscureText: false,
                   onSubmitted: (_) => submitData(),
                 ),
               ),

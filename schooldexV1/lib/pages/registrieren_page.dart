@@ -36,7 +36,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
       ServicesAccount.addAccount(benutzernamenController.text,
               passwortController.text, schulController.text, status)
           .then((value) {
-        if (value == 'succes') {
+        if (value == 'success') {
           Navigator.of(context).pushReplacementNamed(Newspage.routeName);
         } else {
           return;

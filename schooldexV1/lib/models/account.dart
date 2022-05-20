@@ -18,7 +18,6 @@ class Account {
       id: map['id'] as String,
       benutzername: map['benutzername'] as String,
       passwort: map['passwort'] as String,
-      schulname: map['schulcode'] as String,
       status: map['status'] as String,
     );
   }
