@@ -29,6 +29,8 @@ class _LoginPageState extends State<LoginPage> {
       benutzernamenController.text,
     ];
     ServicesAccount.getAccount(schulController.text).then((accountlist) {
+      print('test');
+      print(accountlist);
       var index = accountlist
           .indexWhere((element) => matchingList.contains(element.benutzername));
       try {

@@ -48,7 +48,7 @@ class MyBottomNavigationBar extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
-                  width: 70,
+                  width: MediaQuery.of(context).size.width / 5 - 10,
                   child: IconButton(
                     icon: const Icon(Icons.home_rounded),
                     color: newsIconColor,
@@ -57,7 +57,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 70,
+                  width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.school_rounded),
                     color: nachhilfeIconColor,
@@ -66,7 +66,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 70,
+                  width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.sports_basketball),
                     color: agIconColor,
@@ -75,7 +75,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 70,
+                  width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.apps_outlined),
                     color: vertretungsIconColor,
@@ -84,9 +84,9 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 70,
+                  width: MediaQuery.of(context).size.width / 5 - 15,
                   child: IconButton(
-                    icon: const Icon(Icons.settings),
+                    icon: const Icon(Icons.settings_rounded),
                     color: settingsIconColor,
                     iconSize: 40,
                     onPressed: () => selectPagetoSettings(context),

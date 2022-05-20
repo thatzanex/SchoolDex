@@ -1,3 +1,4 @@
+import 'package:SchoolDex/widgets/mybottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 
 class Settingspage extends StatelessWidget {
@@ -21,6 +22,8 @@ class Settingspage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.white,
+          Colors.white, Colors.white, Colors.orange),
     );
   }
 }
