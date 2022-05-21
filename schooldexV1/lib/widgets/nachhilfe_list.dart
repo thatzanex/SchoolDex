@@ -132,9 +132,7 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
                         ),
                         child: Column(
                           children: [
-                            Container(
-                              child: const Text('Jahrgang'),
-                            ),
+                            const Text('Jahrgang'),
                             Text(
                               widget.nachhilfen[index].jahrgang.toString(),
                               style: const TextStyle(
@@ -194,14 +192,10 @@ Widget buildPopupDialog(
     title: Column(
       children: [
         Text(fach, style: const TextStyle(fontWeight: FontWeight.bold)),
-        Container(
-          child: Text('Jahrgang: $jahrgang'),
-        ),
+        Text('Jahrgang: $jahrgang'),
       ],
     ),
-    content: Container(
-      child: Text(beschreibung),
-    ),
+    content: Text(beschreibung),
     actions: [
       Row(
         children: [
@@ -222,10 +216,10 @@ Widget buildPopupDialog(
             label: const Text('Schließen'),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
             child: IconButton(
                 onPressed: () => _startdeleteNachhilfe(),
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete_outline,
                   color: Colors.blue,
                 )),

@@ -105,9 +105,7 @@ class _AGlisteState extends State<AGliste> {
                         ),
                         child: Column(
                           children: [
-                            Container(
-                              child: const Text('Jahrgang'),
-                            ),
+                            const Text('Jahrgang'),
                             Text(
                               widget.agangebot[index].jahrgang.toString(),
                               style: const TextStyle(
@@ -173,17 +171,15 @@ Widget buildPopupDialog(
         ),
       ],
     ),
-    content: Container(
-      child: Text(beschreibung),
-    ),
+    content: Text(beschreibung),
     actions: [
       Row(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 20, 0),
             child: IconButton(
                 onPressed: () => _startupdateAgs(context),
-                icon: Icon(
+                icon: const Icon(
                   Icons.change_circle_outlined,
                   color: Colors.blue,
                 )),
@@ -196,10 +192,10 @@ Widget buildPopupDialog(
             label: const Text('Schließen'),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
             child: IconButton(
                 onPressed: () => _startdeleteAgs(),
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete_outline,
                   color: Colors.blue,
                 )),

@@ -11,7 +11,7 @@ class AGPage extends StatefulWidget {
   String schulname;
   AGPage(this.isTeacher, this.schulname);
   @override
-  _AGPageState createState() => _AGPageState();
+  State<AGPage> createState() => _AGPageState();
 }
 
 class _AGPageState extends State<AGPage> {
@@ -69,7 +69,7 @@ class _AGPageState extends State<AGPage> {
         actions: <Widget>[
           IconButton(
             onPressed: () => _getAgs(),
-            icon: Icon(Icons.replay_outlined),
+            icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
           )
         ],

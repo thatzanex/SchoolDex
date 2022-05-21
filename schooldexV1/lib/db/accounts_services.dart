@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '/models/account.dart';
 
 class ServicesAccount {
-  static final Uri ROOT =
+  static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/account_actions.php');
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const String _ADD_Account_ACTION = 'ADD_Account';
@@ -15,13 +15,11 @@ class ServicesAccount {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       map['schulname'] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print('getAccount Response: ${response.body}');
+      final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<Account> listchen1 =
             resultsObjsJson.map((e) => Account.fromMap(e)).toList();
-        //print(listchen1);
         return listchen1;
       } else {
         return <Account>[];
@@ -44,8 +42,7 @@ class ServicesAccount {
       map["passwort"] = passwort;
       map["schulname"] = schulname;
       map["status1"] = status;
-      final response = await http.post(ROOT, body: map);
-      print("addAccount >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';

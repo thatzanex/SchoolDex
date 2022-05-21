@@ -12,7 +12,7 @@ class Newspage extends StatefulWidget {
   String schulname;
   Newspage(this.isTeacher, this.schulname);
   @override
-  _NewspageState createState() => _NewspageState();
+  State<Newspage> createState() => _NewspageState();
 }
 
 class _NewspageState extends State<Newspage> {
@@ -42,7 +42,6 @@ class _NewspageState extends State<Newspage> {
 
   void _addNeueNews(String nxUeberschrift, String nxInhalt, String nxDatum,
       String nxSchulname) {
-    print('hallo');
     ServicesNews.addNews(nxUeberschrift, nxInhalt, nxDatum, nxSchulname)
         .then((value) {
       ServicesNews.getNews(nxSchulname).then((news2) {

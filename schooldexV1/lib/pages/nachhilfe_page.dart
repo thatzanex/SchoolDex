@@ -50,7 +50,6 @@ class _NachhilfepageState extends State<Nachhilfepage> {
       String nxUserId,
       String nxUsername,
       String nxSchulname) {
-    print('Hallo: $nxUsername');
     ServicesNachhilfe.addNachhilfe(nxFach, nxJahrgang, nxBeschreibung, nxUserId,
             nxUsername, nxSchulname)
         .then((value) {

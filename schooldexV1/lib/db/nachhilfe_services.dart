@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '/models/nachhilfe.dart';
 
 class ServicesNachhilfe {
-  static final Uri ROOT =
+  static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/nachhilfe_actions.php');
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const String _ADD_Nachhilfe_ACTION = 'ADD_Nachhilfe';
@@ -15,14 +15,11 @@ class ServicesNachhilfe {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       map['schulname'] = schulname;
-      final response = await http.post(ROOT, body: map);
-      //print('getNachhilfe Response: ${response.body}');
+      final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
-        print(resultsObjsJson);
         List<Nachhilfe> listchen1 =
             resultsObjsJson.map((e) => Nachhilfe.fromMap(e)).toList();
-        print(listchen1);
         return listchen1;
       } else {
         return <Nachhilfe>[];
@@ -48,8 +45,7 @@ class ServicesNachhilfe {
       map["userId"] = userId;
       map["benutzername"] = username;
       map["schulname"] = schulname;
-      final response = await http.post(ROOT, body: map);
-      //print("addNachhilfe >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';
@@ -72,10 +68,9 @@ class ServicesNachhilfe {
       map["jahrgang"] = jahrgang;
       map["beschreibung"] = beschreibung;
       map["userId"] = userId;
-      map["username"] = username;
+      map["benutzername"] = username;
       map["schulname"] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print("updateNachhilfe >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';
@@ -88,8 +83,7 @@ class ServicesNachhilfe {
       map["action"] = _DELETE_Nachhilfe_ACTION;
       map["id"] = id;
       map["schulname"] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print("deleteNachhilfe >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';

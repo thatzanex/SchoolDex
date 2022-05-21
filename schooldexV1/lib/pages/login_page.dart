@@ -32,14 +32,12 @@ class _LoginPageState extends State<LoginPage> {
     LocalServices.instance.remove('20');
     try {
       LocalServices.instance.getAccount().then((value) {
-        print('findAccounts: $value');
         try {
           widget.accountstatus(
               value[0].id.toString(),
               value[0].benutzername.toString(),
               value[0].schulname.toString(),
               value[0].status.toString());
-          print('getAccounts');
           Navigator.of(context).pushReplacementNamed(Newspage.routeName);
         } catch (e) {
           return;
@@ -55,8 +53,6 @@ class _LoginPageState extends State<LoginPage> {
       benutzernamenController.text,
     ];
     ServicesAccount.getAccount(schulController.text).then((accountlist) {
-      print('test');
-      print(accountlist);
       var index = accountlist
           .indexWhere((element) => matchingList.contains(element.benutzername));
       try {
@@ -70,7 +66,6 @@ class _LoginPageState extends State<LoginPage> {
                   schulname: schulController.text))
               .then((value) {
             findAccounts();
-            print('fast geschafft');
             Navigator.of(context).pushReplacementNamed(Newspage.routeName);
           });
         } else {
@@ -96,11 +91,11 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('SchoolDex'),
       ),
       body: Container(
-        margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
         child: Center(
           child: Column(
             children: [
-              Text(
+              const Text(
                 'Wilkommen',
                 style: TextStyle(
                   fontSize: 35,
@@ -108,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.orange,
                 ),
               ),
-              Text(
+              const Text(
                 'bei SchoolDex!',
                 style: TextStyle(
                   fontSize: 35,
@@ -117,12 +112,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 15),
-                child: Text(
+                margin: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+                child: const Text(
                   'Eurem Schwarzenbrett',
                   style: TextStyle(
                     fontSize: 20,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -165,7 +159,6 @@ class _LoginPageState extends State<LoginPage> {
               TextButton(
                 child: const Text(
                   'Du hast noch kein Konto, dann klicke hier',
-                  //style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () => selectPagetoRegistrieren(context),
               ),

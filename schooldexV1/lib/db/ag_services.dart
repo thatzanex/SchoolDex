@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '/models/ag.dart';
 
 class ServicesAgs {
-  static final Uri ROOT = Uri.http('localhost', '/SchoolDexDB/ag_actions.php');
+  static final Uri root = Uri.http('localhost', '/SchoolDexDB/ag_actions.php');
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const String _ADD_Ags_ACTION = 'ADD_Ags';
   static const String _UPDATE_Ags_ACTION = 'UPDATE_Ags';
@@ -14,14 +14,11 @@ class ServicesAgs {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       map['schulname'] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print(schulname);
-      //print('getAgs Response: ${response.body}');
+      final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<AGs> listchen1 =
             resultsObjsJson.map((e) => AGs.fromMap(e)).toList();
-        //print(listchen1);
         return listchen1;
       } else {
         return <AGs>[];
@@ -46,8 +43,7 @@ class ServicesAgs {
       map["beschreibung"] = beschreibung;
       map["termin"] = termin;
       map["schulname"] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print("addAgs >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';
@@ -71,8 +67,7 @@ class ServicesAgs {
       map["beschreibung"] = beschreibung;
       map["termin"] = termin;
       map["schulname"] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print("updateAgs >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';
@@ -85,8 +80,7 @@ class ServicesAgs {
       map["action"] = _DELETE_Ags_ACTION;
       map["id"] = id;
       map["schulname"] = schulname;
-      final response = await http.post(ROOT, body: map);
-      print("deleteAGs >> Response:: ${response.body}");
+      final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
       return 'error';

@@ -13,9 +13,7 @@ Widget schuelerPopupDialog(
         ),
       ],
     ),
-    content: Container(
-      child: Text(inhalt),
-    ),
+    content: Text(inhalt),
     actions: [
       Center(
         child: TextButton.icon(

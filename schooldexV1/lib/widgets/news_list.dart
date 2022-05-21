@@ -146,17 +146,15 @@ Widget buildPopupDialog(
         ),
       ],
     ),
-    content: Container(
-      child: Text(inhalt),
-    ),
+    content: Text(inhalt),
     actions: [
       Row(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 20, 0),
             child: IconButton(
                 onPressed: () => _startupdateNews(context),
-                icon: Icon(
+                icon: const Icon(
                   Icons.change_circle_outlined,
                   color: Colors.blue,
                 )),
@@ -169,10 +167,10 @@ Widget buildPopupDialog(
             label: const Text('Schließen'),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
             child: IconButton(
                 onPressed: () => _startdeleteNews(),
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete_outline,
                   color: Colors.blue,
                 )),

@@ -37,20 +37,22 @@ class Settingspage extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               child: Text(
                 'Benutzername: $benutzername',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
               margin: const EdgeInsets.all(10),
               child: Text(
                 'Schule: $schulname',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
               margin: const EdgeInsets.all(10),
               child: TextButton(
-                  child: Text(
+                  child: const Text(
                     'Ausloggen',
                     style: TextStyle(fontSize: 20),
                   ),

@@ -37,14 +37,12 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
     LocalServices.instance.remove('22');
     try {
       LocalServices.instance.getAccount().then((value) {
-        print('findAccounts: $value');
         try {
           widget.accountstatus(
               value[0].id.toString(),
               value[0].benutzername.toString(),
               value[0].schulname.toString(),
               value[0].status.toString());
-          print('getAccounts');
           Navigator.of(context).pushReplacementNamed(Newspage.routeName);
         } catch (e) {
           return;
@@ -71,7 +69,6 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
       ServicesAccount.getAccount(schulController.text).then((accountlist) {
-        print(accountlist);
         String matchingList = benutzernamenController.text;
         var index = accountlist.indexWhere(
             (element) => matchingList.contains(element.benutzername));
@@ -159,21 +156,11 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 5, 0, 15),
-                child: Column(
-                  children: [
-                    Text(
-                      'Registriere dich jetzt',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    // Text(
-                    //   'deinem Schwarzenbrett',
-                    //   style: const TextStyle(
-                    //     fontSize: 20,
-                    //   ),
-                    // ),
-                  ],
+                child: const Text(
+                  'Registriere dich jetzt',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
               ),
               Container(
