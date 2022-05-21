@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class NeueNachhilfe extends StatefulWidget {
   final Function addNx;
+  final String userId;
+  final String username;
+  final String schulname;
 
-  NeueNachhilfe(this.addNx);
+  NeueNachhilfe(this.addNx, this.userId, this.username, this.schulname);
 
   @override
   State<NeueNachhilfe> createState() => _NeueNachhilfeState();
@@ -27,10 +30,12 @@ class _NeueNachhilfeState extends State<NeueNachhilfe> {
     }
 
     widget.addNx(
-      fachController.text,
-      jahrgangsstufeController.text,
-      beschreibungController.text,
-    );
+        fachController.text,
+        jahrgangsstufeController.text,
+        beschreibungController.text,
+        widget.userId,
+        widget.username,
+        widget.schulname);
     Navigator.of(context).pop();
   }
 

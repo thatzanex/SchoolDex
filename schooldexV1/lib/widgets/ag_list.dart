@@ -4,9 +4,10 @@ import '../models/ag.dart';
 import 'ag_update.dart';
 
 class AGliste extends StatefulWidget {
-  AGliste(this.agangebot);
+  AGliste(this.agangebot, this.schulname);
 
   List<AGs> agangebot;
+  String schulname;
 
   @override
   State<AGliste> createState() => _AGlisteState();
@@ -15,7 +16,7 @@ class AGliste extends StatefulWidget {
 class _AGlisteState extends State<AGliste> {
   _deleteAgs(id) {
     ServicesAgs.deleteAgs(id).then((value) {
-      ServicesAgs.getAgs().then((ags2) {
+      ServicesAgs.getAgs(widget.schulname).then((ags2) {
         setState(() {
           widget.agangebot = ags2;
         });
@@ -24,10 +25,10 @@ class _AGlisteState extends State<AGliste> {
   }
 
   _updateAGs(String id, String thema, String jahrgang, String beschreibung,
-      String termin) {
-    ServicesAgs.updateAgs(id, thema, jahrgang, beschreibung, termin)
+      String termin, String schulname) {
+    ServicesAgs.updateAgs(id, thema, jahrgang, beschreibung, termin, schulname)
         .then((value) {
-      ServicesAgs.getAgs().then((ags1) {
+      ServicesAgs.getAgs(schulname).then((ags1) {
         setState(() {
           widget.agangebot = ags1;
         });
@@ -47,14 +48,16 @@ class _AGlisteState extends State<AGliste> {
               onTap: () => showDialog(
                 context: context,
                 builder: (BuildContext context) => buildPopupDialog(
-                    context,
-                    _updateAGs,
-                    _deleteAgs,
-                    widget.agangebot[index].id.toString(),
-                    widget.agangebot[index].thema.toString(),
-                    widget.agangebot[index].jahrgang.toString(),
-                    widget.agangebot[index].beschreibung.toString(),
-                    widget.agangebot[index].termin.toString()),
+                  context,
+                  _updateAGs,
+                  _deleteAgs,
+                  widget.agangebot[index].id.toString(),
+                  widget.agangebot[index].thema.toString(),
+                  widget.agangebot[index].jahrgang.toString(),
+                  widget.agangebot[index].beschreibung.toString(),
+                  widget.agangebot[index].termin.toString(),
+                  widget.agangebot[index].schulname.toString(),
+                ),
               ),
               child: Card(
                 //color: agangebot[index].colorcard,
@@ -126,16 +129,17 @@ class _AGlisteState extends State<AGliste> {
 
 Widget buildPopupDialog(
     BuildContext context,
-    Function _updateAgs,
-    Function _deleteAgs,
+    Function updateAgs,
+    Function deleteAgs,
     String id,
     String thema,
     String jahrgang,
     String beschreibung,
-    String termin) {
+    String termin,
+    String schulname) {
   _startdeleteAgs() {
     Navigator.of(context).pop();
-    _deleteAgs(id);
+    deleteAgs(id);
   }
 
   _startupdateAgs(BuildContext cnx) {
@@ -143,7 +147,8 @@ Widget buildPopupDialog(
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return UpdateAGs(_updateAgs, id, thema, jahrgang, beschreibung, termin);
+        return UpdateAGs(
+            updateAgs, id, thema, jahrgang, beschreibung, termin, schulname);
       },
     );
   }

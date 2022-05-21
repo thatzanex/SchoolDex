@@ -4,12 +4,15 @@ import '../db/nachhilfe_services.dart';
 class UpdateNachhilfe extends StatefulWidget {
   final Function updateNx;
 
-  UpdateNachhilfe(
-      this.updateNx, this.id, this.fach, this.jahrgang, this.beschreibung);
+  UpdateNachhilfe(this.updateNx, this.id, this.fach, this.jahrgang,
+      this.beschreibung, this.userId, this.username, this.schulname);
   final String id;
   final String fach;
   final String jahrgang;
   final String beschreibung;
+  final String userId;
+  final String username;
+  final String schulname;
 
   @override
   State<UpdateNachhilfe> createState() => _UpdateNachhilfeState();
@@ -40,15 +43,17 @@ class _UpdateNachhilfeState extends State<UpdateNachhilfe> {
       return;
     }
 
-    ServicesNachhilfe.addNachhilfe(fachController.text,
-        jahrgangsstufeController.text, beschreibungController.text);
+    // ServicesNachhilfe.addNachhilfe(fachController.text,
+    //     jahrgangsstufeController.text, beschreibungController.text);
 
     widget.updateNx(
-      widget.id,
-      fachController.text,
-      jahrgangsstufeController.text,
-      beschreibungController.text,
-    );
+        widget.id,
+        fachController.text,
+        jahrgangsstufeController.text,
+        beschreibungController.text,
+        widget.userId,
+        widget.username,
+        widget.schulname);
     Navigator.of(context).pop();
   }
 

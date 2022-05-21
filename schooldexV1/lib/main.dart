@@ -12,11 +12,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  String userId = '';
   String username = '';
   String dbname = '';
   String status1 = '';
 
-  void accountStatus(String benutzername, String schulname, String status) {
+  void accountStatus(
+      String id, String benutzername, String schulname, String status) {
+    userId = id;
     username = benutzername;
     dbname = schulname;
     status1 = status;
@@ -29,9 +32,10 @@ class MyApp extends StatelessWidget {
       //home: Newspage(),
       home: RegistrierenPage(accountStatus),
       routes: {
-        Nachhilfepage.routeName: (ctx) => Nachhilfepage(),
-        AGPage.routeName: (ctx) => AGPage(status1),
-        Newspage.routeName: (ctx) => Newspage(),
+        Nachhilfepage.routeName: (ctx) =>
+            Nachhilfepage(status1, userId, username, dbname),
+        AGPage.routeName: (ctx) => AGPage(status1, dbname),
+        Newspage.routeName: (ctx) => Newspage(status1, dbname),
         Vertretungspage.routeName: (ctx) => Vertretungspage(),
         Settingspage.routeName: (ctx) => Settingspage(),
         LoginPage.routeName: (ctx) => LoginPage(),

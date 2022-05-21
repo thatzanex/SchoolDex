@@ -3,8 +3,9 @@ import 'package:intl/intl.dart';
 
 class NeueNews extends StatefulWidget {
   final Function addNx;
+  final String schulname;
 
-  NeueNews(this.addNx);
+  NeueNews(this.addNx, this.schulname);
 
   @override
   State<NeueNews> createState() => _NeueNewsState();
@@ -32,6 +33,7 @@ class _NeueNewsState extends State<NeueNews> {
       ueberschriftenController.text,
       inhaltController.text,
       datum,
+      widget.schulname,
     );
     Navigator.of(context).pop();
   }

@@ -8,6 +8,9 @@ import '../widgets/news_new.dart';
 
 class Newspage extends StatefulWidget {
   static const routeName = '/news';
+  String isTeacher;
+  String schulname;
+  Newspage(this.isTeacher, this.schulname);
   @override
   _NewspageState createState() => _NewspageState();
 }
@@ -19,9 +22,10 @@ class _NewspageState extends State<Newspage> {
         //jahrgang: '8',
         inhalt:
             'Wir haben jetzt endlich einen neuen Basketballkorb. Kommt vorbei, seht ihn euch an und benutzt ihn',
-        datum: DateFormat('dd.MM.yyyy').format(DateTime.now()))
+        datum: DateFormat('dd.MM.yyyy').format(DateTime.now()),
+        schulname: 'SchoolDex')
   ];
-
+  @override
   void initState() {
     super.initState();
     _userNews = [];
@@ -29,17 +33,19 @@ class _NewspageState extends State<Newspage> {
   }
 
   _getNews() {
-    ServicesNews.getNews().then((news1) {
+    ServicesNews.getNews(widget.schulname).then((news1) {
       setState(() {
         _userNews = news1;
       });
     });
   }
 
-  void _addNeueNews(String nxUeberschrift, String nxInhalt, String nxDatum) {
+  void _addNeueNews(String nxUeberschrift, String nxInhalt, String nxDatum,
+      String nxSchulname) {
     print('hallo');
-    ServicesNews.addNews(nxUeberschrift, nxInhalt, nxDatum).then((value) {
-      ServicesNews.getNews().then((news2) {
+    ServicesNews.addNews(nxUeberschrift, nxInhalt, nxDatum, nxSchulname)
+        .then((value) {
+      ServicesNews.getNews(nxSchulname).then((news2) {
         setState(() {
           _userNews = news2;
         });
@@ -51,7 +57,7 @@ class _NewspageState extends State<Newspage> {
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return NeueNews(_addNeueNews);
+        return NeueNews(_addNeueNews, widget.schulname);
       },
     );
   }
@@ -64,7 +70,7 @@ class _NewspageState extends State<Newspage> {
         actions: <Widget>[
           IconButton(
             onPressed: () => _getNews(),
-            icon: Icon(Icons.replay_outlined),
+            icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
           )
         ],
@@ -72,14 +78,16 @@ class _NewspageState extends State<Newspage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            NewsListe(_userNews),
+            NewsListe(_userNews, widget.schulname),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => _startAddNeueNews(context),
-      ),
+      floatingActionButton: widget.isTeacher.startsWith('L135')
+          ? FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () => _startAddNeueNews(context),
+            )
+          : Container(),
       bottomNavigationBar: MyBottomNavigationBar(Colors.orange, Colors.white,
           Colors.white, Colors.white, Colors.white),
     );

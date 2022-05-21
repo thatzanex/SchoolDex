@@ -4,12 +4,13 @@ import 'package:intl/intl.dart';
 class UpdateNews extends StatefulWidget {
   final Function updateNx;
 
-  UpdateNews(
-      this.updateNx, this.id, this.ueberschrift, this.inhalt, this.datum);
+  UpdateNews(this.updateNx, this.id, this.ueberschrift, this.inhalt, this.datum,
+      this.schulname);
   final String id;
   final String ueberschrift;
   final String inhalt;
   final String datum;
+  final String schulname;
 
   @override
   State<UpdateNews> createState() => _UpdateNewsState();
@@ -42,6 +43,7 @@ class _UpdateNewsState extends State<UpdateNews> {
       ueberschriftenController.text,
       inhaltController.text,
       entereddatum,
+      widget.schulname,
     );
     Navigator.of(context).pop();
   }

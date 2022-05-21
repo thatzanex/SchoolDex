@@ -4,8 +4,8 @@ class Account {
   String? id;
   String benutzername;
   String passwort;
-  String? schulname;
   String status;
+  String? schulname;
 
   Account({
     this.id,
@@ -21,14 +21,15 @@ class Account {
       Account.fromMap(json.decode(source));
 
   String toStringLocal() =>
-      'ShoppingItem(id: $id, benutzername: $benutzername, passwort: $passwort, schulname: $schulname status: $status)';
+      'ShoppingItem(id: $id, benutzername: $benutzername, passwort: $passwort, status: $status, schulname: $schulname )';
 
   factory Account.fromMap(Map<String, dynamic> map) {
     return Account(
       id: map['id'] as String,
       benutzername: map['benutzername'] as String,
       passwort: map['passwort'] as String,
-      status: map['status'] as String,
+      status: map['status1'] as String,
+      schulname: map['schulname'] as String,
     );
   }
 
@@ -47,8 +48,8 @@ class Account {
       'id': id,
       'benutzername': benutzername,
       'passwort': passwort,
-      'schulname': schulname,
       'status': status,
+      'schulname': schulname,
     };
   }
 }

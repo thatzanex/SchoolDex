@@ -34,13 +34,16 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   }
 
   findAccounts() {
-    LocalServices.instance.remove('15');
+    //LocalServices.instance.remove('17');
     try {
       LocalServices.instance.getAccount().then((value) {
         print('findAccounts: $value');
         try {
-          widget.accountstatus(value[0].benutzername.toString(),
-              value[0].schulname.toString(), value[0].status.toString());
+          widget.accountstatus(
+              value[0].id.toString(),
+              value[0].benutzername.toString(),
+              value[0].schulname.toString(),
+              value[0].status.toString());
           print('getAccounts');
           Navigator.of(context).pushReplacementNamed(Newspage.routeName);
         } catch (e) {

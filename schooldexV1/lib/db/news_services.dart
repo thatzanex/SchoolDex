@@ -10,10 +10,11 @@ class ServicesNews {
   static const String _UPDATE_News_ACTION = 'UPDATE_News';
   static const String _DELETE_News_ACTION = 'DELETE_News';
 
-  static Future<List<News>> getNews() async {
+  static Future<List<News>> getNews(String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
+      map['schulname'] = schulname;
       final response = await http.post(ROOT, body: map);
       //print('getNews Response: ${response.body}');
       if (200 == response.statusCode) {
@@ -30,17 +31,15 @@ class ServicesNews {
     }
   }
 
-  static Future<String> addNews(
-    String ueberschrift,
-    String inhalt,
-    String datum,
-  ) async {
+  static Future<String> addNews(String ueberschrift, String inhalt,
+      String datum, String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = _ADD_News_ACTION;
       map["ueberschrift"] = ueberschrift;
       map["inhalt"] = inhalt;
       map["datum"] = datum;
+      map["schulname"] = schulname;
       final response = await http.post(ROOT, body: map);
       print("addNews >> Response:: ${response.body}");
       return response.body;
@@ -49,8 +48,8 @@ class ServicesNews {
     }
   }
 
-  static Future<String> updateNews(
-      String id, String ueberschrift, String inhalt, String datum) async {
+  static Future<String> updateNews(String id, String ueberschrift,
+      String inhalt, String datum, String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = _UPDATE_News_ACTION;
@@ -58,6 +57,7 @@ class ServicesNews {
       map["ueberschrift"] = ueberschrift;
       map["inhalt"] = inhalt;
       map["datum"] = datum;
+      map["schulname"] = schulname;
       final response = await http.post(ROOT, body: map);
       print("updateNews >> Response:: ${response.body}");
       return response.body;

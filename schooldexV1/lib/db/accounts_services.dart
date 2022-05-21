@@ -43,7 +43,7 @@ class ServicesAccount {
       map["benutzername"] = benutzername;
       map["passwort"] = passwort;
       map["schulname"] = schulname;
-      map["status"] = status;
+      map["status1"] = status;
       final response = await http.post(ROOT, body: map);
       print("addAccount >> Response:: ${response.body}");
       return response.body;

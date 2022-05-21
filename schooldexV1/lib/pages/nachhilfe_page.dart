@@ -8,6 +8,11 @@ import '../widgets/MyBottomNavigationBar.dart';
 
 class Nachhilfepage extends StatefulWidget {
   static const routeName = '/nachhilfe';
+  String isTeacher;
+  String benutzername;
+  String userId;
+  String schulname;
+  Nachhilfepage(this.isTeacher, this.userId, this.benutzername, this.schulname);
   @override
   State<Nachhilfepage> createState() => _NachhilfepageState();
 }
@@ -15,11 +20,13 @@ class Nachhilfepage extends StatefulWidget {
 class _NachhilfepageState extends State<Nachhilfepage> {
   List<Nachhilfe> _userNachhilfen = [
     Nachhilfe(
-      fach: 'Mathematik',
-      jahrgang: '8',
-      beschreibung:
-          'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
-    ),
+        fach: 'Mathematik',
+        jahrgang: '8',
+        beschreibung:
+            'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
+        userId: '1',
+        username: 'Max Mustermann',
+        schulname: 'SchoolDex'),
   ];
   @override
   void initState() {
@@ -29,7 +36,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   }
 
   _getNachhilfen() {
-    ServicesNachhilfe.getNachhilfe().then((nachhilfen) {
+    ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen) {
       setState(() {
         _userNachhilfen = nachhilfen;
       });
@@ -37,13 +44,17 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   }
 
   void _addNeueNachhilfe(
-      String nxFach, String nxJahrgang, String nxBeschreibung) {
-    ServicesNachhilfe.addNachhilfe(
-      nxFach,
-      nxJahrgang,
-      nxBeschreibung,
-    ).then((value) {
-      ServicesNachhilfe.getNachhilfe().then((nachhilfen1) {
+      String nxFach,
+      String nxJahrgang,
+      String nxBeschreibung,
+      String nxUserId,
+      String nxUsername,
+      String nxSchulname) {
+    print('Hallo: $nxUsername');
+    ServicesNachhilfe.addNachhilfe(nxFach, nxJahrgang, nxBeschreibung, nxUserId,
+            nxUsername, nxSchulname)
+        .then((value) {
+      ServicesNachhilfe.getNachhilfe(nxSchulname).then((nachhilfen1) {
         setState(() {
           _userNachhilfen = nachhilfen1;
         });
@@ -55,7 +66,8 @@ class _NachhilfepageState extends State<Nachhilfepage> {
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return NeueNachhilfe(_addNeueNachhilfe);
+        return NeueNachhilfe(_addNeueNachhilfe, widget.userId,
+            widget.benutzername, widget.schulname);
       },
     );
   }
@@ -68,7 +80,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           actions: <Widget>[
             IconButton(
               onPressed: () => _getNachhilfen(),
-              icon: Icon(Icons.replay_outlined),
+              icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
             )
           ],
@@ -77,14 +89,16 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           child: Column(
             children: <Widget>[
               //NachhilfeListe(_userNachhilfen),
-              NachhilfeListe(_userNachhilfen),
+              NachhilfeListe(_userNachhilfen, widget.schulname),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () => _startAddNeueNachhilfe(context),
-        ),
+        floatingActionButton: widget.isTeacher.startsWith('L135')
+            ? FloatingActionButton(
+                child: const Icon(Icons.add),
+                onPressed: () => _startAddNeueNachhilfe(context),
+              )
+            : Container(),
         bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.orange,
             Colors.white, Colors.white, Colors.white));
   }

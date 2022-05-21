@@ -9,12 +9,14 @@ class ServicesAgs {
   static const String _UPDATE_Ags_ACTION = 'UPDATE_Ags';
   static const String _DELETE_Ags_ACTION = 'DELETE_Ags';
 
-  static Future<List<AGs>> getAgs() async {
+  static Future<List<AGs>> getAgs(String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
+      map['schulname'] = schulname;
       final response = await http.post(ROOT, body: map);
-      //print('getAgs Response: ${response.body}');
+      print(schulname);
+      print('getAgs Response: ${response.body}');
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<AGs> listchen1 =
@@ -34,6 +36,7 @@ class ServicesAgs {
     String jahrgang,
     String beschreibung,
     String termin,
+    String schulname,
   ) async {
     try {
       var map = Map<String, dynamic>();
@@ -42,6 +45,7 @@ class ServicesAgs {
       map["jahrgang"] = jahrgang;
       map["beschreibung"] = beschreibung;
       map["termin"] = termin;
+      map["schulname"] = schulname;
       final response = await http.post(ROOT, body: map);
       print("addAgs >> Response:: ${response.body}");
       return response.body;
@@ -50,8 +54,14 @@ class ServicesAgs {
     }
   }
 
-  static Future<String> updateAgs(String id, String thema, String jahrgang,
-      String beschreibung, String termin) async {
+  static Future<String> updateAgs(
+    String id,
+    String thema,
+    String jahrgang,
+    String beschreibung,
+    String termin,
+    String schulname,
+  ) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = _UPDATE_Ags_ACTION;
@@ -60,6 +70,7 @@ class ServicesAgs {
       map["jahrgang"] = jahrgang;
       map["beschreibung"] = beschreibung;
       map["termin"] = termin;
+      map["schulname"] = schulname;
       final response = await http.post(ROOT, body: map);
       print("updateAgs >> Response:: ${response.body}");
       return response.body;

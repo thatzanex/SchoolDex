@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class UpdateAGs extends StatefulWidget {
   final Function updateAx;
+  final String schulname;
 
   UpdateAGs(this.updateAx, this.id, this.thema, this.jahrgang,
-      this.beschreibung, this.termin);
+      this.beschreibung, this.termin, this.schulname);
   final String id;
   final String thema;
   final String jahrgang;
@@ -48,12 +49,12 @@ class _UpdateAGsState extends State<UpdateAGs> {
     }
 
     widget.updateAx(
-      widget.id,
-      themaController.text,
-      jahrgangsstufeController.text,
-      beschreibungController.text,
-      terminController.text,
-    );
+        widget.id,
+        themaController.text,
+        jahrgangsstufeController.text,
+        beschreibungController.text,
+        terminController.text,
+        widget.schulname);
     Navigator.of(context).pop();
   }
 

@@ -28,8 +28,8 @@ class LocalServices {
         id TEXT PRIMARY KEY,
         benutzername TEXT,
         passwort TEXT,
-        schulname TEXT,
-        status TEXT
+        status TEXT,
+        schulname TEXT
       )
     ''');
   }
@@ -39,7 +39,7 @@ class LocalServices {
     var accounts = await db.query('account', orderBy: 'id');
     print('test3: $accounts');
     List<Account> accountList =
-        accounts.map((e) => Account.fromMap(e)).toList();
+        accounts.map((e) => Account.fromMapLocal(e)).toList();
     // List<Account> accountList = accounts.isNotEmpty
     //     ? accounts.map((e) => Account.fromMapLocal(e)).toList()
     //     : [];

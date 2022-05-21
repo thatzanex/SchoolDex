@@ -4,7 +4,10 @@ import '../models/nachhilfe.dart';
 import 'nachhilfe_update.dart';
 
 class NachhilfeListe extends StatefulWidget {
-  NachhilfeListe(this.nachhilfen);
+  // String accountId;
+  // String accountname;
+  final String schulname;
+  NachhilfeListe(this.nachhilfen, this.schulname);
 
   List<Nachhilfe> nachhilfen;
   @override
@@ -15,7 +18,7 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
   Color colorCard = Colors.grey.shade200;
   _deleteNachhilfe(id) {
     ServicesNachhilfe.deleteNachhilfe(id).then((value) {
-      ServicesNachhilfe.getNachhilfe().then((nachhilfen2) {
+      ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen2) {
         setState(() {
           widget.nachhilfen = nachhilfen2;
         });
@@ -23,11 +26,12 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
     });
   }
 
-  _updateNachhilfe(
-      String id, String fach, String jahrgang, String beschreibung) {
-    ServicesNachhilfe.updateNachhilfe(id, fach, jahrgang, beschreibung)
+  _updateNachhilfe(String id, String fach, String jahrgang, String beschreibung,
+      String userId, String username, String schulname) {
+    ServicesNachhilfe.updateNachhilfe(
+            id, fach, jahrgang, beschreibung, userId, username, schulname)
         .then((value) {
-      ServicesNachhilfe.getNachhilfe().then((nachhilfen1) {
+      ServicesNachhilfe.getNachhilfe(schulname).then((nachhilfen1) {
         setState(() {
           widget.nachhilfen = nachhilfen1;
         });
@@ -67,6 +71,9 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
                 widget.nachhilfen[index].fach.toString(),
                 widget.nachhilfen[index].jahrgang.toString(),
                 widget.nachhilfen[index].beschreibung.toString(),
+                widget.nachhilfen[index].userId.toString(),
+                widget.nachhilfen[index].username.toString(),
+                widget.nachhilfen[index].schulname.toString(),
               ),
             ),
             child: Card(
@@ -83,10 +90,10 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
                         children: [
                           Container(
                             margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            child: const Text('Mustermann, Max'
-                                //nachhilfen[index].account.toString(),
-                                //style: TextStyle(),
-                                ),
+                            child: Text(
+                              widget.nachhilfen[index].username.toString(),
+                              //style: TextStyle(),
+                            ),
                           ),
                           Container(
                             margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
@@ -143,17 +150,19 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
 }
 
 Widget buildPopupDialog(
-  BuildContext context,
-  Function _updateNachhilfe,
-  Function _deleteNachhilfe,
-  String id,
-  String fach,
-  String jahrgang,
-  String beschreibung,
-) {
+    BuildContext context,
+    Function updateNachhilfe,
+    Function deleteNachhilfe,
+    String id,
+    String fach,
+    String jahrgang,
+    String beschreibung,
+    String userid,
+    String username,
+    String schulname) {
   _startdeleteNachhilfe() {
     Navigator.of(context).pop();
-    _deleteNachhilfe(id);
+    deleteNachhilfe(id);
   }
 
   _startupdateNachhilfe(BuildContext cnx) {
@@ -161,8 +170,8 @@ Widget buildPopupDialog(
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return UpdateNachhilfe(
-            _updateNachhilfe, id, fach, jahrgang, beschreibung);
+        return UpdateNachhilfe(updateNachhilfe, id, fach, jahrgang,
+            beschreibung, userid, username, schulname);
       },
     );
   }
@@ -172,7 +181,7 @@ Widget buildPopupDialog(
       children: [
         Text(fach, style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
-          child: Text('Jahrgang: ${jahrgang}'),
+          child: Text('Jahrgang: $jahrgang'),
         ),
       ],
     ),
@@ -183,10 +192,10 @@ Widget buildPopupDialog(
       Row(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 20, 0),
             child: IconButton(
                 onPressed: () => _startupdateNachhilfe(context),
-                icon: Icon(
+                icon: const Icon(
                   Icons.change_circle_outlined,
                   color: Colors.blue,
                 )),

@@ -3,13 +3,18 @@ class Nachhilfe {
   String fach;
   String jahrgang;
   String? beschreibung;
+  String userId;
+  String username;
+  String schulname;
 
-  Nachhilfe({
-    this.id,
-    required this.fach,
-    required this.jahrgang,
-    this.beschreibung,
-  });
+  Nachhilfe(
+      {this.id,
+      required this.fach,
+      required this.jahrgang,
+      this.beschreibung,
+      required this.userId,
+      required this.username,
+      required this.schulname});
 
   factory Nachhilfe.fromMap(Map<String, dynamic> map) {
     return Nachhilfe(
@@ -17,6 +22,9 @@ class Nachhilfe {
       fach: map['fach'] as String,
       jahrgang: map['jahrgang'] as String,
       beschreibung: map['beschreibung'] as String,
+      userId: map['userId'] as String,
+      username: map['benutzername'] as String,
+      schulname: map['schulname'] as String,
     );
   }
 }

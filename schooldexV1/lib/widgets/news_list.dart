@@ -4,8 +4,9 @@ import 'news_update.dart';
 import '../db/news_services.dart';
 
 class NewsListe extends StatefulWidget {
-  NewsListe(this.neuigkeiten);
+  NewsListe(this.neuigkeiten, this.schulname);
   List<News> neuigkeiten;
+  final String schulname;
 
   @override
   State<NewsListe> createState() => _NewsListeState();
@@ -14,7 +15,7 @@ class NewsListe extends StatefulWidget {
 class _NewsListeState extends State<NewsListe> {
   _deleteNews(id) {
     ServicesNews.deleteNews(id).then((value) {
-      ServicesNews.getNews().then((news2) {
+      ServicesNews.getNews(widget.schulname).then((news2) {
         setState(() {
           widget.neuigkeiten = news2;
         });
@@ -22,9 +23,11 @@ class _NewsListeState extends State<NewsListe> {
     });
   }
 
-  _updateNews(String id, String ueberschrift, String inhalt, String datum) {
-    ServicesNews.updateNews(id, ueberschrift, inhalt, datum).then((value) {
-      ServicesNews.getNews().then((news1) {
+  _updateNews(String id, String ueberschrift, String inhalt, String datum,
+      String schulname) {
+    ServicesNews.updateNews(id, ueberschrift, inhalt, datum, schulname)
+        .then((value) {
+      ServicesNews.getNews(schulname).then((news1) {
         setState(() {
           widget.neuigkeiten = news1;
         });
@@ -42,13 +45,15 @@ class _NewsListeState extends State<NewsListe> {
             onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) => buildPopupDialog(
-                  context,
-                  _updateNews,
-                  _deleteNews,
-                  widget.neuigkeiten[index].id.toString(),
-                  widget.neuigkeiten[index].ueberschrift.toString(),
-                  widget.neuigkeiten[index].inhalt.toString(),
-                  widget.neuigkeiten[index].datum.toString()),
+                context,
+                _updateNews,
+                _deleteNews,
+                widget.neuigkeiten[index].id.toString(),
+                widget.neuigkeiten[index].ueberschrift.toString(),
+                widget.neuigkeiten[index].inhalt.toString(),
+                widget.neuigkeiten[index].datum.toString(),
+                widget.neuigkeiten[index].schulname.toString(),
+              ),
             ),
             child: Card(
               color: Colors.orange,
@@ -95,15 +100,16 @@ class _NewsListeState extends State<NewsListe> {
 
 Widget buildPopupDialog(
     BuildContext context,
-    Function _updateNews,
-    Function _deleteNews,
+    Function updateNews,
+    Function deleteNews,
     String id,
     String ueberschrift,
     String inhalt,
-    String datum) {
+    String datum,
+    String schulname) {
   _startdeleteNews() {
     Navigator.of(context).pop();
-    _deleteNews(id);
+    deleteNews(id);
   }
 
   _startupdateNews(BuildContext cnx) {
@@ -111,7 +117,8 @@ Widget buildPopupDialog(
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return UpdateNews(_updateNews, id, ueberschrift, inhalt, datum);
+        return UpdateNews(
+            updateNews, id, ueberschrift, inhalt, datum, schulname);
       },
     );
   }
