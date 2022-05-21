@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         AGPage.routeName: (ctx) => AGPage(status1, dbname),
         Newspage.routeName: (ctx) => Newspage(status1, dbname),
         Vertretungspage.routeName: (ctx) => Vertretungspage(),
-        Settingspage.routeName: (ctx) => Settingspage(),
+        Settingspage.routeName: (ctx) => Settingspage(username, dbname),
         LoginPage.routeName: (ctx) => LoginPage(accountStatus),
         RegistrierenPage.routeName: (ctx) => RegistrierenPage(accountStatus),
       },

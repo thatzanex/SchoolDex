@@ -17,7 +17,7 @@ class AGliste extends StatefulWidget {
 
 class _AGlisteState extends State<AGliste> {
   _deleteAgs(id) {
-    ServicesAgs.deleteAgs(id).then((value) {
+    ServicesAgs.deleteAgs(id, widget.schulname).then((value) {
       ServicesAgs.getAgs(widget.schulname).then((ags2) {
         setState(() {
           widget.agangebot = ags2;

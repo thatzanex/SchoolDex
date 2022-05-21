@@ -66,11 +66,12 @@ class ServicesNews {
     }
   }
 
-  static Future<String> deleteNews(String id) async {
+  static Future<String> deleteNews(String id, String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = _DELETE_News_ACTION;
       map["id"] = id;
+      map["schulname"] = schulname;
       final response = await http.post(ROOT, body: map);
       print("deleteNews >> Response:: ${response.body}");
       return response.body;

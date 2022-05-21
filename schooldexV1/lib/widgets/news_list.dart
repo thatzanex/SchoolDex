@@ -16,7 +16,7 @@ class NewsListe extends StatefulWidget {
 
 class _NewsListeState extends State<NewsListe> {
   _deleteNews(id) {
-    ServicesNews.deleteNews(id).then((value) {
+    ServicesNews.deleteNews(id, widget.schulname).then((value) {
       ServicesNews.getNews(widget.schulname).then((news2) {
         setState(() {
           widget.neuigkeiten = news2;

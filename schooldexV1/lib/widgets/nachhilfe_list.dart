@@ -20,7 +20,7 @@ class NachhilfeListe extends StatefulWidget {
 class _NachhilfeListeState extends State<NachhilfeListe> {
   Color colorCard = Colors.grey.shade200;
   _deleteNachhilfe(id) {
-    ServicesNachhilfe.deleteNachhilfe(id).then((value) {
+    ServicesNachhilfe.deleteNachhilfe(id, widget.schulname).then((value) {
       ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen2) {
         setState(() {
           widget.nachhilfen = nachhilfen2;
