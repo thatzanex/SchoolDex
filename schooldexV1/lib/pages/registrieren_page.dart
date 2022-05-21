@@ -34,7 +34,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   }
 
   findAccounts() {
-    //LocalServices.instance.remove('17');
+    //LocalServices.instance.remove('21');
     try {
       LocalServices.instance.getAccount().then((value) {
         print('findAccounts: $value');
@@ -71,7 +71,6 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
       ServicesAccount.getAccount(schulController.text).then((accountlist) {
-        print('test');
         print(accountlist);
         String matchingList = benutzernamenController.text;
         var index = accountlist.indexWhere(
@@ -79,19 +78,14 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         try {
           if (passwortController.text ==
               accountlist[index].passwort.toString()) {
-            print('1');
             clarValues();
-            //Navigator.of(context).pushReplacementNamed(Newspage.routeName);
             return;
           } else {
-            print('2');
             clarValues();
             return;
           }
         } catch (e) {
-          print('3');
           if (codeController.text == 'L135' || codeController.text == 'S246') {
-            print('Registrieren');
             ServicesAccount.addAccount(
                     benutzernamenController.text,
                     passwortController.text,
@@ -102,7 +96,6 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                 benutzernamenController.text,
               ];
               ServicesAccount.getAccount(schulController.text).then((value2) {
-                print('14: ${value2}');
                 var index = value2.indexWhere(
                     (element) => matchingList.contains(element.benutzername));
                 LocalServices.instance
@@ -113,9 +106,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                         schulname: schulController.text,
                         status: codeController.text))
                     .then((value) {
-                  print('Test erfolgreich');
                   if (value1 == 'success') {
-                    print('Hallo');
                     findAccounts();
                     Navigator.of(context)
                         .pushReplacementNamed(Newspage.routeName);
@@ -143,12 +134,6 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // actions: [
-        //   IconButton(
-        //       onPressed: () => Navigator.of(context)
-        //           .pushReplacementNamed(LoginPage.routeName),
-        //       icon: Icon(Icons.keyboard_backspace))
-        // ],
         title: const Text('SchoolDex'),
       ),
       body: Container(
@@ -157,7 +142,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
           child: Column(
             children: [
               const Text(
-                'Registrier dich',
+                'Willkommen',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
@@ -165,7 +150,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                 ),
               ),
               const Text(
-                'jetzt!',
+                'bei SchoolDex!',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
@@ -177,19 +162,17 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                 child: Column(
                   children: [
                     Text(
-                      'Und mache SchoolDex',
+                      'Registriere dich jetzt',
                       style: const TextStyle(
                         fontSize: 20,
-                        //fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'zu deinem Schwarzenbrett',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        //fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // Text(
+                    //   'deinem Schwarzenbrett',
+                    //   style: const TextStyle(
+                    //     fontSize: 20,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -256,8 +239,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                 onPressed: submitData,
               ),
               TextButton(
-                child: const Text(
-                    'Du hast doch schon ein Konto, dann klicke hier'),
+                child: const Text('Du hast schon ein Konto, dann klicke hier'),
                 onPressed: () => selectPagetoLogin(context),
               ),
             ],

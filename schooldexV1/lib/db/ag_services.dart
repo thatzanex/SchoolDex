@@ -16,7 +16,7 @@ class ServicesAgs {
       map['schulname'] = schulname;
       final response = await http.post(ROOT, body: map);
       print(schulname);
-      print('getAgs Response: ${response.body}');
+      //print('getAgs Response: ${response.body}');
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
         List<AGs> listchen1 =

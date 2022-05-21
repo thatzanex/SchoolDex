@@ -89,16 +89,15 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           child: Column(
             children: <Widget>[
               //NachhilfeListe(_userNachhilfen),
-              NachhilfeListe(_userNachhilfen, widget.schulname),
+              NachhilfeListe(
+                  _userNachhilfen, widget.schulname, widget.isTeacher),
             ],
           ),
         ),
-        floatingActionButton: widget.isTeacher.startsWith('L135')
-            ? FloatingActionButton(
-                child: const Icon(Icons.add),
-                onPressed: () => _startAddNeueNachhilfe(context),
-              )
-            : Container(),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => _startAddNeueNachhilfe(context),
+        ),
         bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.orange,
             Colors.white, Colors.white, Colors.white));
   }

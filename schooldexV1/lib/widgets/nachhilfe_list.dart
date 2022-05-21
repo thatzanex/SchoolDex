@@ -2,12 +2,14 @@ import 'package:SchoolDex/db/nachhilfe_services.dart';
 import 'package:flutter/material.dart';
 import '../models/nachhilfe.dart';
 import 'nachhilfe_update.dart';
+import 'popup.dart';
 
 class NachhilfeListe extends StatefulWidget {
   // String accountId;
   // String accountname;
   final String schulname;
-  NachhilfeListe(this.nachhilfen, this.schulname);
+  final String isTeacher;
+  NachhilfeListe(this.nachhilfen, this.schulname, this.isTeacher);
 
   List<Nachhilfe> nachhilfen;
   @override
@@ -63,18 +65,28 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
           return GestureDetector(
             onTap: () => showDialog(
               context: context,
-              builder: (BuildContext context) => buildPopupDialog(
-                context,
-                _updateNachhilfe,
-                _deleteNachhilfe,
-                widget.nachhilfen[index].id.toString(),
-                widget.nachhilfen[index].fach.toString(),
-                widget.nachhilfen[index].jahrgang.toString(),
-                widget.nachhilfen[index].beschreibung.toString(),
-                widget.nachhilfen[index].userId.toString(),
-                widget.nachhilfen[index].username.toString(),
-                widget.nachhilfen[index].schulname.toString(),
-              ),
+              builder: (BuildContext context) {
+                if (widget.isTeacher.startsWith('L135')) {
+                  return buildPopupDialog(
+                    context,
+                    _updateNachhilfe,
+                    _deleteNachhilfe,
+                    widget.nachhilfen[index].id.toString(),
+                    widget.nachhilfen[index].fach.toString(),
+                    widget.nachhilfen[index].jahrgang.toString(),
+                    widget.nachhilfen[index].beschreibung.toString(),
+                    widget.nachhilfen[index].userId.toString(),
+                    widget.nachhilfen[index].username.toString(),
+                    widget.nachhilfen[index].schulname.toString(),
+                  );
+                } else {
+                  return schuelerPopupDialog(
+                      context,
+                      widget.nachhilfen[index].fach.toString(),
+                      widget.nachhilfen[index].beschreibung.toString(),
+                      widget.nachhilfen[index].jahrgang.toString());
+                }
+              },
             ),
             child: Card(
               color: colorCard,

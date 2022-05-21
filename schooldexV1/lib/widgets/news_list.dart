@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import '../models/news.dart';
 import 'news_update.dart';
 import '../db/news_services.dart';
+import 'popup.dart';
 
 class NewsListe extends StatefulWidget {
-  NewsListe(this.neuigkeiten, this.schulname);
+  NewsListe(this.neuigkeiten, this.schulname, this.isTeacher);
   List<News> neuigkeiten;
   final String schulname;
+  final String isTeacher;
 
   @override
   State<NewsListe> createState() => _NewsListeState();
@@ -44,16 +46,26 @@ class _NewsListeState extends State<NewsListe> {
           return GestureDetector(
             onTap: () => showDialog(
               context: context,
-              builder: (BuildContext context) => buildPopupDialog(
-                context,
-                _updateNews,
-                _deleteNews,
-                widget.neuigkeiten[index].id.toString(),
-                widget.neuigkeiten[index].ueberschrift.toString(),
-                widget.neuigkeiten[index].inhalt.toString(),
-                widget.neuigkeiten[index].datum.toString(),
-                widget.neuigkeiten[index].schulname.toString(),
-              ),
+              builder: (BuildContext context) {
+                if (widget.isTeacher.startsWith('L135')) {
+                  return buildPopupDialog(
+                    context,
+                    _updateNews,
+                    _deleteNews,
+                    widget.neuigkeiten[index].id.toString(),
+                    widget.neuigkeiten[index].ueberschrift.toString(),
+                    widget.neuigkeiten[index].inhalt.toString(),
+                    widget.neuigkeiten[index].datum.toString(),
+                    widget.neuigkeiten[index].schulname.toString(),
+                  );
+                } else {
+                  return schuelerPopupDialog(
+                      context,
+                      widget.neuigkeiten[index].ueberschrift.toString(),
+                      widget.neuigkeiten[index].inhalt.toString(),
+                      widget.neuigkeiten[index].datum.toString());
+                }
+              },
             ),
             child: Card(
               color: Colors.orange,

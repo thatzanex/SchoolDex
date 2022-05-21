@@ -16,9 +16,8 @@ class ServicesNachhilfe {
       map['action'] = _GET_ALL_ACTION;
       map['schulname'] = schulname;
       final response = await http.post(ROOT, body: map);
-      print('getNachhilfe Response: ${response.body}');
+      //print('getNachhilfe Response: ${response.body}');
       if (200 == response.statusCode) {
-        print('Test');
         var resultsObjsJson = jsonDecode(response.body) as List;
         print(resultsObjsJson);
         List<Nachhilfe> listchen1 =
@@ -50,7 +49,7 @@ class ServicesNachhilfe {
       map["benutzername"] = username;
       map["schulname"] = schulname;
       final response = await http.post(ROOT, body: map);
-      print("addNachhilfe >> Response:: ${response.body}");
+      //print("addNachhilfe >> Response:: ${response.body}");
       return response.body;
     } catch (e) {
       return 'error';

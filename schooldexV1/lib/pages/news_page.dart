@@ -78,7 +78,7 @@ class _NewspageState extends State<Newspage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            NewsListe(_userNews, widget.schulname),
+            NewsListe(_userNews, widget.schulname, widget.isTeacher),
           ],
         ),
       ),

@@ -77,7 +77,7 @@ class _AGPageState extends State<AGPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            AGliste(_userAGs, widget.schulname),
+            AGliste(_userAGs, widget.schulname, widget.isTeacher),
           ],
         ),
       ),

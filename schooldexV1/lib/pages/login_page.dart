@@ -7,6 +7,8 @@ import '../models/account.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
+  final Function accountstatus;
+  LoginPage(this.accountstatus);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -26,6 +28,28 @@ class _LoginPageState extends State<LoginPage> {
     schulController.text = '';
   }
 
+  findAccounts() {
+    LocalServices.instance.remove('20');
+    try {
+      LocalServices.instance.getAccount().then((value) {
+        print('findAccounts: $value');
+        try {
+          widget.accountstatus(
+              value[0].id.toString(),
+              value[0].benutzername.toString(),
+              value[0].schulname.toString(),
+              value[0].status.toString());
+          print('getAccounts');
+          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+        } catch (e) {
+          return;
+        }
+      });
+    } catch (e) {
+      return;
+    }
+  }
+
   void submitData() {
     List<String> matchingList = [
       benutzernamenController.text,
@@ -37,13 +61,18 @@ class _LoginPageState extends State<LoginPage> {
           .indexWhere((element) => matchingList.contains(element.benutzername));
       try {
         if (passwortController.text == accountlist[index].passwort.toString()) {
-          LocalServices.instance.add(Account(
-              id: accountlist[index].id.toString(),
-              benutzername: benutzernamenController.text,
-              passwort: passwortController.text,
-              status: accountlist[index].status.toString()));
-          print('hi, fast geschafft');
-          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+          LocalServices.instance
+              .add(Account(
+                  id: accountlist[index].id.toString(),
+                  benutzername: benutzernamenController.text,
+                  passwort: passwortController.text,
+                  status: accountlist[index].status.toString(),
+                  schulname: schulController.text))
+              .then((value) {
+            findAccounts();
+            print('fast geschafft');
+            Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+          });
         } else {
           clarValues();
 
