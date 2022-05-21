@@ -89,8 +89,8 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           child: Column(
             children: <Widget>[
               //NachhilfeListe(_userNachhilfen),
-              NachhilfeListe(
-                  _userNachhilfen, widget.schulname, widget.isTeacher),
+              NachhilfeListe(_userNachhilfen, widget.schulname,
+                  widget.isTeacher, widget.userId),
             ],
           ),
         ),

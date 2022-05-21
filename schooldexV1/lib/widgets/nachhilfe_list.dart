@@ -9,7 +9,8 @@ class NachhilfeListe extends StatefulWidget {
   // String accountname;
   final String schulname;
   final String isTeacher;
-  NachhilfeListe(this.nachhilfen, this.schulname, this.isTeacher);
+  final String userId;
+  NachhilfeListe(this.nachhilfen, this.schulname, this.isTeacher, this.userId);
 
   List<Nachhilfe> nachhilfen;
   @override
@@ -66,7 +67,8 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
             onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) {
-                if (widget.isTeacher.startsWith('L135')) {
+                if (widget.isTeacher.startsWith('L135') ||
+                    widget.userId == widget.nachhilfen[index].userId) {
                   return buildPopupDialog(
                     context,
                     _updateNachhilfe,
