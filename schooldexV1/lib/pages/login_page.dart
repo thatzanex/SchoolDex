@@ -2,6 +2,8 @@ import 'package:SchoolDex/db/accounts_services.dart';
 import 'package:SchoolDex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'registrieren_page.dart';
+import '../db/local_services.dart';
+import '../models/account.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
@@ -35,6 +37,11 @@ class _LoginPageState extends State<LoginPage> {
           .indexWhere((element) => matchingList.contains(element.benutzername));
       try {
         if (passwortController.text == accountlist[index].passwort.toString()) {
+          LocalServices.instance.add(Account(
+              id: accountlist[index].id.toString(),
+              benutzername: benutzernamenController.text,
+              passwort: passwortController.text,
+              status: accountlist[index].status.toString()));
           print('hi, fast geschafft');
           Navigator.of(context).pushReplacementNamed(Newspage.routeName);
         } else {

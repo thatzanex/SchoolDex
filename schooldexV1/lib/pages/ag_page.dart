@@ -7,6 +7,8 @@ import '../widgets/MyBottomNavigationBar.dart';
 
 class AGPage extends StatefulWidget {
   static const routeName = '/ags';
+  String isTeacher;
+  AGPage(this.isTeacher);
   @override
   _AGPageState createState() => _AGPageState();
 }
@@ -20,7 +22,7 @@ class _AGPageState extends State<AGPage> {
             'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
         termin: 'Dienstag 3-4 Stunde')
   ];
-
+  @override
   void initState() {
     super.initState();
     _userAGs = [];
@@ -76,10 +78,12 @@ class _AGPageState extends State<AGPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => _startAddNeueAG(context),
-      ),
+      floatingActionButton: widget.isTeacher.endsWith('L135')
+          ? FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () => _startAddNeueAG(context),
+            )
+          : Container(),
       bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.white,
           Colors.orange, Colors.white, Colors.white),
     );
