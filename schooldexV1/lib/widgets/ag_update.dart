@@ -5,12 +5,13 @@ class UpdateAGs extends StatefulWidget {
   final String schulname;
 
   UpdateAGs(this.updateAx, this.id, this.thema, this.jahrgang,
-      this.beschreibung, this.termin, this.schulname);
+      this.beschreibung, this.termin, this.schulname, this.userId);
   final String id;
   final String thema;
   final String jahrgang;
   final String beschreibung;
   final String termin;
+  final String userId;
 
   @override
   State<UpdateAGs> createState() => _UpdateAGsState();
@@ -54,7 +55,8 @@ class _UpdateAGsState extends State<UpdateAGs> {
         jahrgangsstufeController.text,
         beschreibungController.text,
         terminController.text,
-        widget.schulname);
+        widget.schulname,
+        widget.userId);
     Navigator.of(context).pop();
   }
 

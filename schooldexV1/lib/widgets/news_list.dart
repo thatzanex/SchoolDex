@@ -5,10 +5,11 @@ import '../db/news_services.dart';
 import 'popup.dart';
 
 class NewsListe extends StatefulWidget {
-  NewsListe(this.neuigkeiten, this.schulname, this.isTeacher);
+  NewsListe(this.neuigkeiten, this.schulname, this.isTeacher, this.userId);
   List<News> neuigkeiten;
   final String schulname;
   final String isTeacher;
+  final String userId;
 
   @override
   State<NewsListe> createState() => _NewsListeState();
@@ -26,8 +27,8 @@ class _NewsListeState extends State<NewsListe> {
   }
 
   _updateNews(String id, String ueberschrift, String inhalt, String datum,
-      String schulname) {
-    ServicesNews.updateNews(id, ueberschrift, inhalt, datum, schulname)
+      String schulname, String userId) {
+    ServicesNews.updateNews(id, ueberschrift, inhalt, datum, schulname, userId)
         .then((value) {
       ServicesNews.getNews(schulname).then((news1) {
         setState(() {
@@ -47,7 +48,9 @@ class _NewsListeState extends State<NewsListe> {
             onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) {
-                if (widget.isTeacher.startsWith('L135')) {
+                if (widget.isTeacher.startsWith('Admin789') ||
+                    widget.userId ==
+                        widget.neuigkeiten[index].userId.toString()) {
                   return buildPopupDialog(
                     context,
                     _updateNews,
@@ -57,6 +60,7 @@ class _NewsListeState extends State<NewsListe> {
                     widget.neuigkeiten[index].inhalt.toString(),
                     widget.neuigkeiten[index].datum.toString(),
                     widget.neuigkeiten[index].schulname.toString(),
+                    widget.neuigkeiten[index].userId.toString(),
                   );
                 } else {
                   return schuelerPopupDialog(
@@ -118,7 +122,8 @@ Widget buildPopupDialog(
     String ueberschrift,
     String inhalt,
     String datum,
-    String schulname) {
+    String schulname,
+    String userId) {
   _startdeleteNews() {
     Navigator.of(context).pop();
     deleteNews(id);
@@ -130,7 +135,7 @@ Widget buildPopupDialog(
       context: cnx,
       builder: (_) {
         return UpdateNews(
-            updateNews, id, ueberschrift, inhalt, datum, schulname);
+            updateNews, id, ueberschrift, inhalt, datum, schulname, userId);
       },
     );
   }

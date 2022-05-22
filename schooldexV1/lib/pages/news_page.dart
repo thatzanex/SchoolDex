@@ -10,7 +10,8 @@ class Newspage extends StatefulWidget {
   static const routeName = '/news';
   String isTeacher;
   String schulname;
-  Newspage(this.isTeacher, this.schulname);
+  String userId;
+  Newspage(this.isTeacher, this.schulname, this.userId);
   @override
   State<Newspage> createState() => _NewspageState();
 }
@@ -23,7 +24,8 @@ class _NewspageState extends State<Newspage> {
         inhalt:
             'Wir haben jetzt endlich einen neuen Basketballkorb. Kommt vorbei, seht ihn euch an und benutzt ihn',
         datum: DateFormat('dd.MM.yyyy').format(DateTime.now()),
-        schulname: 'SchoolDex')
+        schulname: 'SchoolDex',
+        userId: '1')
   ];
   @override
   void initState() {
@@ -41,8 +43,9 @@ class _NewspageState extends State<Newspage> {
   }
 
   void _addNeueNews(String nxUeberschrift, String nxInhalt, String nxDatum,
-      String nxSchulname) {
-    ServicesNews.addNews(nxUeberschrift, nxInhalt, nxDatum, nxSchulname)
+      String nxSchulname, String nxuserId) {
+    ServicesNews.addNews(
+            nxUeberschrift, nxInhalt, nxDatum, nxSchulname, nxuserId)
         .then((value) {
       ServicesNews.getNews(nxSchulname).then((news2) {
         setState(() {
@@ -56,7 +59,7 @@ class _NewspageState extends State<Newspage> {
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return NeueNews(_addNeueNews, widget.schulname);
+        return NeueNews(_addNeueNews, widget.schulname, widget.userId);
       },
     );
   }
@@ -77,11 +80,13 @@ class _NewspageState extends State<Newspage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            NewsListe(_userNews, widget.schulname, widget.isTeacher),
+            NewsListe(
+                _userNews, widget.schulname, widget.isTeacher, widget.userId),
           ],
         ),
       ),
-      floatingActionButton: widget.isTeacher.startsWith('L135')
+      floatingActionButton: widget.isTeacher.startsWith('L135') ||
+              widget.isTeacher.startsWith('Admin789')
           ? FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () => _startAddNeueNews(context),

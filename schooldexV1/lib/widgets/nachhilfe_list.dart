@@ -5,8 +5,6 @@ import 'nachhilfe_update.dart';
 import 'popup.dart';
 
 class NachhilfeListe extends StatefulWidget {
-  // String accountId;
-  // String accountname;
   final String schulname;
   final String isTeacher;
   final String userId;
@@ -67,8 +65,9 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
             onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) {
-                if (widget.isTeacher.startsWith('L135') ||
-                    widget.userId == widget.nachhilfen[index].userId) {
+                if ( //widget.isTeacher.startsWith('L135') ||
+                    widget.userId == widget.nachhilfen[index].userId ||
+                        widget.isTeacher.startsWith('Admin789')) {
                   return buildPopupDialog(
                     context,
                     _updateNachhilfe,

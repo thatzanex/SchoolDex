@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class NeueAG extends StatefulWidget {
   final Function addAx;
   final String schulname;
+  final String userId;
 
-  NeueAG(this.addAx, this.schulname);
+  NeueAG(this.addAx, this.schulname, this.userId);
 
   @override
   State<NeueAG> createState() => _NeueAGState();
@@ -33,8 +34,13 @@ class _NeueAGState extends State<NeueAG> {
       return;
     }
 
-    widget.addAx(themaController.text, jahrgangsstufeController.text,
-        beschreibungController.text, terminController.text, widget.schulname);
+    widget.addAx(
+        themaController.text,
+        jahrgangsstufeController.text,
+        beschreibungController.text,
+        terminController.text,
+        widget.schulname,
+        widget.userId);
     Navigator.of(context).pop();
   }
 

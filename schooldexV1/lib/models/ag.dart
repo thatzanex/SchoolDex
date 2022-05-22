@@ -5,6 +5,7 @@ class AGs {
   String? beschreibung;
   String termin;
   String schulname;
+  String userId;
 
   AGs({
     this.id,
@@ -13,6 +14,7 @@ class AGs {
     this.beschreibung,
     required this.termin,
     required this.schulname,
+    required this.userId,
   });
 
   factory AGs.fromMap(Map<String, dynamic> map) {
@@ -23,6 +25,7 @@ class AGs {
       beschreibung: map['beschreibung'] as String,
       termin: map['termin'] as String,
       schulname: map['schulname'] as String,
+      userId: map['userId'] as String,
     );
   }
 }

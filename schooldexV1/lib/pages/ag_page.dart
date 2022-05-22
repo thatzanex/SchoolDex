@@ -9,7 +9,8 @@ class AGPage extends StatefulWidget {
   static const routeName = '/ags';
   String isTeacher;
   String schulname;
-  AGPage(this.isTeacher, this.schulname);
+  String userId;
+  AGPage(this.isTeacher, this.schulname, this.userId);
   @override
   State<AGPage> createState() => _AGPageState();
 }
@@ -22,7 +23,8 @@ class _AGPageState extends State<AGPage> {
         beschreibung:
             'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
         termin: 'Dienstag 3-4 Stunde',
-        schulname: 'SchoolDex')
+        schulname: 'SchoolDex',
+        userId: '1')
   ];
   @override
   void initState() {
@@ -40,9 +42,9 @@ class _AGPageState extends State<AGPage> {
   }
 
   void _addNeueAG(String nxThema, String nxJahrgang, String nxBeschreibung,
-      String nxTermin, String nxSchulname) {
+      String nxTermin, String nxSchulname, String userId) {
     ServicesAgs.addAgs(
-            nxThema, nxJahrgang, nxBeschreibung, nxTermin, nxSchulname)
+            nxThema, nxJahrgang, nxBeschreibung, nxTermin, nxSchulname, userId)
         .then((value) {
       ServicesAgs.getAgs(nxSchulname).then((ags2) {
         setState(() {
@@ -56,7 +58,7 @@ class _AGPageState extends State<AGPage> {
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return NeueAG(_addNeueAG, widget.schulname);
+        return NeueAG(_addNeueAG, widget.schulname, widget.userId);
       },
     );
   }
@@ -77,11 +79,13 @@ class _AGPageState extends State<AGPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            AGliste(_userAGs, widget.schulname, widget.isTeacher),
+            AGliste(
+                _userAGs, widget.schulname, widget.isTeacher, widget.userId),
           ],
         ),
       ),
-      floatingActionButton: widget.isTeacher.endsWith('L135')
+      floatingActionButton: widget.isTeacher.endsWith('L135') ||
+              widget.isTeacher.endsWith('Admin789')
           ? FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () => _startAddNeueAG(context),

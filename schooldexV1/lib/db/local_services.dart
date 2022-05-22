@@ -37,20 +37,13 @@ class LocalServices {
   Future<List<Account>> getAccount() async {
     Database db = await instance.database;
     var accounts = await db.query('account', orderBy: 'id');
-    print('test3: $accounts');
     List<Account> accountList =
         accounts.map((e) => Account.fromMapLocal(e)).toList();
-    // List<Account> accountList = accounts.isNotEmpty
-    //     ? accounts.map((e) => Account.fromMapLocal(e)).toList()
-    //     : [];
-    print('localgetAccount: $accountList');
     return accountList;
   }
 
   Future<int> add(Account item) async {
     Database db = await instance.database;
-    print('LocalAccountAdd');
-    print(item);
     return await db.insert('account', item.toMapLocal());
   }
 

@@ -5,15 +5,15 @@ import '/models/account.dart';
 class ServicesAccount {
   static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/account_actions.php');
-  static const _GET_ALL_ACTION = 'GET_ALL';
-  static const String _ADD_Account_ACTION = 'ADD_Account';
+  static const getAllAction = 'GET_ALL';
+  static const String addAccountAction = 'ADD_Account';
   // static const String _UPDATE_Account_ACTION = 'UPDATE_Account';
   // static const String _DELETE_Account_ACTION = 'DELETE_Account';
 
   static Future<List<Account>> getAccount(String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map['action'] = _GET_ALL_ACTION;
+      map['action'] = getAllAction;
       map['schulname'] = schulname;
       final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
@@ -37,7 +37,7 @@ class ServicesAccount {
   ) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _ADD_Account_ACTION;
+      map["action"] = addAccountAction;
       map["benutzername"] = benutzername;
       map["passwort"] = passwort;
       map["schulname"] = schulname;

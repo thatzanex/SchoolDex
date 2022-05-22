@@ -5,15 +5,15 @@ import '/models/nachhilfe.dart';
 class ServicesNachhilfe {
   static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/nachhilfe_actions.php');
-  static const _GET_ALL_ACTION = 'GET_ALL';
-  static const String _ADD_Nachhilfe_ACTION = 'ADD_Nachhilfe';
-  static const String _UPDATE_Nachhilfe_ACTION = 'UPDATE_Nachhilfe';
-  static const String _DELETE_Nachhilfe_ACTION = 'DELETE_Nachhilfe';
+  static const getAllAction = 'GET_ALL';
+  static const String addNachhilfeAction = 'ADD_Nachhilfe';
+  static const String updateNachhilfeAction = 'UPDATE_Nachhilfe';
+  static const String deleteNachhilfeAction = 'DELETE_Nachhilfe';
 
   static Future<List<Nachhilfe>> getNachhilfe(String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map['action'] = _GET_ALL_ACTION;
+      map['action'] = getAllAction;
       map['schulname'] = schulname;
       final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
@@ -38,7 +38,7 @@ class ServicesNachhilfe {
       String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _ADD_Nachhilfe_ACTION;
+      map["action"] = addNachhilfeAction;
       map["fach"] = fach;
       map["jahrgang"] = jahrgang;
       map["beschreibung"] = beschreibung;
@@ -62,7 +62,7 @@ class ServicesNachhilfe {
       String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _UPDATE_Nachhilfe_ACTION;
+      map["action"] = updateNachhilfeAction;
       map["id"] = id;
       map["fach"] = fach;
       map["jahrgang"] = jahrgang;
@@ -80,7 +80,7 @@ class ServicesNachhilfe {
   static Future<String> deleteNachhilfe(String id, String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _DELETE_Nachhilfe_ACTION;
+      map["action"] = deleteNachhilfeAction;
       map["id"] = id;
       map["schulname"] = schulname;
       final response = await http.post(root, body: map);

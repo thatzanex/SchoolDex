@@ -5,15 +5,15 @@ import '/models/news.dart';
 class ServicesNews {
   static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/news_actions.php');
-  static const _GET_ALL_ACTION = 'GET_ALL';
-  static const String _ADD_News_ACTION = 'ADD_News';
-  static const String _UPDATE_News_ACTION = 'UPDATE_News';
-  static const String _DELETE_News_ACTION = 'DELETE_News';
+  static const getAllAction = 'GET_ALL';
+  static const String addNewsAction = 'ADD_News';
+  static const String updateNewsAction = 'UPDATE_News';
+  static const String deleteNewsAction = 'DELETE_News';
 
   static Future<List<News>> getNews(String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map['action'] = _GET_ALL_ACTION;
+      map['action'] = getAllAction;
       map['schulname'] = schulname;
       final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
@@ -30,14 +30,15 @@ class ServicesNews {
   }
 
   static Future<String> addNews(String ueberschrift, String inhalt,
-      String datum, String schulname) async {
+      String datum, String schulname, String userId) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _ADD_News_ACTION;
+      map["action"] = addNewsAction;
       map["ueberschrift"] = ueberschrift;
       map["inhalt"] = inhalt;
       map["datum"] = datum;
       map["schulname"] = schulname;
+      map["userId"] = userId;
       final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
@@ -46,15 +47,16 @@ class ServicesNews {
   }
 
   static Future<String> updateNews(String id, String ueberschrift,
-      String inhalt, String datum, String schulname) async {
+      String inhalt, String datum, String schulname, String userId) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _UPDATE_News_ACTION;
+      map["action"] = updateNewsAction;
       map["id"] = id;
       map["ueberschrift"] = ueberschrift;
       map["inhalt"] = inhalt;
       map["datum"] = datum;
       map["schulname"] = schulname;
+      map["userId"] = userId;
       final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
@@ -65,7 +67,7 @@ class ServicesNews {
   static Future<String> deleteNews(String id, String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = _DELETE_News_ACTION;
+      map["action"] = deleteNewsAction;
       map["id"] = id;
       map["schulname"] = schulname;
       final response = await http.post(root, body: map);

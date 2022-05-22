@@ -82,7 +82,9 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
             return;
           }
         } catch (e) {
-          if (codeController.text == 'L135' || codeController.text == 'S246') {
+          if (codeController.text == 'L135' ||
+              codeController.text == 'S246' ||
+              codeController.text == 'Admin789') {
             ServicesAccount.addAccount(
                     benutzernamenController.text,
                     passwortController.text,

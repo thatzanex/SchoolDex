@@ -5,11 +5,12 @@ import '../models/ag.dart';
 import 'ag_update.dart';
 
 class AGliste extends StatefulWidget {
-  AGliste(this.agangebot, this.schulname, this.isTeacher);
+  AGliste(this.agangebot, this.schulname, this.isTeacher, this.userId);
 
   List<AGs> agangebot;
   String schulname;
   String isTeacher;
+  String userId;
 
   @override
   State<AGliste> createState() => _AGlisteState();
@@ -27,8 +28,9 @@ class _AGlisteState extends State<AGliste> {
   }
 
   _updateAGs(String id, String thema, String jahrgang, String beschreibung,
-      String termin, String schulname) {
-    ServicesAgs.updateAgs(id, thema, jahrgang, beschreibung, termin, schulname)
+      String termin, String schulname, String userId) {
+    ServicesAgs.updateAgs(
+            id, thema, jahrgang, beschreibung, termin, schulname, userId)
         .then((value) {
       ServicesAgs.getAgs(schulname).then((ags1) {
         setState(() {
@@ -48,7 +50,9 @@ class _AGlisteState extends State<AGliste> {
             onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) {
-                if (widget.isTeacher.startsWith('L135')) {
+                if (widget.isTeacher.startsWith('Admin789') ||
+                    widget.agangebot[index].userId.toString() ==
+                        widget.userId) {
                   return buildPopupDialog(
                     context,
                     _updateAGs,
@@ -59,6 +63,7 @@ class _AGlisteState extends State<AGliste> {
                     widget.agangebot[index].beschreibung.toString(),
                     widget.agangebot[index].termin.toString(),
                     widget.agangebot[index].schulname.toString(),
+                    widget.agangebot[index].userId.toString(),
                   );
                 } else {
                   return schuelerPopupDialog(
@@ -143,7 +148,8 @@ Widget buildPopupDialog(
     String jahrgang,
     String beschreibung,
     String termin,
-    String schulname) {
+    String schulname,
+    String userId) {
   _startdeleteAgs() {
     Navigator.of(context).pop();
     deleteAgs(id);
@@ -154,8 +160,8 @@ Widget buildPopupDialog(
     showModalBottomSheet(
       context: cnx,
       builder: (_) {
-        return UpdateAGs(
-            updateAgs, id, thema, jahrgang, beschreibung, termin, schulname);
+        return UpdateAGs(updateAgs, id, thema, jahrgang, beschreibung, termin,
+            schulname, userId);
       },
     );
   }
