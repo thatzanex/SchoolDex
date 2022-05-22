@@ -1,4 +1,4 @@
-import 'package:SchoolDex/db/nachhilfe_services.dart';
+import 'package:schooldex/db/nachhilfe_services.dart';
 import 'package:flutter/material.dart';
 import '../models/nachhilfe.dart';
 import 'nachhilfe_update.dart';

@@ -1,7 +1,7 @@
-import 'package:SchoolDex/db/accounts_services.dart';
-import 'package:SchoolDex/models/account.dart';
-import 'package:SchoolDex/pages/login_page.dart';
-import 'package:SchoolDex/pages/news_page.dart';
+import 'package:schooldex/db/accounts_services.dart';
+import 'package:schooldex/models/account.dart';
+import 'package:schooldex/pages/login_page.dart';
+import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import '../db/local_services.dart';
 
@@ -34,7 +34,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   }
 
   findAccounts() {
-    LocalServices.instance.remove('22');
+    //LocalServices.instance.remove('22');
     try {
       LocalServices.instance.getAccount().then((value) {
         try {

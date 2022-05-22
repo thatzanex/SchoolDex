@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SchoolDex V1',
-      //home: Newspage(),
       home: RegistrierenPage(accountStatus),
       routes: {
         Nachhilfepage.routeName: (ctx) =>

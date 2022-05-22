@@ -1,5 +1,5 @@
-import 'package:SchoolDex/pages/login_page.dart';
-import 'package:SchoolDex/widgets/mybottomnavigationbar.dart';
+import 'package:schooldex/pages/login_page.dart';
+import 'package:schooldex/widgets/mybottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import '../db/local_services.dart';
 

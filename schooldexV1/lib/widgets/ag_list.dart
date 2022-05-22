@@ -1,5 +1,5 @@
-import 'package:SchoolDex/db/ag_services.dart';
-import 'package:SchoolDex/widgets/popup.dart';
+import 'package:schooldex/db/ag_services.dart';
+import 'package:schooldex/widgets/popup.dart';
 import 'package:flutter/material.dart';
 import '../models/ag.dart';
 import 'ag_update.dart';

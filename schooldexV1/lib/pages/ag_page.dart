@@ -1,4 +1,4 @@
-import 'package:SchoolDex/db/ag_services.dart';
+import 'package:schooldex/db/ag_services.dart';
 import 'package:flutter/material.dart';
 import '../widgets/ag_new.dart';
 import '../widgets/ag_list.dart';
