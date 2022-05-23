@@ -58,8 +58,7 @@ class Settingspage extends StatelessWidget {
                   ),
                   onPressed: () {
                     _loggout(context);
-                  } //_loggout(context),
-                  ),
+                  }),
             )
           ],
         ),

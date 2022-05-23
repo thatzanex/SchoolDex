@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       home: RegistrierenPage(accountStatus),
       routes: {
         Nachhilfepage.routeName: (ctx) =>
-            Nachhilfepage(status1, userId, username, dbname),
+            Nachhilfepage(status1, userId, username, dbname, searchItems),
         AGPage.routeName: (ctx) => AGPage(status1, dbname, userId, searchItems),
         Newspage.routeName: (ctx) => Newspage(status1, dbname, userId),
         Vertretungspage.routeName: (ctx) => Vertretungspage(),

@@ -24,21 +24,32 @@ class Searchpage extends StatefulWidget {
 
 class _SearchpageState extends State<Searchpage> {
   List<Nachhilfe> nachhilfeListe = [];
+  List<Nachhilfe> nachhilfeListe1 = [];
+  List<Nachhilfe> nachhilfeListecombiniert = [];
   List<AGs> agListe = [];
+  List<AGs> agListe1 = [];
+  List<AGs> agListecombiniert = [];
   final searchcontroler = TextEditingController();
 
   @override
   void initState() {
-    nachhilfeListe = widget.nachhilfen;
-    agListe = widget.ags;
+    nachhilfeListecombiniert = widget.nachhilfen;
+    agListecombiniert = widget.ags;
     super.initState();
   }
 
   searchNachhilfe() {
-    nachhilfeListe = widget.nachhilfen
-        .where((element) => element.fach
-            .contains(RegExp(searchcontroler.text, caseSensitive: false)))
-        .toList();
+    setState(() {
+      nachhilfeListe = widget.nachhilfen
+          .where((element) => element.fach
+              .contains(RegExp(searchcontroler.text, caseSensitive: false)))
+          .toList();
+      nachhilfeListe1 = widget.nachhilfen
+          .where((element) => element.jahrgang
+              .contains(RegExp(searchcontroler.text, caseSensitive: false)))
+          .toList();
+      nachhilfeListecombiniert = nachhilfeListe + nachhilfeListe1;
+    });
   }
 
   searchAGs() {
@@ -47,6 +58,11 @@ class _SearchpageState extends State<Searchpage> {
           .where((element) => element.thema
               .contains(RegExp(searchcontroler.text, caseSensitive: false)))
           .toList();
+      agListe1 = widget.ags
+          .where((element) => element.jahrgang
+              .contains(RegExp(searchcontroler.text, caseSensitive: false)))
+          .toList();
+      agListecombiniert = agListe + agListe1;
     });
   }
 
@@ -63,8 +79,14 @@ class _SearchpageState extends State<Searchpage> {
                       controller: searchcontroler,
                       onSubmitted: (_) => searchNachhilfe(),
                     )),
-                NachhilfeListe(nachhilfeListe, widget.schulname,
-                    widget.isTeacher, widget.userId, -100)
+                TextButton(
+                    onPressed: searchNachhilfe,
+                    child: const Text(
+                      'Suchen',
+                      style: TextStyle(fontSize: 15),
+                    )),
+                NachhilfeListe(nachhilfeListecombiniert, widget.schulname,
+                    widget.isTeacher, widget.userId, 258)
               ],
             )
           : Column(
@@ -81,7 +103,7 @@ class _SearchpageState extends State<Searchpage> {
                       'Suchen',
                       style: TextStyle(fontSize: 15),
                     )),
-                AGliste(agListe, widget.schulname, widget.isTeacher,
+                AGliste(agListecombiniert, widget.schulname, widget.isTeacher,
                     widget.userId, 258)
               ],
             ),
