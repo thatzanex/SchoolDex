@@ -5,12 +5,13 @@ import '../models/ag.dart';
 import 'ag_update.dart';
 
 class AGliste extends StatefulWidget {
-  AGliste(this.agangebot, this.schulname, this.isTeacher, this.userId);
+  AGliste(this.agangebot, this.schulname, this.isTeacher, this.userId, this.x);
 
   List<AGs> agangebot;
   String schulname;
   String isTeacher;
   String userId;
+  double x;
 
   @override
   State<AGliste> createState() => _AGlisteState();
@@ -43,7 +44,7 @@ class _AGlisteState extends State<AGliste> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 700,
+      height: MediaQuery.of(context).size.height - 50 - widget.x.toDouble(),
       child: ListView.builder(
         itemBuilder: (cnx, index) {
           return GestureDetector(

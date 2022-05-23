@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:schooldex/pages/search_page.dart';
+import 'models/ag.dart';
+import 'models/nachhilfe.dart';
 import 'pages/ag_page.dart';
 import 'pages/nachhilfe_page.dart';
 import 'pages/vertretungs_page.dart';
@@ -16,6 +19,9 @@ class MyApp extends StatelessWidget {
   String username = '';
   String dbname = '';
   String status1 = '';
+  List<Nachhilfe> nachhilfeList = [];
+  List<AGs> agList = [];
+  String ueberschrift = '';
 
   void accountStatus(
       String id, String benutzername, String schulname, String status) {
@@ -23,6 +29,12 @@ class MyApp extends StatelessWidget {
     username = benutzername;
     dbname = schulname;
     status1 = status;
+  }
+
+  void searchItems(List<Nachhilfe> nachhilfen, List<AGs> ags, String title) {
+    nachhilfeList = nachhilfen;
+    agList = ags;
+    ueberschrift = title;
   }
 
   @override
@@ -33,12 +45,14 @@ class MyApp extends StatelessWidget {
       routes: {
         Nachhilfepage.routeName: (ctx) =>
             Nachhilfepage(status1, userId, username, dbname),
-        AGPage.routeName: (ctx) => AGPage(status1, dbname, userId),
+        AGPage.routeName: (ctx) => AGPage(status1, dbname, userId, searchItems),
         Newspage.routeName: (ctx) => Newspage(status1, dbname, userId),
         Vertretungspage.routeName: (ctx) => Vertretungspage(),
         Settingspage.routeName: (ctx) => Settingspage(username, dbname),
         LoginPage.routeName: (ctx) => LoginPage(accountStatus),
         RegistrierenPage.routeName: (ctx) => RegistrierenPage(accountStatus),
+        Searchpage.routeName: (ctx) => Searchpage(
+            nachhilfeList, agList, ueberschrift, dbname, userId, status1),
       },
     );
   }

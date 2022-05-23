@@ -1,5 +1,7 @@
 import 'package:schooldex/db/ag_services.dart';
 import 'package:flutter/material.dart';
+import 'package:schooldex/models/nachhilfe.dart';
+import 'package:schooldex/pages/search_page.dart';
 import '../widgets/ag_new.dart';
 import '../widgets/ag_list.dart';
 import '../models/ag.dart';
@@ -7,10 +9,13 @@ import '../widgets/MyBottomNavigationBar.dart';
 
 class AGPage extends StatefulWidget {
   static const routeName = '/ags';
-  String isTeacher;
-  String schulname;
-  String userId;
-  AGPage(this.isTeacher, this.schulname, this.userId);
+  final String isTeacher;
+  final String schulname;
+  final String userId;
+  final Function searchAgs;
+  const AGPage(this.isTeacher, this.schulname, this.userId, this.searchAgs,
+      {Key? key})
+      : super(key: key);
   @override
   State<AGPage> createState() => _AGPageState();
 }
@@ -63,10 +68,22 @@ class _AGPageState extends State<AGPage> {
     );
   }
 
+  void _startsearchAgs(BuildContext ctx) {
+    List<Nachhilfe> listchen = [];
+    widget.searchAgs(listchen, _userAGs, 'AG Angebote durchsuchen');
+    Navigator.of(context).pushNamed(Searchpage.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(Icons.search),
+            iconSize: 35,
+            onPressed: () {
+              _startsearchAgs(context);
+            }),
         title: const Text('AG Angebot'),
         actions: <Widget>[
           IconButton(
@@ -80,7 +97,7 @@ class _AGPageState extends State<AGPage> {
         child: Column(
           children: <Widget>[
             AGliste(
-                _userAGs, widget.schulname, widget.isTeacher, widget.userId),
+                _userAGs, widget.schulname, widget.isTeacher, widget.userId, 0),
           ],
         ),
       ),
