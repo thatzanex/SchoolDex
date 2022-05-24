@@ -48,13 +48,13 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   
 
-flutter_icons:
-  image_path: "images/logo.png"
-  adaptive_icon_backround: "#1D2C59"
-  adaptive_icon_foreground: "images/logo_foreground.png"
-  android: true
-  ios: true
-  remove_alpha_ios: true
+#flutter_icons:
+  #image_path: "images/logo.png"
+  #adaptive_icon_backround: "#1D2C59"
+  #adaptive_icon_foreground: "images/logo_foreground.png"
+  #android: true
+  #ios: true
+  #remove_alpha_ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
