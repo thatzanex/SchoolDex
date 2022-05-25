@@ -22,6 +22,7 @@ class Settingspage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account'),
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
       body: Center(
         child: Column(

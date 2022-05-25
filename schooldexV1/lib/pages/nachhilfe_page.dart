@@ -90,6 +90,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
               onPressed: () {
                 _startsearchNachhilfen(context);
               }),
+          backgroundColor: const Color.fromARGB(255, 29, 44, 89),
           title: const Text('Nachhilfeangebot'),
           actions: <Widget>[
             IconButton(
@@ -109,6 +110,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 44, 89),
           child: const Icon(Icons.add),
           onPressed: () => _startAddNeueNachhilfe(context),
         ),

@@ -11,6 +11,7 @@ class Vertretungspage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Vetretungsplan'),
         actions: <Widget>[MyAccountbottom()],
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
       body: WebView(
         initialUrl: 'https://vertretungsplan.musterschule.de',

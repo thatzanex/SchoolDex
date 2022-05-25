@@ -69,7 +69,10 @@ class _SearchpageState extends State<Searchpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
+      ),
       body: widget.title.startsWith('Nachhilfe')
           ? Column(
               children: [

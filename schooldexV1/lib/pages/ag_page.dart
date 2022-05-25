@@ -79,11 +79,13 @@ class _AGPageState extends State<AGPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: const Icon(Icons.search),
-            iconSize: 35,
-            onPressed: () {
-              _startsearchAgs(context);
-            }),
+          icon: const Icon(Icons.search),
+          iconSize: 35,
+          onPressed: () {
+            _startsearchAgs(context);
+          },
+        ),
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
         title: const Text('AG Angebot'),
         actions: <Widget>[
           IconButton(
@@ -104,6 +106,7 @@ class _AGPageState extends State<AGPage> {
       floatingActionButton: widget.isTeacher.endsWith('L135') ||
               widget.isTeacher.endsWith('Admin789')
           ? FloatingActionButton(
+              backgroundColor: const Color.fromARGB(255, 29, 44, 89),
               child: const Icon(Icons.add),
               onPressed: () => _startAddNeueAG(context),
             )

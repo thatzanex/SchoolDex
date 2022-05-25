@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('SchoolDex'),
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
       body: Container(
         margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
