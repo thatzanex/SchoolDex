@@ -133,6 +133,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
         title: const Text('SchoolDex'),
       ),
       body: Container(

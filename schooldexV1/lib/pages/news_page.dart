@@ -69,6 +69,7 @@ class _NewspageState extends State<Newspage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('News'),
+        backgroundColor: const Color.fromARGB(255, 29, 44, 89),
         actions: <Widget>[
           IconButton(
             onPressed: () => _getNews(),
@@ -88,6 +89,7 @@ class _NewspageState extends State<Newspage> {
       floatingActionButton: widget.isTeacher.startsWith('L135') ||
               widget.isTeacher.startsWith('Admin789')
           ? FloatingActionButton(
+              backgroundColor: const Color.fromARGB(255, 29, 44, 89),
               child: const Icon(Icons.add),
               onPressed: () => _startAddNeueNews(context),
             )

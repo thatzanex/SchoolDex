@@ -38,7 +38,7 @@ class MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: Colors.blue,
+      color: Color.fromARGB(255, 29, 44, 89),
       child: Container(
         width: double.infinity,
         height: 55,

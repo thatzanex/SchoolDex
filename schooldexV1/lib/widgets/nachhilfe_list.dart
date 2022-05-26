@@ -8,7 +8,9 @@ class NachhilfeListe extends StatefulWidget {
   final String schulname;
   final String isTeacher;
   final String userId;
-  NachhilfeListe(this.nachhilfen, this.schulname, this.isTeacher, this.userId);
+  final double x;
+  NachhilfeListe(
+      this.nachhilfen, this.schulname, this.isTeacher, this.userId, this.x);
 
   List<Nachhilfe> nachhilfen;
   @override
@@ -43,7 +45,7 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 700,
+      height: MediaQuery.of(context).size.height - 50 - widget.x.toDouble(),
       child: ListView.builder(
         itemBuilder: (cnx, index) {
           if (widget.nachhilfen[index].fach.startsWith('Mathe')) {
