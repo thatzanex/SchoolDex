@@ -91,79 +91,81 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('SchoolDex'),
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
-      body: Container(
-        margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-        child: Center(
-          child: Column(
-            children: [
-              const Text(
-                'Wilkommen',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange,
-                ),
-              ),
-              const Text(
-                'bei SchoolDex!',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 5, 0, 15),
-                child: const Text(
-                  'Eurem Schwarzenbrett',
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+          child: Center(
+            child: Column(
+              children: [
+                const Text(
+                  'Wilkommen',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange,
                   ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                child: TextField(
-                    decoration:
-                        const InputDecoration(labelText: 'Benutzername'),
-                    controller: benutzernamenController,
+                const Text(
+                  'bei SchoolDex!',
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+                  child: const Text(
+                    'Eurem Schwarzenbrett',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                  child: TextField(
+                      decoration:
+                          const InputDecoration(labelText: 'Benutzername'),
+                      controller: benutzernamenController,
+                      onSubmitted: (_) {
+                        FocusScope.of(context).requestFocus(_loginFocusNode);
+                      }),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                  child: TextField(
+                    decoration: const InputDecoration(labelText: 'Passwort'),
+                    controller: passwortController,
+                    focusNode: _loginFocusNode,
+                    obscureText: true,
                     onSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_loginFocusNode);
-                    }),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                child: TextField(
-                  decoration: const InputDecoration(labelText: 'Passwort'),
-                  controller: passwortController,
-                  focusNode: _loginFocusNode,
-                  obscureText: true,
-                  onSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_schulFocusNode);
-                  },
+                      FocusScope.of(context).requestFocus(_schulFocusNode);
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                child: TextField(
-                  decoration: const InputDecoration(labelText: 'Schule'),
-                  controller: schulController,
-                  focusNode: _schulFocusNode,
-                  obscureText: false,
-                  onSubmitted: (_) => submitData(),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                  child: TextField(
+                    decoration: const InputDecoration(labelText: 'Schule'),
+                    controller: schulController,
+                    focusNode: _schulFocusNode,
+                    obscureText: false,
+                    onSubmitted: (_) => submitData(),
+                  ),
                 ),
-              ),
-              TextButton(
-                child: const Text('Einloggen'),
-                onPressed: submitData,
-              ),
-              TextButton(
-                child: const Text(
-                  'Du hast noch kein Konto, dann klicke hier',
+                TextButton(
+                  child: const Text('Einloggen'),
+                  onPressed: submitData,
                 ),
-                onPressed: () => selectPagetoRegistrieren(context),
-              ),
-            ],
+                TextButton(
+                  child: const Text(
+                    'Du hast noch kein Konto, dann klicke hier',
+                  ),
+                  onPressed: () => selectPagetoRegistrieren(context),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -66,10 +66,19 @@ class _NachhilfepageState extends State<Nachhilfepage> {
 
   void _startAddNeueNachhilfe(BuildContext cnx) {
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return NeueNachhilfe(_addNeueNachhilfe, widget.userId,
-            widget.benutzername, widget.schulname);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: NeueNachhilfe(_addNeueNachhilfe, widget.userId,
+                      widget.benutzername, widget.schulname));
+            });
       },
     );
   }

@@ -55,11 +55,21 @@ class _NewspageState extends State<Newspage> {
     });
   }
 
-  void _startAddNeueNews(BuildContext cnx) {
+  void _startAddNeueNews(BuildContext context) {
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return NeueNews(_addNeueNews, widget.schulname, widget.userId);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child:
+                      NeueNews(_addNeueNews, widget.schulname, widget.userId));
+            });
       },
     );
   }

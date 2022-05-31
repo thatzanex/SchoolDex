@@ -38,16 +38,16 @@ class MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: Color.fromARGB(255, 29, 44, 89),
-      child: Container(
+      color: const Color.fromARGB(255, 29, 44, 89),
+      child: SizedBox(
         width: double.infinity,
         height: 55,
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 360,
             child: Row(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 10,
                   child: IconButton(
                     icon: const Icon(Icons.home_rounded),
@@ -56,7 +56,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                     onPressed: () => selectPagetoNews(context),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.school_rounded),
@@ -65,7 +65,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                     onPressed: () => selectPagetoNachhilfe(context),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.sports_basketball),
@@ -74,7 +74,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                     onPressed: () => selectPagetoAG(context),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.apps_outlined),
@@ -83,7 +83,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                     onPressed: () => selectPagetoVertretung(context),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 15,
                   child: IconButton(
                     icon: const Icon(Icons.settings_rounded),

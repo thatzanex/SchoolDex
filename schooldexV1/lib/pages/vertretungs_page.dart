@@ -4,6 +4,7 @@ import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/account_bottom.dart';
 
 class Vertretungspage extends StatelessWidget {
+  const Vertretungspage({Key? key}) : super(key: key);
   static const routeName = '/vertretung';
   @override
   Widget build(BuildContext context) {

@@ -61,9 +61,18 @@ class _AGPageState extends State<AGPage> {
 
   void _startAddNeueAG(BuildContext cnx) {
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return NeueAG(_addNeueAG, widget.schulname, widget.userId);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: NeueAG(_addNeueAG, widget.schulname, widget.userId));
+            });
       },
     );
   }
