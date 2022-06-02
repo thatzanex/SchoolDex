@@ -43,99 +43,95 @@ class _AGlisteState extends State<AGliste> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height - 50 - widget.x.toDouble(),
-      child: ListView.builder(
-        itemBuilder: (cnx, index) {
-          return GestureDetector(
-            onTap: () => showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                if (widget.isTeacher.startsWith('Admin789') ||
-                    widget.agangebot[index].userId.toString() ==
-                        widget.userId) {
-                  return buildPopupDialog(
+    return ListView.builder(
+      itemBuilder: (cnx, index) {
+        return GestureDetector(
+          onTap: () => showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              if (widget.isTeacher.startsWith('Admin789') ||
+                  widget.agangebot[index].userId.toString() == widget.userId) {
+                return buildPopupDialog(
+                  context,
+                  _updateAGs,
+                  _deleteAgs,
+                  widget.agangebot[index].id.toString(),
+                  widget.agangebot[index].thema.toString(),
+                  widget.agangebot[index].jahrgang.toString(),
+                  widget.agangebot[index].beschreibung.toString(),
+                  widget.agangebot[index].termin.toString(),
+                  widget.agangebot[index].schulname.toString(),
+                  widget.agangebot[index].userId.toString(),
+                );
+              } else {
+                return schuelerPopupDialog(
                     context,
-                    _updateAGs,
-                    _deleteAgs,
-                    widget.agangebot[index].id.toString(),
                     widget.agangebot[index].thema.toString(),
-                    widget.agangebot[index].jahrgang.toString(),
                     widget.agangebot[index].beschreibung.toString(),
-                    widget.agangebot[index].termin.toString(),
-                    widget.agangebot[index].schulname.toString(),
-                    widget.agangebot[index].userId.toString(),
-                  );
-                } else {
-                  return schuelerPopupDialog(
-                      context,
-                      widget.agangebot[index].thema.toString(),
-                      widget.agangebot[index].beschreibung.toString(),
-                      widget.agangebot[index].termin.toString());
-                }
-              },
-            ),
-            child: Card(
-              //color: agangebot[index].colorcard,
-              color: Colors.orange,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(10, 10, 10, 5),
-                            child: Text(
-                              widget.agangebot[index].thema.toString(),
-                              style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                            ),
+                    widget.agangebot[index].termin.toString());
+              }
+            },
+          ),
+          child: Card(
+            //color: agangebot[index].colorcard,
+            color: Colors.orange,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                          child: Text(
+                            widget.agangebot[index].thema.toString(),
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Text(
-                              widget.agangebot[index].termin.toString(),
-                              //style: TextStyle(),
-                            ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Text(
+                            widget.agangebot[index].termin.toString(),
+                            //style: TextStyle(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.fromLTRB(12, 5, 12, 5),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black54, width: 2),
+                      ),
+                      child: Column(
+                        children: [
+                          const Text('Jahrgang'),
+                          Text(
+                            widget.agangebot[index].jahrgang.toString(),
+                            style: const TextStyle(
+                                fontSize: 23, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(5),
-                        padding: const EdgeInsets.fromLTRB(12, 5, 12, 5),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black54, width: 2),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text('Jahrgang'),
-                            Text(
-                              widget.agangebot[index].jahrgang.toString(),
-                              style: const TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    child: Text(
-                      widget.agangebot[index].beschreibung.toString(),
-                      style: const TextStyle(fontSize: 17),
                     ),
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.all(5),
+                  child: Text(
+                    widget.agangebot[index].beschreibung.toString(),
+                    style: const TextStyle(fontSize: 17),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        },
-        itemCount: widget.agangebot.length,
-      ),
+          ),
+        );
+      },
+      itemCount: widget.agangebot.length,
     );
   }
 }

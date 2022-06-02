@@ -112,9 +112,12 @@ class _NachhilfepageState extends State<Nachhilfepage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              //NachhilfeListe(_userNachhilfen),
-              NachhilfeListe(_userNachhilfen, widget.schulname,
-                  widget.isTeacher, widget.userId, 0),
+              SizedBox(
+                height: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top,
+                child: NachhilfeListe(_userNachhilfen, widget.schulname,
+                    widget.isTeacher, widget.userId),
+              )
             ],
           ),
         ),

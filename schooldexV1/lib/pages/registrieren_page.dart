@@ -53,6 +53,17 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
     }
   }
 
+  Widget popupdialog(String text) {
+    return Container(
+      color: Colors.orange,
+      padding: const EdgeInsets.fromLTRB(5, 20, 5, 60),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 20),
+      ),
+    );
+  }
+
   clarValues() {
     benutzernamenController.text = '';
     passwortController.text = '';
@@ -61,7 +72,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
     codeController.text = '';
   }
 
-  void submitData() {
+  submitData() {
     if (benutzernamenController.text.isEmpty ||
         passwortController.text.isEmpty ||
         schulController.text.isEmpty ||
@@ -75,11 +86,19 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         try {
           if (passwortController.text ==
               accountlist[index].passwort.toString()) {
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return popupdialog('Dieser Benutzername existert schon');
+                });
             clarValues();
-            return;
           } else {
             clarValues();
-            return;
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return popupdialog('Dieser Benutzername existert schon');
+                });
           }
         } catch (e) {
           if (codeController.text == 'L135' ||
@@ -116,12 +135,22 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
               });
             });
           } else {
-            return;
+            clarValues();
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return popupdialog('Geben sie einen gültigen Code ein');
+                });
           }
         }
       });
     } else {
-      return;
+      clarValues();
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return popupdialog('Geben Sie zwei gleiche Passwörter ein');
+          });
     }
   }
 
@@ -227,7 +256,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                 ),
                 TextButton(
                   child: const Text('Registrieren'),
-                  onPressed: submitData,
+                  onPressed: () => submitData(),
                 ),
                 TextButton(
                   child:

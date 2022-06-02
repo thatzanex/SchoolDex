@@ -107,8 +107,12 @@ class _AGPageState extends State<AGPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            AGliste(
-                _userAGs, widget.schulname, widget.isTeacher, widget.userId, 0),
+            SizedBox(
+              height: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top,
+              child: AGliste(_userAGs, widget.schulname, widget.isTeacher,
+                  widget.userId, 0),
+            ),
           ],
         ),
       ),

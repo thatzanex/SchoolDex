@@ -74,49 +74,87 @@ class _SearchpageState extends State<Searchpage> {
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
       body: widget.title.startsWith('Nachhilfe')
-          ? Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: searchcontroler,
-                      onSubmitted: (_) => searchNachhilfe(),
-                    )),
-                TextButton(
-                    onPressed: searchNachhilfe,
-                    child: const Text(
-                      'Suchen',
-                      style: TextStyle(fontSize: 15),
-                    )),
-                NachhilfeListe(nachhilfeListecombiniert, widget.schulname,
-                    widget.isTeacher, widget.userId, 258)
-              ],
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextField(
+                        controller: searchcontroler,
+                        onSubmitted: (_) => searchNachhilfe(),
+                      )),
+                  TextButton(
+                      onPressed: searchNachhilfe,
+                      child: const Text(
+                        'Suchen',
+                        style: TextStyle(fontSize: 15),
+                      )),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: (MediaQuery.of(context).size.height -
+                                  MediaQuery.of(context).padding.top) *
+                              0.7,
+                          child: NachhilfeListe(
+                            nachhilfeListecombiniert,
+                            widget.schulname,
+                            widget.isTeacher,
+                            widget.userId,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             )
-          : Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: searchcontroler,
-                      onSubmitted: (_) => searchAGs(),
-                    )),
-                TextButton(
-                    onPressed: searchAGs,
-                    child: const Text(
-                      'Suchen',
-                      style: TextStyle(fontSize: 15),
-                    )),
-                AGliste(agListecombiniert, widget.schulname, widget.isTeacher,
-                    widget.userId, 258)
-              ],
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextField(
+                        controller: searchcontroler,
+                        onSubmitted: (_) => searchAGs(),
+                      )),
+                  TextButton(
+                      onPressed: searchAGs,
+                      child: const Text(
+                        'Suchen',
+                        style: TextStyle(fontSize: 15),
+                      )),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: (MediaQuery.of(context).size.height -
+                                  MediaQuery.of(context).padding.top) *
+                              0.7,
+                          child: AGliste(agListecombiniert, widget.schulname,
+                              widget.isTeacher, widget.userId, 258),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        Colors.white,
-        Colors.white,
-        Colors.orange,
-        Colors.white,
-        Colors.white,
-      ),
+      bottomNavigationBar: widget.title.startsWith('Nachhilfe')
+          ? MyBottomNavigationBar(
+              Colors.white,
+              Colors.orange,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+            )
+          : MyBottomNavigationBar(
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+            ),
     );
   }
 }

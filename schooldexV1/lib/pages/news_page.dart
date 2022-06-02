@@ -91,8 +91,12 @@ class _NewspageState extends State<Newspage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            NewsListe(
-                _userNews, widget.schulname, widget.isTeacher, widget.userId),
+            SizedBox(
+              height: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top,
+              child: NewsListe(
+                  _userNews, widget.schulname, widget.isTeacher, widget.userId),
+            )
           ],
         ),
       ),
