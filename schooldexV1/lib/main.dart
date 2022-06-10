@@ -9,6 +9,7 @@ import 'pages/news_page.dart';
 import 'pages/settings_page.dart';
 import 'pages/login_page.dart';
 import 'pages/registrieren_page.dart';
+import 'pages/blackboard.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,6 +48,8 @@ class MyApp extends StatelessWidget {
             Nachhilfepage(status1, userId, username, dbname, searchItems),
         AGPage.routeName: (ctx) => AGPage(status1, dbname, userId, searchItems),
         Newspage.routeName: (ctx) => Newspage(status1, dbname, userId),
+        Blackboardpage.routeName: (ctx) =>
+            Blackboardpage(status1, userId, username, dbname, searchItems),
         Vertretungspage.routeName: (ctx) => Vertretungspage(),
         Settingspage.routeName: (ctx) => Settingspage(username, dbname),
         LoginPage.routeName: (ctx) => LoginPage(accountStatus),

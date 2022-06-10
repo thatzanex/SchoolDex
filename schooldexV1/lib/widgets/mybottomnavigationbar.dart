@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schooldex/pages/blackboard.dart';
 import '../pages/ag_page.dart';
 import '../pages/vertretungs_page.dart';
 import '../pages/nachhilfe_page.dart';
@@ -10,10 +11,15 @@ class MyBottomNavigationBar extends StatelessWidget {
   final Color agIconColor;
   final Color newsIconColor;
   final Color vertretungsIconColor;
-  final Color settingsIconColor;
+  final Color blackboardIconColor;
 
-  MyBottomNavigationBar(this.newsIconColor, this.nachhilfeIconColor,
-      this.agIconColor, this.vertretungsIconColor, this.settingsIconColor);
+  MyBottomNavigationBar(
+    this.newsIconColor,
+    this.nachhilfeIconColor,
+    this.agIconColor,
+    this.blackboardIconColor,
+    this.vertretungsIconColor,
+  );
 
   void selectPagetoNews(BuildContext ctx) {
     Navigator.of(ctx).pushReplacementNamed(Newspage.routeName);
@@ -31,8 +37,8 @@ class MyBottomNavigationBar extends StatelessWidget {
     Navigator.of(ctx).pushReplacementNamed(Vertretungspage.routeName);
   }
 
-  void selectPagetoSettings(BuildContext ctx) {
-    Navigator.of(ctx).pushReplacementNamed(Settingspage.routeName);
+  void selectPagetoBlackboard(BuildContext ctx) {
+    Navigator.of(ctx).pushReplacementNamed(Blackboardpage.routeName);
   }
 
   @override
@@ -77,19 +83,19 @@ class MyBottomNavigationBar extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
-                    icon: const Icon(Icons.apps_outlined),
-                    color: vertretungsIconColor,
+                    icon: const Icon(Icons.backpack_outlined),
+                    color: blackboardIconColor,
                     iconSize: 40,
-                    onPressed: () => selectPagetoVertretung(context),
+                    onPressed: () => selectPagetoBlackboard(context),
                   ),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 15,
                   child: IconButton(
-                    icon: const Icon(Icons.settings_rounded),
-                    color: settingsIconColor,
+                    icon: const Icon(Icons.apps_outlined),
+                    color: vertretungsIconColor,
                     iconSize: 40,
-                    onPressed: () => selectPagetoSettings(context),
+                    onPressed: () => selectPagetoVertretung(context),
                   ),
                 ),
               ],

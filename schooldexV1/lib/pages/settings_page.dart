@@ -64,8 +64,8 @@ class Settingspage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.white,
-          Colors.white, Colors.white, Colors.orange),
+      bottomNavigationBar: MyBottomNavigationBar(
+          Colors.white, Colors.white, Colors.white, Colors.white, Colors.white),
     );
   }
 }

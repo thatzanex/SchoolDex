@@ -2,6 +2,7 @@ import 'package:schooldex/db/ag_services.dart';
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
+import 'package:schooldex/widgets/account_bottom.dart';
 import '../widgets/ag_new.dart';
 import '../widgets/ag_list.dart';
 import '../models/ag.dart';
@@ -87,6 +88,7 @@ class _AGPageState extends State<AGPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.search),
           iconSize: 35,
@@ -101,7 +103,8 @@ class _AGPageState extends State<AGPage> {
             onPressed: () => _getAgs(),
             icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
-          )
+          ),
+          const MyAccountbottom()
         ],
       ),
       body: SingleChildScrollView(

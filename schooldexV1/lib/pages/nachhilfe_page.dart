@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/ag.dart';
 import 'package:schooldex/pages/search_page.dart';
+import 'package:schooldex/widgets/account_bottom.dart';
 import '../db/nachhilfe_services.dart';
 import '../models/nachhilfe.dart';
 import '../widgets/nachhilfe_list.dart';
@@ -93,6 +94,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           leading: IconButton(
               icon: const Icon(Icons.search),
               iconSize: 35,
@@ -106,7 +108,8 @@ class _NachhilfepageState extends State<Nachhilfepage> {
               onPressed: () => _getNachhilfen(),
               icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
-            )
+            ),
+            const MyAccountbottom(),
           ],
         ),
         body: SingleChildScrollView(

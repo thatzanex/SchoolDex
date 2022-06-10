@@ -1,5 +1,6 @@
 import 'package:schooldex/db/news_services.dart';
 import 'package:flutter/material.dart';
+import 'package:schooldex/widgets/account_bottom.dart';
 import '../models/news.dart';
 import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
@@ -78,6 +79,7 @@ class _NewspageState extends State<Newspage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('News'),
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),
         actions: <Widget>[
@@ -85,7 +87,8 @@ class _NewspageState extends State<Newspage> {
             onPressed: () => _getNews(),
             icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
-          )
+          ),
+          const MyAccountbottom()
         ],
       ),
       body: SingleChildScrollView(
