@@ -151,7 +151,7 @@ class _SearchpageState extends State<Searchpage> {
           : MyBottomNavigationBar(
               Colors.white,
               Colors.white,
-              Colors.white,
+              Colors.orange,
               Colors.white,
               Colors.white,
             ),
