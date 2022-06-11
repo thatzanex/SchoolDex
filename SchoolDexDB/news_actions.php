@@ -14,6 +14,24 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    if('CREATE_TABLE' == $action){
+        $sql = "CREATE TABLE IF NOT EXISTS $table (
+            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            ueberschrift TEXT NOT NULL,
+            inhalt TEXT NOT NULL,
+            datum TEXT NOT NULL,
+            schulname TEXT NOT NULL,
+            userId TEXT NOT NULL
+            )";
+        if ($conn->query($sql) === TRUE) {
+            echo "success";
+        } else {
+            echo "error";
+        }
+        $conn->close();
+        return;
+    }
+
     if('GET_ALL' == $action){
         $dbdata = array();
         $sql = "SELECT id, ueberschrift, inhalt, datum, schulname, userId FROM $table ORDER BY id DESC";

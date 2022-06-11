@@ -42,6 +42,24 @@
         return;
     }
 
+    if('Check_Account' == $action){
+        $benutzername = $_POST['benutzername'];
+        $passwort = $_POST['passwort'];
+        $schulname = $_POST['schulname'];
+        $sql = "SELECT id, benutzername, passwort,  status1, schulname FROM $table ORDER BY id DESC";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0 && ) {
+            while($row = $result->fetch_assoc()) {
+                $dbdata[]=$row;
+            }
+            $list = json_encode($dbdata);
+            echo $list;		 
+        } else {
+            echo "error";
+        }
+        return;
+    }
+
 //    if('UPDATE_Account' == $action){
 //        $id = $_POST['id'];
 //        $benutzername = $_POST['benutzername'];
