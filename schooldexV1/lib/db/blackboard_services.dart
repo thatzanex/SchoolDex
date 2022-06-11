@@ -6,6 +6,7 @@ class ServicesBlackboard {
   static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/blackboard_actions.php');
   static const getAllAction = 'GET_ALL';
+  static const String creatTable = 'CREATE_TABLE';
   static const String addBlackboardAction = 'ADD_blackboard';
   static const String updateBlackboardAction = 'UPDATE_blackboard';
   static const String deleteBlackboardAction = 'DELETE_blackboard';
@@ -26,6 +27,19 @@ class ServicesBlackboard {
       }
     } catch (e) {
       return <Blackboard>[];
+    }
+  }
+
+  static Future<String> createTable(String schulname) async {
+    try {
+      var map = Map<String, dynamic>();
+      map["action"] = creatTable;
+      map["schulname"] = schulname;
+      final response = await http.post(root, body: map);
+      print("createTable >> Response:: ${response.body}");
+      return response.body;
+    } catch (e) {
+      return 'error';
     }
   }
 

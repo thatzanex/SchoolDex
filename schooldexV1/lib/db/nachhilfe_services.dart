@@ -6,6 +6,7 @@ class ServicesNachhilfe {
   static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/nachhilfe_actions.php');
   static const getAllAction = 'GET_ALL';
+  static const String creatTable = 'CREATE_TABLE';
   static const String addNachhilfeAction = 'ADD_Nachhilfe';
   static const String updateNachhilfeAction = 'UPDATE_Nachhilfe';
   static const String deleteNachhilfeAction = 'DELETE_Nachhilfe';
@@ -26,6 +27,19 @@ class ServicesNachhilfe {
       }
     } catch (e) {
       return <Nachhilfe>[];
+    }
+  }
+
+  static Future<String> createTable(String schulname) async {
+    try {
+      var map = Map<String, dynamic>();
+      map["action"] = creatTable;
+      map["schulname"] = schulname;
+      final response = await http.post(root, body: map);
+      print("createTable >> Response:: ${response.body}");
+      return response.body;
+    } catch (e) {
+      return 'error';
     }
   }
 

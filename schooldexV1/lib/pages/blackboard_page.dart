@@ -40,7 +40,16 @@ class _BlackboardpageState extends State<Blackboardpage> {
   void initState() {
     super.initState();
     _userBlackboard = [];
+    _createTable();
     _getBlackboards();
+  }
+
+  _createTable() {
+    ServicesBlackboard.createTable(widget.schulname).then((result) {
+      if ('success' == result) {
+        _getBlackboards();
+      }
+    });
   }
 
   _getBlackboards() {

@@ -6,6 +6,7 @@ class ServicesNews {
   static final Uri root =
       Uri.http('localhost', '/SchoolDexDB/news_actions.php');
   static const getAllAction = 'GET_ALL';
+  static const String creatTable = 'CREATE_TABLE';
   static const String addNewsAction = 'ADD_News';
   static const String updateNewsAction = 'UPDATE_News';
   static const String deleteNewsAction = 'DELETE_News';
@@ -26,6 +27,19 @@ class ServicesNews {
       }
     } catch (e) {
       return <News>[];
+    }
+  }
+
+  static Future<String> createTable(String schulname) async {
+    try {
+      var map = Map<String, dynamic>();
+      map["action"] = creatTable;
+      map["schulname"] = schulname;
+      final response = await http.post(root, body: map);
+      print("createTable >> Response:: ${response.body}");
+      return response.body;
+    } catch (e) {
+      return 'error';
     }
   }
 

@@ -5,6 +5,7 @@ import '/models/ag.dart';
 class ServicesAgs {
   static final Uri root = Uri.http('localhost', '/SchoolDexDB/ag_actions.php');
   static const getAllAction = 'GET_ALL';
+  static const String creatTable = 'CREATE_TABLE';
   static const String addAgsAction = 'ADD_Ags';
   static const String updateAgsAction = 'UPDATE_Ags';
   static const String deleteAgsAction = 'DELETE_Ags';
@@ -25,6 +26,19 @@ class ServicesAgs {
       }
     } catch (e) {
       return <AGs>[];
+    }
+  }
+
+  static Future<String> createTable(String schulname) async {
+    try {
+      var map = Map<String, dynamic>();
+      map["action"] = creatTable;
+      map["schulname"] = schulname;
+      final response = await http.post(root, body: map);
+      print("createTable >> Response:: ${response.body}");
+      return response.body;
+    } catch (e) {
+      return 'error';
     }
   }
 
