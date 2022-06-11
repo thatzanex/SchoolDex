@@ -36,7 +36,6 @@ class ServicesNachhilfe {
       map["action"] = creatTable;
       map["schulname"] = schulname;
       final response = await http.post(root, body: map);
-      print("createTable >> Response:: ${response.body}");
       return response.body;
     } catch (e) {
       return 'error';

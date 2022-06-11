@@ -79,7 +79,10 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         codeController.text.isEmpty) {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
+      // ServicesAccount.createTable(schulController.text).then((value) {
+      //   if (value == 'sucess') {
       ServicesAccount.getAccount(schulController.text).then((accountlist) {
+        print('hallo');
         String matchingList = benutzernamenController.text;
         var index = accountlist.indexWhere(
             (element) => matchingList.contains(element.benutzername));
@@ -144,6 +147,15 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
           }
         }
       });
+      //   } else {
+      //     clarValues();
+      //     showModalBottomSheet(
+      //         context: context,
+      //         builder: (BuildContext context) {
+      //           return popupdialog('Die Schule konnte nicht gefunden werden');
+      //         });
+      //   }
+      // });
     } else {
       clarValues();
       showModalBottomSheet(
