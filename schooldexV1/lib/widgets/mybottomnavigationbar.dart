@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schooldex/pages/blackboard.dart';
+import 'package:schooldex/pages/blackboard_page.dart';
 import '../pages/ag_page.dart';
 import '../pages/vertretungs_page.dart';
 import '../pages/nachhilfe_page.dart';

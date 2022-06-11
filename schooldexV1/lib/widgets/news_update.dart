@@ -46,38 +46,42 @@ class _UpdateNewsState extends State<UpdateNews> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
-          child: const Text(
-            'News bearbeiten',
-            style: TextStyle(fontSize: 28),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+            child: const Text(
+              'News bearbeiten',
+              style: TextStyle(fontSize: 28),
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(5),
-          child: TextField(
-              decoration: const InputDecoration(labelText: 'Überschrift'),
-              controller: ueberschriftenController,
-              onSubmitted: (_) {
-                FocusScope.of(context).requestFocus(_newsFocusNode);
-              }),
-        ),
-        Container(
-          margin: const EdgeInsets.all(5),
-          child: TextField(
-            decoration: const InputDecoration(labelText: 'Inhalt'),
-            controller: inhaltController,
-            focusNode: _newsFocusNode,
-            onSubmitted: (_) => submitData(),
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: TextField(
+                decoration: const InputDecoration(labelText: 'Überschrift'),
+                controller: ueberschriftenController,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_newsFocusNode);
+                }),
           ),
-        ),
-        TextButton(
-          child: const Text('Speichern'),
-          onPressed: submitData,
-        ),
-      ],
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: TextField(
+              decoration: const InputDecoration(labelText: 'Inhalt'),
+              controller: inhaltController,
+              focusNode: _newsFocusNode,
+              onSubmitted: (_) => submitData(),
+            ),
+          ),
+          TextButton(
+            child: const Text('Speichern'),
+            onPressed: submitData,
+          ),
+        ],
+      ),
     );
   }
 }

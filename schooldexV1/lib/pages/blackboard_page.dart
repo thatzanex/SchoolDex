@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/ag.dart';
+import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
+import 'package:schooldex/widgets/account_bottom.dart';
+import 'package:schooldex/widgets/blackboard_new.dart';
 import '../db/blackboard_services.dart';
 import '../models/blackboard.dart';
-// import '../widgets/blackboard_list.dart';
-// import '../widgets/blackboard_new.dart';
+import '../widgets/blackboard_list.dart';
+import '../widgets/blackboard_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
+import 'package:intl/intl.dart';
 
 class Blackboardpage extends StatefulWidget {
   static const routeName = '/blackboard';
@@ -26,6 +30,8 @@ class _BlackboardpageState extends State<Blackboardpage> {
         ueberschrift: 'Mathematik',
         beschreibung:
             'Ich habe meinen Turnbeutel vergessen, hat ihn vielleicht jemand von euch gefunden?',
+        color: '5',
+        datum: DateFormat('dd.MM.yyyy').format(DateTime.now()),
         userId: '1',
         username: 'Max Mustermann',
         schulname: 'SchoolDex'),
@@ -45,10 +51,16 @@ class _BlackboardpageState extends State<Blackboardpage> {
     });
   }
 
-  void _addNeueBlackboards(String nxUeberschrift, String nxBeschreibung,
-      String nxUserId, String nxUsername, String nxSchulname) {
-    ServicesBlackboard.addBlackboard(
-            nxUeberschrift, nxBeschreibung, nxUserId, nxUsername, nxSchulname)
+  void _addNeueBlackboards(
+      String nxUeberschrift,
+      String nxBeschreibung,
+      String nxColor,
+      String nxDatum,
+      String nxUserId,
+      String nxUsername,
+      String nxSchulname) {
+    ServicesBlackboard.addBlackboard(nxUeberschrift, nxBeschreibung, nxColor,
+            nxDatum, nxUserId, nxUsername, nxSchulname)
         .then((value) {
       ServicesBlackboard.getBlackboard(nxSchulname).then((blackboard1) {
         setState(() {
@@ -68,11 +80,10 @@ class _BlackboardpageState extends State<Blackboardpage> {
             maxChildSize: 0.88,
             initialChildSize: 0.88,
             builder: (context, scrollController) {
-              return Container();
-              // return SingleChildScrollView(
-              //     controller: scrollController,
-              //     child: NeueNachhilfe(_addNeueBlackboards, widget.userId,
-              //         widget.benutzername, widget.schulname));
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: NeueBlackboard(_addNeueBlackboards, widget.userId,
+                      widget.benutzername, widget.schulname));
             });
       },
     );
@@ -80,8 +91,9 @@ class _BlackboardpageState extends State<Blackboardpage> {
 
   void _startsearchBlackboards(BuildContext ctx) {
     List<AGs> listchen = [];
+    List<Nachhilfe> listchen1 = [];
     widget.searchNachhilfen(
-        _userBlackboard, listchen, 'Suchen & Finden durchsuchen');
+        listchen1, listchen, _userBlackboard, 'Suchen & Finden durchsuchen');
     Navigator.of(context).pushNamed(Searchpage.routeName);
   }
 
@@ -89,6 +101,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           leading: IconButton(
               icon: const Icon(Icons.search),
               iconSize: 35,
@@ -102,7 +115,8 @@ class _BlackboardpageState extends State<Blackboardpage> {
               onPressed: () => _getBlackboards(),
               icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
-            )
+            ),
+            const MyAccountbottom(),
           ],
         ),
         body: SingleChildScrollView(
@@ -111,9 +125,8 @@ class _BlackboardpageState extends State<Blackboardpage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top,
-                child: Container(),
-                //   child: NachhilfeListe(_userBlackboard, widget.schulname,
-                //       widget.isTeacher, widget.userId),
+                child: BlackboardListe(_userBlackboard, widget.schulname,
+                    widget.isTeacher, widget.userId),
               )
             ],
           ),

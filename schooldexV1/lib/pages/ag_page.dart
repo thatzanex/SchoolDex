@@ -6,6 +6,7 @@ import 'package:schooldex/widgets/account_bottom.dart';
 import '../widgets/ag_new.dart';
 import '../widgets/ag_list.dart';
 import '../models/ag.dart';
+import '../models/blackboard.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 
 class AGPage extends StatefulWidget {
@@ -80,7 +81,8 @@ class _AGPageState extends State<AGPage> {
 
   void _startsearchAgs(BuildContext ctx) {
     List<Nachhilfe> listchen = [];
-    widget.searchAgs(listchen, _userAGs, 'AG Angebote durchsuchen');
+    List<Blackboard> listchen1 = [];
+    widget.searchAgs(listchen, _userAGs, listchen1, 'AG Angebote durchsuchen');
     Navigator.of(context).pushNamed(Searchpage.routeName);
   }
 

@@ -155,10 +155,19 @@ Widget buildPopupDialog(
   _startupdateAgs(BuildContext cnx) {
     Navigator.of(context).pop();
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return UpdateAGs(updateAgs, id, thema, jahrgang, beschreibung, termin,
-            schulname, userId);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: UpdateAGs(updateAgs, id, thema, jahrgang, beschreibung,
+                      termin, schulname, userId));
+            });
       },
     );
   }

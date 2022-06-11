@@ -132,10 +132,19 @@ Widget buildPopupDialog(
   _startupdateNews(BuildContext cnx) {
     Navigator.of(context).pop();
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return UpdateNews(
-            updateNews, id, ueberschrift, inhalt, datum, schulname, userId);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: UpdateNews(updateNews, id, ueberschrift, inhalt, datum,
+                      schulname, userId));
+            });
       },
     );
   }

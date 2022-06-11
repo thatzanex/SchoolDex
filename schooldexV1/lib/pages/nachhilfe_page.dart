@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/ag.dart';
+import 'package:schooldex/models/blackboard.dart';
 import 'package:schooldex/pages/search_page.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
 import '../db/nachhilfe_services.dart';
@@ -86,7 +87,9 @@ class _NachhilfepageState extends State<Nachhilfepage> {
 
   void _startsearchNachhilfen(BuildContext ctx) {
     List<AGs> listchen = [];
-    widget.searchNachhilfen(_userNachhilfen, listchen, 'Nachhilfe durchsuchen');
+    List<Blackboard> listchen1 = [];
+    widget.searchNachhilfen(
+        _userNachhilfen, listchen, listchen1, 'Nachhilfe durchsuchen');
     Navigator.of(context).pushNamed(Searchpage.routeName);
   }
 

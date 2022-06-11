@@ -29,13 +29,21 @@ class ServicesBlackboard {
     }
   }
 
-  static Future<String> addBlackboard(String ueberschrift, String beschreibung,
-      String userId, String username, String schulname) async {
+  static Future<String> addBlackboard(
+      String ueberschrift,
+      String beschreibung,
+      String color,
+      String datum,
+      String userId,
+      String username,
+      String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map["action"] = addBlackboardAction;
       map["ueberschrift"] = ueberschrift;
       map["beschreibung"] = beschreibung;
+      map["color"] = color;
+      map["datum"] = datum;
       map["userId"] = userId;
       map["benutzername"] = username;
       map["schulname"] = schulname;
@@ -50,6 +58,8 @@ class ServicesBlackboard {
       String id,
       String ueberschrift,
       String beschreibung,
+      String color,
+      String datum,
       String userId,
       String username,
       String schulname) async {
@@ -59,6 +69,8 @@ class ServicesBlackboard {
       map["id"] = id;
       map["ueberschrift"] = ueberschrift;
       map["beschreibung"] = beschreibung;
+      map["color"] = color;
+      map["datum"] = datum;
       map["userId"] = userId;
       map["benutzername"] = username;
       map["schulname"] = schulname;

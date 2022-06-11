@@ -4,7 +4,7 @@ import 'package:schooldex/pages/settings_page.dart';
 class MyAccountbottom extends StatelessWidget {
   const MyAccountbottom({Key? key}) : super(key: key);
   void selectPagetoAccount(BuildContext ctx) {
-    Navigator.of(ctx).pushReplacementNamed(Settingspage.routeName);
+    Navigator.of(ctx).pushNamed(Settingspage.routeName);
   }
 
   @override

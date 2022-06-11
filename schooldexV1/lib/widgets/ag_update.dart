@@ -62,59 +62,63 @@ class _UpdateAGsState extends State<UpdateAGs> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
-          child: const Text(
-            'Neues AG Angebot',
-            style: TextStyle(fontSize: 28),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+            child: const Text(
+              'Neues AG Angebot',
+              style: TextStyle(fontSize: 28),
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(5),
-          child: TextField(
-              decoration: const InputDecoration(labelText: 'Thema'),
-              controller: themaController,
-              onSubmitted: (_) {
-                FocusScope.of(context).requestFocus(_jahrgangFocusNode);
-              }),
-        ),
-        Container(
-          margin: const EdgeInsets.all(5),
-          child: TextField(
-              decoration: const InputDecoration(
-                  labelText: 'Angesprochene Jahrgangsstufe'),
-              controller: jahrgangsstufeController,
-              focusNode: _jahrgangFocusNode,
-              onSubmitted: (_) {
-                FocusScope.of(context).requestFocus(_terminFocusNode);
-              }),
-        ),
-        Container(
-          margin: const EdgeInsets.all(5),
-          child: TextField(
-              decoration: const InputDecoration(labelText: 'Termin'),
-              controller: terminController,
-              focusNode: _terminFocusNode,
-              onSubmitted: (_) {
-                FocusScope.of(context).requestFocus(_beschreibungFocusNode);
-              }),
-        ),
-        Container(
-          margin: const EdgeInsets.all(5),
-          child: TextField(
-            decoration: const InputDecoration(labelText: 'Beschreibung'),
-            controller: beschreibungController,
-            focusNode: _beschreibungFocusNode,
-            onSubmitted: (_) => submitData(),
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: TextField(
+                decoration: const InputDecoration(labelText: 'Thema'),
+                controller: themaController,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_jahrgangFocusNode);
+                }),
           ),
-        ),
-        TextButton(
-          child: const Text('Hinzufügen'),
-          onPressed: submitData,
-        ),
-      ],
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: TextField(
+                decoration: const InputDecoration(
+                    labelText: 'Angesprochene Jahrgangsstufe'),
+                controller: jahrgangsstufeController,
+                focusNode: _jahrgangFocusNode,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_terminFocusNode);
+                }),
+          ),
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: TextField(
+                decoration: const InputDecoration(labelText: 'Termin'),
+                controller: terminController,
+                focusNode: _terminFocusNode,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_beschreibungFocusNode);
+                }),
+          ),
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: TextField(
+              decoration: const InputDecoration(labelText: 'Beschreibung'),
+              controller: beschreibungController,
+              focusNode: _beschreibungFocusNode,
+              onSubmitted: (_) => submitData(),
+            ),
+          ),
+          TextButton(
+            child: const Text('Hinzufügen'),
+            onPressed: submitData,
+          ),
+        ],
+      ),
     );
   }
 }
