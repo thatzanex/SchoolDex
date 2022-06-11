@@ -37,7 +37,16 @@ class _AGPageState extends State<AGPage> {
   void initState() {
     super.initState();
     _userAGs = [];
+    _createTable();
     _getAgs();
+  }
+
+  _createTable() {
+    ServicesAgs.createTable(widget.schulname).then((result) {
+      if ('success' == result) {
+        _getAgs();
+      }
+    });
   }
 
   _getAgs() {

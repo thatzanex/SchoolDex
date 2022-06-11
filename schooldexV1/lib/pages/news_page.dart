@@ -32,7 +32,16 @@ class _NewspageState extends State<Newspage> {
   void initState() {
     super.initState();
     _userNews = [];
+    _createTable();
     _getNews();
+  }
+
+  _createTable() {
+    ServicesNews.createTable(widget.schulname).then((result) {
+      if ('success' == result) {
+        _getNews();
+      }
+    });
   }
 
   _getNews() {

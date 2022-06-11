@@ -37,7 +37,16 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   void initState() {
     super.initState();
     _userNachhilfen = [];
+    _createTable();
     _getNachhilfen();
+  }
+
+  _createTable() {
+    ServicesNachhilfe.createTable(widget.schulname).then((result) {
+      if ('success' == result) {
+        _getNachhilfen();
+      }
+    });
   }
 
   _getNachhilfen() {
