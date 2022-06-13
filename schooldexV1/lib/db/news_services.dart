@@ -4,7 +4,7 @@ import '/models/news.dart';
 
 class ServicesNews {
   static final Uri root =
-      Uri.http('localhost', '/SchoolDexDB/news_actions.php');
+      Uri.http('schooldex.gehronlein.de', '/SchoolDexDB/news_actions.php');
   static const getAllAction = 'GET_ALL';
   static const String creatTable = 'CREATE_TABLE';
   static const String addNewsAction = 'ADD_News';

@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import '/models/blackboard.dart';
 
 class ServicesBlackboard {
-  static final Uri root =
-      Uri.http('localhost', '/SchoolDexDB/blackboard_actions.php');
+  static final Uri root = Uri.http(
+      'schooldex.gehronlein.de', '/SchoolDexDB/blackboard_actions.php');
   static const getAllAction = 'GET_ALL';
   static const String creatTable = 'CREATE_TABLE';
   static const String addBlackboardAction = 'ADD_blackboard';

@@ -4,7 +4,7 @@ import '/models/account.dart';
 
 class ServicesAccount {
   static final Uri root =
-      Uri.http('localhost', '/SchoolDexDB/account_actions.php');
+      Uri.http('schooldex.gehronlein.de', '/SchoolDexDB/account_actions.php');
   static const String getAllAction = 'GET_ALL';
   static const String creatTables = 'CREATE_TABLE';
   static const String addAccountAction = 'ADD_Account';
