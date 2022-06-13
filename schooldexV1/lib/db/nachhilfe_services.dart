@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import '/models/nachhilfe.dart';
 
 class ServicesNachhilfe {
-  static final Uri root =
-      Uri.http('schooldex.gehronlein.de', '/SchoolDexDB/nachhilfe_actions.php');
+  static final Uri root = Uri.https(
+      'schooldex.gehronlein.de', '/SchoolDexDB/nachhilfe_actions.php');
   static const getAllAction = 'GET_ALL';
   static const String creatTable = 'CREATE_TABLE';
   static const String addNachhilfeAction = 'ADD_Nachhilfe';

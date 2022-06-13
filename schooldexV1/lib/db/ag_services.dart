@@ -4,7 +4,7 @@ import '/models/ag.dart';
 
 class ServicesAgs {
   static final Uri root =
-      Uri.http('schooldex.gehronlein.de', '/SchoolDexDB/ag_actions.php');
+      Uri.https('schooldex.gehronlein.de', '/SchoolDexDB/ag_actions.php');
   static const getAllAction = 'GET_ALL';
   static const String creatTable = 'CREATE_TABLE';
   static const String addAgsAction = 'ADD_Ags';
