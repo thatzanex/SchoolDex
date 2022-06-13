@@ -5,8 +5,8 @@ import 'package:schooldex/pages/search_page.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
 import '../db/nachhilfe_services.dart';
 import '../models/nachhilfe.dart';
-import '../widgets/nachhilfe_list.dart';
-import '../widgets/nachhilfe_new.dart';
+import '../widgets/nachhilfen/nachhilfe_list.dart';
+import '../widgets/nachhilfen/nachhilfe_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 
 class Nachhilfepage extends StatefulWidget {

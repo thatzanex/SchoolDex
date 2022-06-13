@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/news.dart';
+import '/models/news.dart';
 import 'news_update.dart';
-import '../db/news_services.dart';
-import 'popup.dart';
+import '/db/news_services.dart';
+import '../popup.dart';
 
 class NewsListe extends StatefulWidget {
   NewsListe(this.neuigkeiten, this.schulname, this.isTeacher, this.userId);

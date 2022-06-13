@@ -1,8 +1,8 @@
 import 'package:schooldex/db/blackboard_services.dart';
 import 'package:flutter/material.dart';
-import '../models/blackboard.dart';
+import '/models/blackboard.dart';
 import 'blackboard_update.dart';
-import 'popup.dart';
+import '../popup.dart';
 
 class BlackboardListe extends StatefulWidget {
   final String schulname;

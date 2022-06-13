@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:schooldex/models/ag.dart';
 import 'package:schooldex/models/blackboard.dart';
 import 'package:schooldex/models/nachhilfe.dart';
-import 'package:schooldex/widgets/ag_list.dart';
-import 'package:schooldex/widgets/blackboard_list.dart';
+import 'package:schooldex/widgets/ag/ag_list.dart';
+import 'package:schooldex/widgets/blackboard/blackboard_list.dart';
 import 'package:schooldex/widgets/mybottomnavigationbar.dart';
-import 'package:schooldex/widgets/nachhilfe_list.dart';
+import 'package:schooldex/widgets/nachhilfen/nachhilfe_list.dart';
 
 class Searchpage extends StatefulWidget {
   static const routeName = '/search';

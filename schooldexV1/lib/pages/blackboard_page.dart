@@ -3,11 +3,10 @@ import 'package:schooldex/models/ag.dart';
 import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
-import 'package:schooldex/widgets/blackboard_new.dart';
 import '../db/blackboard_services.dart';
 import '../models/blackboard.dart';
-import '../widgets/blackboard_list.dart';
-import '../widgets/blackboard_new.dart';
+import '../widgets/blackboard/blackboard_list.dart';
+import '../widgets/blackboard/blackboard_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import 'package:intl/intl.dart';
 

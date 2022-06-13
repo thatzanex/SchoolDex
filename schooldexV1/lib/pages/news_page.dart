@@ -4,8 +4,8 @@ import 'package:schooldex/widgets/account_bottom.dart';
 import '../models/news.dart';
 import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
-import '../widgets/news_list.dart';
-import '../widgets/news_new.dart';
+import '../widgets/news/news_list.dart';
+import '../widgets/news/news_new.dart';
 
 class Newspage extends StatefulWidget {
   static const routeName = '/news';
