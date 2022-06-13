@@ -16,7 +16,7 @@
 
     if('CREATE_TABLE' == $action){
         $sql = "CREATE TABLE IF NOT EXISTS $table (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            id INT(11) AUTO_INCREMENT PRIMARY KEY,
             ueberschrift TEXT NOT NULL,
             inhalt TEXT NOT NULL,
             datum TEXT NOT NULL,
