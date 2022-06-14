@@ -1,5 +1,6 @@
 import 'package:schooldex/db/ag_services.dart';
 import 'package:flutter/material.dart';
+import 'package:schooldex/db/local_db/ag_local.dart';
 import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
@@ -37,20 +38,20 @@ class _AGPageState extends State<AGPage> {
   void initState() {
     super.initState();
     _userAGs = [];
-    _createTable();
+    //_createTable();
     _getAgs();
   }
 
-  _createTable() {
-    ServicesAgs.createTable(widget.schulname).then((result) {
-      if ('success' == result) {
-        _getAgs();
-      }
-    });
-  }
+  // _createTable() {
+  //   ServicesAgs.createTable(widget.schulname).then((result) {
+  //     if ('success' == result) {
+  //       _getAgs();
+  //     }
+  //   });
+  // }
 
   _getAgs() {
-    ServicesAgs.getAgs(widget.schulname).then((ags1) {
+    AGLocalServices.instance.getAccount().then((ags1) {
       setState(() {
         _userAGs = ags1;
       });
@@ -59,10 +60,16 @@ class _AGPageState extends State<AGPage> {
 
   void _addNeueAG(String nxThema, String nxJahrgang, String nxBeschreibung,
       String nxTermin, String nxSchulname, String userId) {
-    ServicesAgs.addAgs(
-            nxThema, nxJahrgang, nxBeschreibung, nxTermin, nxSchulname, userId)
+    AGLocalServices.instance
+        .add(AGs(
+            thema: nxThema,
+            jahrgang: nxJahrgang,
+            beschreibung: nxBeschreibung,
+            termin: nxTermin,
+            schulname: nxSchulname,
+            userId: userId))
         .then((value) {
-      ServicesAgs.getAgs(nxSchulname).then((ags2) {
+      AGLocalServices.instance.getAccount().then((ags2) {
         setState(() {
           _userAGs = ags2;
         });

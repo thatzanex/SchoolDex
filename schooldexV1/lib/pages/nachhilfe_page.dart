@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schooldex/db/local_db/nachhilfe_local.dart';
 import 'package:schooldex/models/ag.dart';
 import 'package:schooldex/models/blackboard.dart';
 import 'package:schooldex/pages/search_page.dart';
@@ -37,20 +38,20 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   void initState() {
     super.initState();
     _userNachhilfen = [];
-    _createTable();
+    //_createTable();
     _getNachhilfen();
   }
 
-  _createTable() {
-    ServicesNachhilfe.createTable(widget.schulname).then((result) {
-      if ('success' == result) {
-        _getNachhilfen();
-      }
-    });
-  }
+  // _createTable() {
+  //   ServicesNachhilfe.createTable(widget.schulname).then((result) {
+  //     if ('success' == result) {
+  //       _getNachhilfen();
+  //     }
+  //   });
+  // }
 
   _getNachhilfen() {
-    ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen) {
+    NachhilfeLocalServices.instance.getAccount().then((nachhilfen) {
       setState(() {
         _userNachhilfen = nachhilfen;
       });
@@ -64,10 +65,16 @@ class _NachhilfepageState extends State<Nachhilfepage> {
       String nxUserId,
       String nxUsername,
       String nxSchulname) {
-    ServicesNachhilfe.addNachhilfe(nxFach, nxJahrgang, nxBeschreibung, nxUserId,
-            nxUsername, nxSchulname)
+    NachhilfeLocalServices.instance
+        .add(Nachhilfe(
+            fach: nxFach,
+            jahrgang: nxJahrgang,
+            beschreibung: nxBeschreibung,
+            userId: nxUserId,
+            username: nxUsername,
+            schulname: nxSchulname))
         .then((value) {
-      ServicesNachhilfe.getNachhilfe(nxSchulname).then((nachhilfen1) {
+      NachhilfeLocalServices.instance.getAccount().then((nachhilfen1) {
         setState(() {
           _userNachhilfen = nachhilfen1;
         });

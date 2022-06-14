@@ -28,4 +28,16 @@ class AGs {
       userId: map['userId'] as String,
     );
   }
+
+  Map<String, dynamic> toMapLocal() {
+    return {
+      'id': id,
+      'thema': thema,
+      'jahrgang': jahrgang,
+      'beschreibung': beschreibung,
+      'termin': termin,
+      'schulname': schulname,
+      'userId': userId
+    };
+  }
 }

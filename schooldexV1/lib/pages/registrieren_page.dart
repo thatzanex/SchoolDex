@@ -1,4 +1,4 @@
-import 'package:schooldex/db/accounts_services.dart';
+import 'package:schooldex/db/accounts_service.dart';
 import 'package:schooldex/models/account.dart';
 import 'package:schooldex/pages/login_page.dart';
 import 'package:schooldex/pages/news_page.dart';
@@ -35,22 +35,19 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
 
   findAccounts() {
     //LocalServices.instance.remove('22');
-    try {
-      LocalServices.instance.getAccount().then((value) {
-        try {
-          widget.accountstatus(
-              value[0].id.toString(),
-              value[0].benutzername.toString(),
-              value[0].schulname.toString(),
-              value[0].status.toString());
-          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
-        } catch (e) {
-          return;
-        }
-      });
-    } catch (e) {
-      return;
-    }
+    // try {
+    //   LocalServices.instance.getAccount().then((value) {
+    //     try {
+    widget.accountstatus('1', benutzernamenController.text,
+        schulController.text, codeController.text);
+    Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+    //     } catch (e) {
+    //       return;
+    //     }
+    //   });
+    // } catch (e) {
+    //   return;
+    // }
   }
 
   Widget popupdialog(String text) {
@@ -79,90 +76,104 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         codeController.text.isEmpty) {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
-      // ServicesAccount.createTable(schulController.text).then((value) {
-      //   if (value == 'sucess') {
-      ServicesAccount.getAccount(schulController.text).then((accountlist) {
-        print('hallo');
-        String matchingList = benutzernamenController.text;
-        var index = accountlist.indexWhere(
-            (element) => matchingList.contains(element.benutzername));
-        try {
-          if (passwortController.text ==
-              accountlist[index].passwort.toString()) {
-            showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return popupdialog('Dieser Benutzername existert schon');
-                });
-            clarValues();
-          } else {
-            clarValues();
-            showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return popupdialog('Dieser Benutzername existert schon');
-                });
-          }
-        } catch (e) {
-          if (codeController.text == 'L135' ||
-              codeController.text == 'S246' ||
-              codeController.text == 'Admin789') {
-            ServicesAccount.addAccount(
-                    benutzernamenController.text,
-                    passwortController.text,
-                    schulController.text,
-                    codeController.text)
-                .then((value1) {
-              List<String> matchingList = [
-                benutzernamenController.text,
-              ];
-              ServicesAccount.getAccount(schulController.text).then((value2) {
-                var index = value2.indexWhere(
-                    (element) => matchingList.contains(element.benutzername));
-                LocalServices.instance
-                    .add(Account(
-                        id: accountlist[index].id.toString(),
-                        benutzername: benutzernamenController.text,
-                        passwort: passwortController.text,
-                        schulname: schulController.text,
-                        status: codeController.text))
-                    .then((value) {
-                  if (value1 == 'success') {
-                    findAccounts();
-                    Navigator.of(context)
-                        .pushReplacementNamed(Newspage.routeName);
-                  } else {
-                    return;
-                  }
-                });
-              });
-            });
-          } else {
-            clarValues();
-            showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return popupdialog('Geben sie einen gültigen Code ein');
-                });
-          }
+      LocalServices.instance
+          .add(Account(
+              benutzername: benutzernamenController.text,
+              passwort: passwortController.text,
+              schulname: schulController.text,
+              status: codeController.text))
+          .then((value1) {
+        if (value1 == 'success') {
+          findAccounts();
+          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+        } else {
+          return;
         }
+        ;
+        // ServicesAccount.createTable(schulController.text).then((value) {
+        //   if (value == 'sucess') {
+        // LocalServices.instance.getAccount().then((accountlist) {
+        //   String matchingList = benutzernamenController.text;
+        //   var index = accountlist.indexWhere(
+        //       (element) => matchingList.contains(element.benutzername));
+        //   try {
+        //     if (passwortController.text ==
+        //         accountlist[index].passwort.toString()) {
+        //       showModalBottomSheet(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return popupdialog('Dieser Benutzername existert schon');
+        //           });
+        //       clarValues();
+        //     } else {
+        //       clarValues();
+        //       showModalBottomSheet(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return popupdialog('Dieser Benutzername existert schon');
+        //           });
+        //     }
+        //   } catch (e) {
+        //     if (codeController.text == 'L135' ||
+        //         codeController.text == 'S246' ||
+        //         codeController.text == 'Admin789') {
+        //       LocalServices.instance
+        //           .add(Account(
+        //               benutzername: benutzernamenController.text,
+        //               passwort: passwortController.text,
+        //               schulname: schulController.text,
+        //               status: codeController.text))
+        //           .then((value1) {
+        //         List<String> matchingList = [
+        //           benutzernamenController.text,
+        //         ];
+        //         LocalServices.instance.getAccount().then((value2) {
+        //           var index = value2.indexWhere(
+        //               (element) => matchingList.contains(element.benutzername));
+        //           LocalServices.instance
+        //               .add(Account(
+        //                   id: accountlist[index].id.toString(),
+        //                   benutzername: benutzernamenController.text,
+        //                   passwort: passwortController.text,
+        //                   schulname: schulController.text,
+        //                   status: codeController.text))
+        //               .then((value) {
+        //             if (value1 == 'success') {
+        //               findAccounts();
+        //               Navigator.of(context)
+        //                   .pushReplacementNamed(Newspage.routeName);
+        //             } else {
+        //               return;
+        //             }
+        //           });
+        //         });
+        //       });
+        //     } else {
+        //       clarValues();
+        //       showModalBottomSheet(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return popupdialog('Geben sie einen gültigen Code ein');
+        //           });
+        //     }
+        //   }
+        // });
+        // //   } else {
+        // //     clarValues();
+        // //     showModalBottomSheet(
+        // //         context: context,
+        // //         builder: (BuildContext context) {
+        // //           return popupdialog('Die Schule konnte nicht gefunden werden');
+        // //         });
+        // //   }
+        // // });
+        // } else {
+        //   clarValues();
+        //   showModalBottomSheet(
+        //       context: context,
+        //       builder: (BuildContext context) {
+        //         return popupdialog('Geben Sie zwei gleiche Passwörter ein');
       });
-      //   } else {
-      //     clarValues();
-      //     showModalBottomSheet(
-      //         context: context,
-      //         builder: (BuildContext context) {
-      //           return popupdialog('Die Schule konnte nicht gefunden werden');
-      //         });
-      //   }
-      // });
-    } else {
-      clarValues();
-      showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return popupdialog('Geben Sie zwei gleiche Passwörter ein');
-          });
     }
   }
 
