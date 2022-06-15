@@ -15,7 +15,7 @@ class BlackboardLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'blackboard.db');
+    String path = join(documentsDirectory.path, 'blackboard1.db');
     return await openDatabase(
       path,
       version: 1,
@@ -25,7 +25,7 @@ class BlackboardLocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE account(
+      CREATE TABLE blackboard(
         id TEXT AUTO_INCREMENT PRIMARY KEY,
         ueberschrift TEXT,
         beschreibung TEXT,

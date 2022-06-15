@@ -15,7 +15,7 @@ class NachhilfeLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'nachhilfe.db');
+    String path = join(documentsDirectory.path, 'nachhilfe1.db');
     return await openDatabase(
       path,
       version: 1,
@@ -25,7 +25,7 @@ class NachhilfeLocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE account(
+      CREATE TABLE nachhilfe(
         id TEXT PRIMARY KEY,
         fach TEXT,
         jahrgang TEXT,

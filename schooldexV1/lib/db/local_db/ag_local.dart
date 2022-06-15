@@ -14,7 +14,7 @@ class AGLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'ags.db');
+    String path = join(documentsDirectory.path, 'ags1.db');
     return await openDatabase(
       path,
       version: 1,
@@ -24,7 +24,7 @@ class AGLocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE account(
+      CREATE TABLE ags(
         id TEXT PRIMARY KEY,
         thema TEXT,
         jahrgang TEXT,

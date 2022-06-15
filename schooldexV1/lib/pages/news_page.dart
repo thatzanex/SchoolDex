@@ -57,6 +57,7 @@ class _NewspageState extends State<Newspage> {
       String nxSchulname, String nxuserId) {
     NewsLocalServices.instance
         .add(News(
+            id: '2',
             ueberschrift: nxUeberschrift,
             inhalt: nxInhalt,
             datum: nxDatum,

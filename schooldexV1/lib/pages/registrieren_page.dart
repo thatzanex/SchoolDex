@@ -27,20 +27,20 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   final _codeFocusNode = FocusNode();
   String status = '0';
 
-  @override
-  void initState() {
-    findAccounts();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   findAccounts();
+  //   super.initState();
+  // }
 
   findAccounts() {
-    //LocalServices.instance.remove('22');
+    LocalServices.instance.remove('1');
     // try {
     //   LocalServices.instance.getAccount().then((value) {
     //     try {
-    widget.accountstatus('1', benutzernamenController.text,
+    widget.accountstatus('2', benutzernamenController.text,
         schulController.text, codeController.text);
-    Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+    //Navigator.of(context).pushReplacementNamed(Newspage.routeName);
     //     } catch (e) {
     //       return;
     //     }
@@ -83,13 +83,13 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
               schulname: schulController.text,
               status: codeController.text))
           .then((value1) {
-        if (value1 == 'success') {
-          findAccounts();
-          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
-        } else {
-          return;
-        }
-        ;
+        //if (value1 == 'success') {
+        findAccounts();
+        Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+        //} else {
+        //  return;
+        //}
+        //;
         // ServicesAccount.createTable(schulController.text).then((value) {
         //   if (value == 'sucess') {
         // LocalServices.instance.getAccount().then((accountlist) {

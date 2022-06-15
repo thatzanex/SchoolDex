@@ -7,7 +7,10 @@ class Settingspage extends StatelessWidget {
   static const routeName = '/settings';
   final String benutzername;
   final String schulname;
-  Settingspage(this.benutzername, this.schulname);
+  Settingspage(
+    this.benutzername,
+    this.schulname,
+  );
 
   _loggout(context) {
     LocalServices.instance.getAccount().then((value) {

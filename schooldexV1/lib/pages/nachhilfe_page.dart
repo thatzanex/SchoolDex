@@ -59,14 +59,16 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   }
 
   void _addNeueNachhilfe(
-      String nxFach,
-      String nxJahrgang,
-      String nxBeschreibung,
-      String nxUserId,
-      String nxUsername,
-      String nxSchulname) {
+    String nxFach,
+    String nxJahrgang,
+    String nxBeschreibung,
+    String nxUserId,
+    String nxUsername,
+    String nxSchulname,
+  ) {
     NachhilfeLocalServices.instance
         .add(Nachhilfe(
+            id: '4',
             fach: nxFach,
             jahrgang: nxJahrgang,
             beschreibung: nxBeschreibung,

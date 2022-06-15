@@ -15,7 +15,7 @@ class NewsLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'news.db');
+    String path = join(documentsDirectory.path, 'schooldex.db');
     return await openDatabase(
       path,
       version: 1,
@@ -25,10 +25,11 @@ class NewsLocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE account(
+      CREATE TABLE news(
         id TEXT PRIMARY KEY,
         ueberschrift TEXT,
         inhalt TEXT,
+        datum TEXT,
         userId TEXT,
         schulname TEXT
       )

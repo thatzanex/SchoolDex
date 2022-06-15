@@ -34,8 +34,8 @@ class News {
       'ueberschrift': ueberschrift,
       'inhalt': inhalt,
       'datum': datum,
-      'userId': userId,
       'schulname': schulname,
+      'userId': userId,
     };
   }
 }

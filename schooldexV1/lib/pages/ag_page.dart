@@ -62,6 +62,7 @@ class _AGPageState extends State<AGPage> {
       String nxTermin, String nxSchulname, String userId) {
     AGLocalServices.instance
         .add(AGs(
+            id: '1',
             thema: nxThema,
             jahrgang: nxJahrgang,
             beschreibung: nxBeschreibung,
