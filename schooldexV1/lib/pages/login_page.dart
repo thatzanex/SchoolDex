@@ -1,4 +1,4 @@
-import 'package:schooldex/db/accounts_service.dart';
+import 'package:schooldex/db/accounts_services.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'registrieren_page.dart';

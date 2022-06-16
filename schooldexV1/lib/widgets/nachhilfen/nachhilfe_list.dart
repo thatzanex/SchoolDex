@@ -1,3 +1,4 @@
+import 'package:schooldex/db/local_db/nachhilfe_local.dart';
 import 'package:schooldex/db/nachhilfe_services.dart';
 import 'package:flutter/material.dart';
 import '/models/nachhilfe.dart';
@@ -20,8 +21,8 @@ class NachhilfeListe extends StatefulWidget {
 class _NachhilfeListeState extends State<NachhilfeListe> {
   Color colorCard = Colors.grey.shade200;
   _deleteNachhilfe(id) {
-    ServicesNachhilfe.deleteNachhilfe(id, widget.schulname).then((value) {
-      ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen2) {
+    NachhilfeLocalServices.instance.remove(id).then((value) {
+      NachhilfeLocalServices.instance.getAccount().then((nachhilfen2) {
         setState(() {
           widget.nachhilfen = nachhilfen2;
         });
@@ -31,10 +32,17 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
 
   _updateNachhilfe(String id, String fach, String jahrgang, String beschreibung,
       String userId, String username, String schulname) {
-    ServicesNachhilfe.updateNachhilfe(
-            id, fach, jahrgang, beschreibung, userId, username, schulname)
+    NachhilfeLocalServices.instance
+        .update(Nachhilfe(
+            id: id,
+            fach: fach,
+            jahrgang: jahrgang,
+            beschreibung: beschreibung,
+            userId: userId,
+            username: username,
+            schulname: schulname))
         .then((value) {
-      ServicesNachhilfe.getNachhilfe(schulname).then((nachhilfen1) {
+      NachhilfeLocalServices.instance.getAccount().then((nachhilfen1) {
         setState(() {
           widget.nachhilfen = nachhilfen1;
         });

@@ -9,6 +9,7 @@ import '../models/nachhilfe.dart';
 import '../widgets/nachhilfen/nachhilfe_list.dart';
 import '../widgets/nachhilfen/nachhilfe_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
+import 'package:uuid/uuid.dart';
 
 class Nachhilfepage extends StatefulWidget {
   static const routeName = '/nachhilfe';
@@ -24,6 +25,7 @@ class Nachhilfepage extends StatefulWidget {
 }
 
 class _NachhilfepageState extends State<Nachhilfepage> {
+  var uudi = const Uuid().v4();
   List<Nachhilfe> _userNachhilfen = [
     Nachhilfe(
         fach: 'Mathematik',
@@ -38,7 +40,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   void initState() {
     super.initState();
     _userNachhilfen = [];
-    //_createTable();
+    // _createTable();
     _getNachhilfen();
   }
 
@@ -59,19 +61,18 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   }
 
   void _addNeueNachhilfe(
-    String nxFach,
-    String nxJahrgang,
-    String nxBeschreibung,
-    String nxUserId,
-    String nxUsername,
-    String nxSchulname,
-  ) {
+      String nxFach,
+      String nxJahrgang,
+      String nxBeschreibung,
+      String nxUserId,
+      String nxUsername,
+      String nxSchulname) {
     NachhilfeLocalServices.instance
         .add(Nachhilfe(
-            id: '4',
+            id: uudi,
             fach: nxFach,
-            jahrgang: nxJahrgang,
             beschreibung: nxBeschreibung,
+            jahrgang: nxJahrgang,
             userId: nxUserId,
             username: nxUsername,
             schulname: nxSchulname))

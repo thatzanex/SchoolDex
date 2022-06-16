@@ -10,6 +10,7 @@ import '../widgets/blackboard/blackboard_list.dart';
 import '../widgets/blackboard/blackboard_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class Blackboardpage extends StatefulWidget {
   static const routeName = '/blackboard';
@@ -27,6 +28,7 @@ class Blackboardpage extends StatefulWidget {
 class _BlackboardpageState extends State<Blackboardpage> {
   List<Blackboard> _userBlackboard = [
     Blackboard(
+        //id: '5',
         ueberschrift: 'Mathematik',
         beschreibung:
             'Ich habe meinen Turnbeutel vergessen, hat ihn vielleicht jemand von euch gefunden?',
@@ -36,6 +38,9 @@ class _BlackboardpageState extends State<Blackboardpage> {
         username: 'Max Mustermann',
         schulname: 'SchoolDex'),
   ];
+
+  var uudi = const Uuid().v4();
+
   @override
   void initState() {
     super.initState();
@@ -70,6 +75,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
       String nxSchulname) {
     BlackboardLocalServices.instance
         .add(Blackboard(
+            id: uudi,
             ueberschrift: nxUeberschrift,
             beschreibung: nxBeschreibung,
             color: nxColor,
@@ -78,6 +84,8 @@ class _BlackboardpageState extends State<Blackboardpage> {
             username: nxUsername,
             schulname: nxSchulname))
         .then((value) {
+      print(
+          '$uudi $nxUeberschrift $nxBeschreibung $nxColor $nxDatum $nxUserId $nxUsername $nxSchulname');
       BlackboardLocalServices.instance.getAccount().then((blackboard1) {
         setState(() {
           _userBlackboard = blackboard1;

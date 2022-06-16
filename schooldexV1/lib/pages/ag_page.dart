@@ -9,6 +9,7 @@ import '../widgets/ag/ag_list.dart';
 import '../models/ag.dart';
 import '../models/blackboard.dart';
 import '../widgets/MyBottomNavigationBar.dart';
+import 'package:uuid/uuid.dart';
 
 class AGPage extends StatefulWidget {
   static const routeName = '/ags';
@@ -24,8 +25,10 @@ class AGPage extends StatefulWidget {
 }
 
 class _AGPageState extends State<AGPage> {
+  var uudi = const Uuid().v4();
   List<AGs> _userAGs = [
     AGs(
+        id: '5',
         thema: 'Ballsportspiele',
         jahrgang: '8',
         beschreibung:
@@ -62,7 +65,7 @@ class _AGPageState extends State<AGPage> {
       String nxTermin, String nxSchulname, String userId) {
     AGLocalServices.instance
         .add(AGs(
-            id: '1',
+            id: uudi,
             thema: nxThema,
             jahrgang: nxJahrgang,
             beschreibung: nxBeschreibung,

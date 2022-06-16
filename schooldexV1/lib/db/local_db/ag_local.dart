@@ -14,7 +14,7 @@ class AGLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'ags1.db');
+    String path = join(documentsDirectory.path, 'schooldexag.db');
     return await openDatabase(
       path,
       version: 1,

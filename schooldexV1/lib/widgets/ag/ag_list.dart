@@ -1,4 +1,5 @@
 import 'package:schooldex/db/ag_services.dart';
+import 'package:schooldex/db/local_db/ag_local.dart';
 import 'package:schooldex/widgets/popup.dart';
 import 'package:flutter/material.dart';
 import '/models/ag.dart';
@@ -19,8 +20,8 @@ class AGliste extends StatefulWidget {
 
 class _AGlisteState extends State<AGliste> {
   _deleteAgs(id) {
-    ServicesAgs.deleteAgs(id, widget.schulname).then((value) {
-      ServicesAgs.getAgs(widget.schulname).then((ags2) {
+    AGLocalServices.instance.remove(id).then((value) {
+      AGLocalServices.instance.getAccount().then((ags2) {
         setState(() {
           widget.agangebot = ags2;
         });
@@ -30,10 +31,17 @@ class _AGlisteState extends State<AGliste> {
 
   _updateAGs(String id, String thema, String jahrgang, String beschreibung,
       String termin, String schulname, String userId) {
-    ServicesAgs.updateAgs(
-            id, thema, jahrgang, beschreibung, termin, schulname, userId)
+    AGLocalServices.instance
+        .update(AGs(
+            id: id,
+            thema: thema,
+            jahrgang: jahrgang,
+            beschreibung: beschreibung,
+            termin: termin,
+            schulname: schulname,
+            userId: userId))
         .then((value) {
-      ServicesAgs.getAgs(schulname).then((ags1) {
+      AGLocalServices.instance.getAccount().then((ags1) {
         setState(() {
           widget.agangebot = ags1;
         });

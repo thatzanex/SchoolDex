@@ -1,4 +1,4 @@
-import 'package:schooldex/db/accounts_service.dart';
+import 'package:schooldex/db/accounts_services.dart';
 import 'package:schooldex/models/account.dart';
 import 'package:schooldex/pages/login_page.dart';
 import 'package:schooldex/pages/news_page.dart';
@@ -27,27 +27,27 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   final _codeFocusNode = FocusNode();
   String status = '0';
 
-  // @override
-  // void initState() {
-  //   findAccounts();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    findAccounts();
+    super.initState();
+  }
 
   findAccounts() {
-    LocalServices.instance.remove('1');
-    // try {
-    //   LocalServices.instance.getAccount().then((value) {
-    //     try {
-    widget.accountstatus('2', benutzernamenController.text,
-        schulController.text, codeController.text);
-    //Navigator.of(context).pushReplacementNamed(Newspage.routeName);
-    //     } catch (e) {
-    //       return;
-    //     }
-    //   });
-    // } catch (e) {
-    //   return;
-    // }
+    //LocalServices.instance.remove('1');
+    try {
+      LocalServices.instance.getAccount().then((value) {
+        try {
+          widget.accountstatus('2', value[0].benutzername.toString(),
+              value[0].schulname.toString(), value[0].status.toString());
+          Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+        } catch (e) {
+          return;
+        }
+      });
+    } catch (e) {
+      return;
+    }
   }
 
   Widget popupdialog(String text) {
@@ -78,6 +78,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
     } else if (wiederholungsController.text == passwortController.text) {
       LocalServices.instance
           .add(Account(
+              id: '0',
               benutzername: benutzernamenController.text,
               passwort: passwortController.text,
               schulname: schulController.text,

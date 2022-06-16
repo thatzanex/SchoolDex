@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/news/news_list.dart';
 import '../widgets/news/news_new.dart';
+import 'package:uuid/uuid.dart';
 
 class Newspage extends StatefulWidget {
   static const routeName = '/news';
@@ -19,6 +20,7 @@ class Newspage extends StatefulWidget {
 }
 
 class _NewspageState extends State<Newspage> {
+  var uudi = const Uuid().v4();
   List<News> _userNews = [
     News(
         ueberschrift: 'Neuer Basketballkorb',
@@ -57,7 +59,7 @@ class _NewspageState extends State<Newspage> {
       String nxSchulname, String nxuserId) {
     NewsLocalServices.instance
         .add(News(
-            id: '2',
+            id: uudi,
             ueberschrift: nxUeberschrift,
             inhalt: nxInhalt,
             datum: nxDatum,

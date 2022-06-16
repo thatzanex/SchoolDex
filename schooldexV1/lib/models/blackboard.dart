@@ -40,7 +40,7 @@ class Blackboard {
       'datum': datum,
       'userId': userId,
       'username': username,
-      'schulname': schulname,
+      'schulname': schulname
     };
   }
 }
