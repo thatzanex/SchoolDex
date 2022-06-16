@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class UpdateBlackboard extends StatefulWidget {
-  final Function updateNx;
-
-  UpdateBlackboard(this.updateNx, this.id, this.fach, this.beschreibung,
-      this.color, this.userId, this.username, this.schulname);
+  final Function addNx;
   final String id;
-  final String fach;
+  final String ueberschrift;
   final String beschreibung;
   final String color;
   final String userId;
   final String username;
   final String schulname;
 
+  UpdateBlackboard(this.addNx, this.id, this.ueberschrift, this.beschreibung,
+      this.color, this.userId, this.username, this.schulname);
+
   @override
   State<UpdateBlackboard> createState() => _UpdateBlackboardState();
 }
 
 class _UpdateBlackboardState extends State<UpdateBlackboard> {
-  final fachController = TextEditingController();
+  final ueberschriftController = TextEditingController();
   final beschreibungController = TextEditingController();
   String datum = DateFormat('dd.MM.yyyy').format(DateTime.now());
 
@@ -31,20 +31,27 @@ class _UpdateBlackboardState extends State<UpdateBlackboard> {
   void initState() {
     super.initState();
     selectedValue = widget.color;
-    fachController.text = widget.fach;
+    ueberschriftController.text = widget.ueberschrift;
     beschreibungController.text = widget.beschreibung;
   }
 
   void submitData() {
-    final enteredFach = fachController.text;
+    final enteredueberschrift = ueberschriftController.text;
     final enteredBeschreibung = beschreibungController.text;
 
-    if (enteredFach.isEmpty || enteredBeschreibung.isEmpty) {
+    if (enteredueberschrift.isEmpty || enteredBeschreibung.isEmpty) {
       return;
     }
 
-    widget.updateNx(widget.id, fachController.text, beschreibungController.text,
-        selectedValue, datum, widget.userId, widget.username, widget.schulname);
+    widget.addNx(
+        widget.id,
+        ueberschriftController.text,
+        beschreibungController.text,
+        selectedValue,
+        datum,
+        widget.userId,
+        widget.username,
+        widget.schulname);
     Navigator.of(context).pop();
   }
 
@@ -58,15 +65,15 @@ class _UpdateBlackboardState extends State<UpdateBlackboard> {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
             child: const Text(
-              'Angebot bearbeiten',
+              'Neuer Eintrag',
               style: TextStyle(fontSize: 28),
             ),
           ),
           Container(
             margin: const EdgeInsets.all(5),
             child: TextField(
-              decoration: const InputDecoration(labelText: 'Fach'),
-              controller: fachController,
+              decoration: const InputDecoration(labelText: 'Überschrift'),
+              controller: ueberschriftController,
               onSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_beschreibungFocusNode);
               },
@@ -93,39 +100,71 @@ class _UpdateBlackboardState extends State<UpdateBlackboard> {
                         style: TextStyle(fontSize: 15),
                       )),
                   DropdownButton(
-                      value: selectedValue,
-                      items: const [
-                        DropdownMenuItem(
+                      value: int.parse(selectedValue),
+                      items: [
+                        const DropdownMenuItem(
                           value: 1,
-                          child: Text('Rot'),
+                          child: Text(
+                            'Rot',
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ),
                         DropdownMenuItem(
                           value: 2,
-                          child: Text('Grün'),
+                          child: Text(
+                            'Grün',
+                            style: TextStyle(color: Colors.green.shade400),
+                          ),
                         ),
                         DropdownMenuItem(
                           value: 3,
-                          child: Text('Blau'),
+                          child: Text(
+                            'Blau',
+                            style: TextStyle(color: Colors.blue.shade300),
+                          ),
                         ),
                         DropdownMenuItem(
                           value: 4,
-                          child: Text('Gelb'),
+                          child: Text(
+                            'Gelb',
+                            style: TextStyle(color: Colors.yellow.shade600),
+                          ),
                         ),
-                        DropdownMenuItem(
+                        const DropdownMenuItem(
                           value: 5,
-                          child: Text('Orange'),
+                          child: Text(
+                            'Orange',
+                            style: TextStyle(color: Colors.orange),
+                          ),
                         ),
                       ],
                       onChanged: (value) {
-                        selectedValue = value.toString();
+                        setState(() {
+                          selectedValue = value.toString();
+                        });
                       }),
                 ],
               ),
             ),
           ),
-          TextButton(
-            child: const Text('Speichern'),
-            onPressed: submitData,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                child: const Text(
+                  'Hinzufügen',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 29, 44, 89),
+                  ),
+                ),
+                onPressed: submitData,
+              ),
+              IconButton(
+                onPressed: (() => Navigator.of(context).pop()),
+                icon: const Icon(Icons.close),
+                color: const Color.fromARGB(255, 29, 44, 89),
+              )
+            ],
           ),
         ],
       ),
