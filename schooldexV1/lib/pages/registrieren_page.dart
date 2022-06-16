@@ -40,7 +40,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
       LocalServices.instance.getAccount().then((value) {
         try {
           widget.accountstatus(
-              const Uuid().v1(),
+              value[0].id.toString(),
               value[0].benutzername.toString(),
               value[0].schulname.toString(),
               value[0].status.toString());
@@ -82,7 +82,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
     } else if (wiederholungsController.text == passwortController.text) {
       LocalServices.instance
           .add(Account(
-              id: '0',
+              id: const Uuid().v1(),
               benutzername: benutzernamenController.text,
               passwort: passwortController.text,
               schulname: schulController.text,

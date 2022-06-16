@@ -17,11 +17,18 @@ class NewsListe extends StatefulWidget {
 }
 
 class _NewsListeState extends State<NewsListe> {
+  List<News> newsus = [];
+  @override
+  void initState() {
+    super.initState();
+    newsus = widget.neuigkeiten;
+  }
+
   _deleteNews(id) {
     NewsLocalServices.instance.remove(id).then((value) {
       NewsLocalServices.instance.getAccount().then((news2) {
         setState(() {
-          widget.neuigkeiten = news2;
+          newsus = news2;
         });
       });
     });
@@ -40,7 +47,7 @@ class _NewsListeState extends State<NewsListe> {
         .then((value) {
       NewsLocalServices.instance.getAccount().then((news1) {
         setState(() {
-          widget.neuigkeiten = news1;
+          newsus = news1;
         });
       });
     });
@@ -57,25 +64,24 @@ class _NewsListeState extends State<NewsListe> {
               context: context,
               builder: (BuildContext context) {
                 if (widget.isTeacher.startsWith('Admin789') ||
-                    widget.userId ==
-                        widget.neuigkeiten[index].userId.toString()) {
+                    widget.userId == newsus[index].userId.toString()) {
                   return buildPopupDialog(
                     context,
                     _updateNews,
                     _deleteNews,
-                    widget.neuigkeiten[index].id.toString(),
-                    widget.neuigkeiten[index].ueberschrift.toString(),
-                    widget.neuigkeiten[index].inhalt.toString(),
-                    widget.neuigkeiten[index].datum.toString(),
-                    widget.neuigkeiten[index].schulname.toString(),
-                    widget.neuigkeiten[index].userId.toString(),
+                    newsus[index].id.toString(),
+                    newsus[index].ueberschrift.toString(),
+                    newsus[index].inhalt.toString(),
+                    newsus[index].datum.toString(),
+                    newsus[index].schulname.toString(),
+                    newsus[index].userId.toString(),
                   );
                 } else {
                   return schuelerPopupDialog(
                       context,
-                      widget.neuigkeiten[index].ueberschrift.toString(),
-                      widget.neuigkeiten[index].inhalt.toString(),
-                      widget.neuigkeiten[index].datum.toString());
+                      newsus[index].ueberschrift.toString(),
+                      newsus[index].inhalt.toString(),
+                      newsus[index].datum.toString());
                 }
               },
             ),
@@ -90,7 +96,7 @@ class _NewsListeState extends State<NewsListe> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 10, 10, 5),
                         child: Text(
-                          widget.neuigkeiten[index].ueberschrift.toString(),
+                          newsus[index].ueberschrift.toString(),
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -98,7 +104,7 @@ class _NewsListeState extends State<NewsListe> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                         child: Text(
-                          widget.neuigkeiten[index].datum.toString(),
+                          newsus[index].datum.toString(),
                           //style: TextStyle(),
                         ),
                       ),
@@ -107,7 +113,7 @@ class _NewsListeState extends State<NewsListe> {
                   Container(
                     margin: const EdgeInsets.all(5),
                     child: Text(
-                      widget.neuigkeiten[index].inhalt.toString(),
+                      newsus[index].inhalt.toString(),
                       style: const TextStyle(fontSize: 17),
                     ),
                   ),
@@ -116,7 +122,7 @@ class _NewsListeState extends State<NewsListe> {
             ),
           );
         },
-        itemCount: widget.neuigkeiten.length,
+        itemCount: newsus.length,
       ),
     );
   }

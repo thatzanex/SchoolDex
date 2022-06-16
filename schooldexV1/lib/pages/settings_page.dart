@@ -7,9 +7,11 @@ import '../db/local_services.dart';
 
 class Settingspage extends StatelessWidget {
   static const routeName = '/settings';
+  final String userId;
   final String benutzername;
   final String schulname;
   Settingspage(
+    this.userId,
     this.benutzername,
     this.schulname,
   );
@@ -60,6 +62,14 @@ class Settingspage extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               child: Text(
                 'Schule: $schulname',
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: Text(
+                'Id: $userId',
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),

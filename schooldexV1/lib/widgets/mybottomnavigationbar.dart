@@ -53,7 +53,7 @@ class MyBottomNavigationBar extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 5 - 10,
+                  width: MediaQuery.of(context).size.width / 5 - 15,
                   child: IconButton(
                     icon: const Icon(Icons.home_rounded),
                     color: newsIconColor,
@@ -62,7 +62,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 5 - 2,
+                  width: MediaQuery.of(context).size.width / 5 - 10,
                   child: IconButton(
                     icon: const Icon(Icons.school_rounded),
                     color: nachhilfeIconColor,
@@ -80,7 +80,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 5 - 2,
+                  width: MediaQuery.of(context).size.width / 5 - 10,
                   child: IconButton(
                     icon: const Icon(Icons.backpack_outlined),
                     color: blackboardIconColor,
@@ -91,7 +91,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 5 - 15,
                   child: IconButton(
-                    icon: const Icon(Icons.apps_outlined),
+                    icon: const Icon(Icons.table_chart_rounded),
                     color: vertretungsIconColor,
                     iconSize: 40,
                     onPressed: () => selectPagetoVertretung(context),

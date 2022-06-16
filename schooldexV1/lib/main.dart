@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         Blackboardpage.routeName: (ctx) =>
             Blackboardpage(status1, userId, username, dbname, searchItems),
         Vertretungspage.routeName: (ctx) => const Vertretungspage(),
-        Settingspage.routeName: (ctx) => Settingspage(username, dbname),
+        Settingspage.routeName: (ctx) => Settingspage(userId, username, dbname),
         LoginPage.routeName: (ctx) => LoginPage(accountStatus),
         RegistrierenPage.routeName: (ctx) => RegistrierenPage(accountStatus),
         Searchpage.routeName: (ctx) => Searchpage(nachhilfeList, agList,
