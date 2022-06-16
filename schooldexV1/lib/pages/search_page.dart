@@ -209,13 +209,21 @@ class _SearchpageState extends State<Searchpage> {
               Colors.white,
               Colors.white,
             )
-          : MyBottomNavigationBar(
-              Colors.white,
-              Colors.white,
-              Colors.orange,
-              Colors.white,
-              Colors.white,
-            ),
+          : widget.title.startsWith('AG')
+              ? MyBottomNavigationBar(
+                  Colors.white,
+                  Colors.white,
+                  Colors.orange,
+                  Colors.white,
+                  Colors.white,
+                )
+              : MyBottomNavigationBar(
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.orange,
+                  Colors.white,
+                ),
     );
   }
 }
