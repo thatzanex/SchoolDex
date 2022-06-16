@@ -6,13 +6,12 @@ import '/models/ag.dart';
 import 'ag_update.dart';
 
 class AGliste extends StatefulWidget {
-  AGliste(this.agangebot, this.schulname, this.isTeacher, this.userId, this.x);
+  AGliste(this.agangebot, this.schulname, this.isTeacher, this.userId);
 
   List<AGs> agangebot;
   String schulname;
   String isTeacher;
   String userId;
-  double x;
 
   @override
   State<AGliste> createState() => _AGlisteState();
