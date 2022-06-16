@@ -39,8 +39,6 @@ class _BlackboardpageState extends State<Blackboardpage> {
         schulname: 'SchoolDex'),
   ];
 
-  var uudi = const Uuid().v4();
-
   @override
   void initState() {
     super.initState();
@@ -75,7 +73,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
       String nxSchulname) {
     BlackboardLocalServices.instance
         .add(Blackboard(
-            id: uudi,
+            id: const Uuid().v1(),
             ueberschrift: nxUeberschrift,
             beschreibung: nxBeschreibung,
             color: nxColor,
@@ -84,8 +82,6 @@ class _BlackboardpageState extends State<Blackboardpage> {
             username: nxUsername,
             schulname: nxSchulname))
         .then((value) {
-      print(
-          '$uudi $nxUeberschrift $nxBeschreibung $nxColor $nxDatum $nxUserId $nxUsername $nxSchulname');
       BlackboardLocalServices.instance.getAccount().then((blackboard1) {
         setState(() {
           _userBlackboard = blackboard1;
@@ -140,7 +136,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
               icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
             ),
-            const MyAccountbottom(),
+            MyAccountbottom(),
           ],
         ),
         body: SingleChildScrollView(

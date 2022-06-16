@@ -35,7 +35,7 @@ class Nachhilfe {
       'jahrgang': jahrgang,
       'beschreibung': beschreibung,
       'userId': userId,
-      'username': username,
+      'benutzername': username,
       'schulname': schulname,
     };
   }

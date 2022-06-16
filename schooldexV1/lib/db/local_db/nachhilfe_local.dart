@@ -15,7 +15,7 @@ class NachhilfeLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'schooldexnach.db');
+    String path = join(documentsDirectory.path, 'schooldexnachhilfen.db');
     return await openDatabase(
       path,
       version: 1,
@@ -25,13 +25,13 @@ class NachhilfeLocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE nachhilfen(
+      CREATE TABLE nachhilfe(
         id TEXT PRIMARY KEY,
         fach TEXT,
         jahrgang TEXT,
         beschreibung TEXT,
         userId TEXT,
-        username TEXT,
+        benutzername TEXT,
         schulname TEXT
       )
     ''');
@@ -39,7 +39,7 @@ class NachhilfeLocalServices {
 
   Future<List<Nachhilfe>> getAccount() async {
     Database db = await instance.database;
-    var accounts = await db.query('nachhilfen', orderBy: 'id');
+    var accounts = await db.query('nachhilfe', orderBy: 'id');
     List<Nachhilfe> accountList =
         accounts.map((e) => Nachhilfe.fromMap(e)).toList();
     return accountList;
@@ -47,17 +47,17 @@ class NachhilfeLocalServices {
 
   Future<int> add(Nachhilfe item) async {
     Database db = await instance.database;
-    return await db.insert('nachhilfen', item.toMapLocal());
+    return await db.insert('nachhilfe', item.toMapLocal());
   }
 
   Future<int> remove(String id) async {
     Database db = await instance.database;
-    return await db.delete('nachhilfen', where: 'id = ?', whereArgs: [id]);
+    return await db.delete('nachhilfe', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int> update(Nachhilfe item) async {
     Database db = await instance.database;
-    return await db.update('nachhilfen', item.toMapLocal(),
+    return await db.update('nachhilfe', item.toMapLocal(),
         where: 'id = ?', whereArgs: [item.id]);
   }
 }

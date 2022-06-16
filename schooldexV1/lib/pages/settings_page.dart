@@ -1,4 +1,6 @@
 import 'package:schooldex/pages/login_page.dart';
+import 'package:schooldex/pages/news_page.dart';
+import 'package:schooldex/widgets/account_bottom.dart';
 import 'package:schooldex/widgets/mybottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import '../db/local_services.dart';
@@ -24,6 +26,15 @@ class Settingspage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            size: 30,
+          ),
+          onPressed: () =>
+              Navigator.of(context).pushReplacementNamed(Newspage.routeName),
+        ),
+        actions: [MyAccountbottom(color: Colors.orange)],
         title: const Text('Account'),
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),

@@ -39,7 +39,7 @@ class Blackboard {
       'color': color,
       'datum': datum,
       'userId': userId,
-      'username': username,
+      'benutzername': username,
       'schulname': schulname
     };
   }

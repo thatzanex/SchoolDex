@@ -25,7 +25,6 @@ class AGPage extends StatefulWidget {
 }
 
 class _AGPageState extends State<AGPage> {
-  var uudi = const Uuid().v4();
   List<AGs> _userAGs = [
     AGs(
         id: '5',
@@ -65,7 +64,7 @@ class _AGPageState extends State<AGPage> {
       String nxTermin, String nxSchulname, String userId) {
     AGLocalServices.instance
         .add(AGs(
-            id: uudi,
+            id: const Uuid().v1(),
             thema: nxThema,
             jahrgang: nxJahrgang,
             beschreibung: nxBeschreibung,
@@ -126,7 +125,7 @@ class _AGPageState extends State<AGPage> {
             icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
           ),
-          const MyAccountbottom()
+          MyAccountbottom()
         ],
       ),
       body: SingleChildScrollView(

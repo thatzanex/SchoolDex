@@ -20,7 +20,6 @@ class Newspage extends StatefulWidget {
 }
 
 class _NewspageState extends State<Newspage> {
-  var uudi = const Uuid().v4();
   List<News> _userNews = [
     News(
         ueberschrift: 'Neuer Basketballkorb',
@@ -59,7 +58,7 @@ class _NewspageState extends State<Newspage> {
       String nxSchulname, String nxuserId) {
     NewsLocalServices.instance
         .add(News(
-            id: uudi,
+            id: const Uuid().v1(),
             ueberschrift: nxUeberschrift,
             inhalt: nxInhalt,
             datum: nxDatum,
@@ -106,7 +105,7 @@ class _NewspageState extends State<Newspage> {
             icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
           ),
-          const MyAccountbottom()
+          MyAccountbottom()
         ],
       ),
       body: SingleChildScrollView(

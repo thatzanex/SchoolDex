@@ -15,7 +15,7 @@ class BlackboardLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'schooldexusblackborder.db');
+    String path = join(documentsDirectory.path, 'schoolblackboards.db');
     return await openDatabase(
       path,
       version: 1,
@@ -32,7 +32,7 @@ class BlackboardLocalServices {
         color TEXT,
         datum TEXT,
         userId TEXT,
-        username TEXT,
+        benutzername TEXT,
         schulname TEXT
       )
     ''');

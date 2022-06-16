@@ -119,7 +119,9 @@ class _NeueBlackboardState extends State<NeueBlackboard> {
                         ),
                       ],
                       onChanged: (value) {
-                        selectedValue = value.toString();
+                        setState(() {
+                          selectedValue = value.toString();
+                        });
                       }),
                 ],
               ),
