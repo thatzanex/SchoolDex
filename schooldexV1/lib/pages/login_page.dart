@@ -1,6 +1,7 @@
 import 'package:schooldex/db/accounts_services.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import 'registrieren_page.dart';
 import '../db/local_services.dart';
 import '../models/account.dart';
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       LocalServices.instance.getAccount().then((value) {
         try {
           widget.accountstatus(
-              value[0].id.toString(),
+              const Uuid().v1(),
               value[0].benutzername.toString(),
               value[0].schulname.toString(),
               value[0].status.toString());

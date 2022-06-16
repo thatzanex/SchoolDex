@@ -3,6 +3,7 @@ import 'package:schooldex/models/account.dart';
 import 'package:schooldex/pages/login_page.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import '../db/local_services.dart';
 
 class RegistrierenPage extends StatefulWidget {
@@ -38,8 +39,11 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
     try {
       LocalServices.instance.getAccount().then((value) {
         try {
-          widget.accountstatus('2', value[0].benutzername.toString(),
-              value[0].schulname.toString(), value[0].status.toString());
+          widget.accountstatus(
+              const Uuid().v1(),
+              value[0].benutzername.toString(),
+              value[0].schulname.toString(),
+              value[0].status.toString());
           Navigator.of(context).pushReplacementNamed(Newspage.routeName);
         } catch (e) {
           return;

@@ -65,7 +65,7 @@ class _UpdateBlackboardState extends State<UpdateBlackboard> {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 15, 10, 5),
             child: const Text(
-              'Neuer Eintrag',
+              'Eintrag bearbeiten',
               style: TextStyle(fontSize: 28),
             ),
           ),
