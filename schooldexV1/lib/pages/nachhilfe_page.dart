@@ -150,7 +150,13 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           child: const Icon(Icons.add),
           onPressed: () => _startAddNeueNachhilfe(context),
         ),
-        bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.orange,
-            Colors.white, Colors.white, Colors.white));
+        bottomNavigationBar: MyBottomNavigationBar(
+          Colors.white,
+          Colors.orange,
+          Colors.white,
+          Colors.white,
+          Colors.white,
+          Colors.white,
+        ));
   }
 }

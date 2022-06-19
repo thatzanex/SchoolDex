@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/blackboard.dart';
+import 'package:schooldex/pages/mensa_page.dart';
 import 'package:schooldex/pages/search_page.dart';
 import 'models/ag.dart';
 import 'models/nachhilfe.dart';
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
         RegistrierenPage.routeName: (ctx) => RegistrierenPage(accountStatus),
         Searchpage.routeName: (ctx) => Searchpage(nachhilfeList, agList,
             blackboardlist, ueberschrift, dbname, userId, status1),
+        Mensapage.routeName: (context) => const Mensapage(),
       },
     );
   }

@@ -208,6 +208,7 @@ class _SearchpageState extends State<Searchpage> {
               Colors.white,
               Colors.white,
               Colors.white,
+              Colors.white,
             )
           : widget.title.startsWith('AG')
               ? MyBottomNavigationBar(
@@ -216,12 +217,14 @@ class _SearchpageState extends State<Searchpage> {
                   Colors.orange,
                   Colors.white,
                   Colors.white,
+                  Colors.white,
                 )
               : MyBottomNavigationBar(
                   Colors.white,
                   Colors.white,
                   Colors.white,
                   Colors.orange,
+                  Colors.white,
                   Colors.white,
                 ),
     );

@@ -162,6 +162,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
           Colors.white,
           Colors.orange,
           Colors.white,
+          Colors.white,
         ));
   }
 }

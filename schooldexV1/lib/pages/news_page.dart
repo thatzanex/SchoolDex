@@ -128,8 +128,14 @@ class _NewspageState extends State<Newspage> {
               onPressed: () => _startAddNeueNews(context),
             )
           : Container(),
-      bottomNavigationBar: MyBottomNavigationBar(Colors.orange, Colors.white,
-          Colors.white, Colors.white, Colors.white),
+      bottomNavigationBar: MyBottomNavigationBar(
+        Colors.orange,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+      ),
     );
   }
 }

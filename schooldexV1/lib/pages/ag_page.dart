@@ -148,8 +148,14 @@ class _AGPageState extends State<AGPage> {
               onPressed: () => _startAddNeueAG(context),
             )
           : Container(),
-      bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.white,
-          Colors.orange, Colors.white, Colors.white),
+      bottomNavigationBar: MyBottomNavigationBar(
+        Colors.white,
+        Colors.white,
+        Colors.orange,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+      ),
     );
   }
 }
