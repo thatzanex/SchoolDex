@@ -156,12 +156,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextButton(
-                  child: const Text('Einloggen'),
-                  onPressed: submitData,
+                  child: Text(
+                    'Einloggen',
+                    style: TextStyle(color: Colors.orange.shade700),
+                  ),
+                  onPressed: () => submitData,
                 ),
                 TextButton(
-                  child: const Text(
+                  child: Text(
                     'Du hast noch kein Konto, dann klicke hier',
+                    style: TextStyle(color: Colors.orange.shade700),
                   ),
                   onPressed: () => selectPagetoRegistrieren(context),
                 ),

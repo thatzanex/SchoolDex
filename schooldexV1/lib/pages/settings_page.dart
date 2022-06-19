@@ -10,7 +10,9 @@ class Settingspage extends StatelessWidget {
   final String userId;
   final String benutzername;
   final String schulname;
+  final String isTeacher;
   Settingspage(
+    this.isTeacher,
     this.userId,
     this.benutzername,
     this.schulname,
@@ -40,53 +42,80 @@ class Settingspage extends StatelessWidget {
         title: const Text('Account'),
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
+      body: Column(
+        //mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Container(
               margin: const EdgeInsets.all(5),
               child: const Icon(
                 Icons.person,
                 size: 150,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'Benutzername: $benutzername',
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: const Text(
+              'Benutzername:',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'Schule: $schulname',
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+            child: Text(
+              '   $benutzername',
+              style: const TextStyle(fontSize: 20),
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'Id: $userId',
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: const Text(
+              'Schule:',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+            child: Text(
+              '   $schulname',
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: const Text(
+              'Status:',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            child: Text(
+              isTeacher.startsWith('L135')
+                  ? '   Lehrer'
+                  : isTeacher.startsWith('Admin789')
+                      ? '   Admin'
+                      : '   Schüler',
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: Center(
               child: TextButton(
-                  child: const Text(
+                  child: Text(
                     'Ausloggen',
-                    style: TextStyle(fontSize: 20),
+                    style:
+                        TextStyle(fontSize: 20, color: Colors.orange.shade700),
                   ),
                   onPressed: () {
                     _loggout(context);
                   }),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: MyBottomNavigationBar(
           Colors.white, Colors.white, Colors.white, Colors.white, Colors.white),

@@ -130,11 +130,11 @@ class _UpdateBlackboardState extends State<UpdateBlackboard> {
                             style: TextStyle(color: Colors.yellow.shade600),
                           ),
                         ),
-                        const DropdownMenuItem(
+                        DropdownMenuItem(
                           value: 5,
                           child: Text(
                             'Orange',
-                            style: TextStyle(color: Colors.orange),
+                            style: TextStyle(color: Colors.orange.shade700),
                           ),
                         ),
                       ],
@@ -151,18 +151,18 @@ class _UpdateBlackboardState extends State<UpdateBlackboard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                child: const Text(
-                  'Hinzufügen',
+                child: Text(
+                  'Speichern',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 29, 44, 89),
+                    color: Colors.orange.shade700,
                   ),
                 ),
-                onPressed: submitData,
+                onPressed: () => submitData(),
               ),
               IconButton(
                 onPressed: (() => Navigator.of(context).pop()),
                 icon: const Icon(Icons.close),
-                color: const Color.fromARGB(255, 29, 44, 89),
+                color: Colors.orange.shade700,
               )
             ],
           ),

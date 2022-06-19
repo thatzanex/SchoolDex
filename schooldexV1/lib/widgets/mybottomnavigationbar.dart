@@ -62,7 +62,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 5 - 10,
+                  width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.school_rounded),
                     color: nachhilfeIconColor,
@@ -80,7 +80,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 5 - 10,
+                  width: MediaQuery.of(context).size.width / 5 - 2,
                   child: IconButton(
                     icon: const Icon(Icons.backpack_outlined),
                     color: blackboardIconColor,

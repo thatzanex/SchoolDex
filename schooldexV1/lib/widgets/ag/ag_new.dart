@@ -101,18 +101,18 @@ class _NeueAGState extends State<NeueAG> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                child: const Text(
+                child: Text(
                   'Hinzufügen',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 29, 44, 89),
+                    color: Colors.orange.shade700,
                   ),
                 ),
-                onPressed: submitData,
+                onPressed: () => submitData(),
               ),
               IconButton(
                 onPressed: (() => Navigator.of(context).pop()),
                 icon: const Icon(Icons.close),
-                color: const Color.fromARGB(255, 29, 44, 89),
+                color: Colors.orange.shade700,
               )
             ],
           ),

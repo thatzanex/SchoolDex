@@ -77,8 +77,11 @@ class _UpdateNewsState extends State<UpdateNews> {
             ),
           ),
           TextButton(
-            child: const Text('Speichern'),
-            onPressed: submitData,
+            child: Text(
+              'Speichern',
+              style: TextStyle(color: Colors.orange.shade700),
+            ),
+            onPressed: () => submitData(),
           ),
         ],
       ),

@@ -283,12 +283,17 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                   ),
                 ),
                 TextButton(
-                  child: const Text('Registrieren'),
+                  child: Text(
+                    'Registrieren',
+                    style: TextStyle(color: Colors.orange.shade700),
+                  ),
                   onPressed: () => submitData(),
                 ),
                 TextButton(
-                  child:
-                      const Text('Du hast schon ein Konto, dann klicke hier'),
+                  child: Text(
+                    'Du hast schon ein Konto, dann klicke hier',
+                    style: TextStyle(color: Colors.orange.shade700),
+                  ),
                   onPressed: () => selectPagetoLogin(context),
                 ),
               ],
