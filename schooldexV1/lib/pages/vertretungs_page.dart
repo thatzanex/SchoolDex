@@ -10,6 +10,7 @@ class Vertretungspage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Vetretungsplan'),
         actions: <Widget>[MyAccountbottom()],
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),

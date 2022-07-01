@@ -10,13 +10,13 @@ class Mensapage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Speiseplan'),
         actions: <Widget>[MyAccountbottom()],
         backgroundColor: const Color.fromARGB(255, 29, 44, 89),
       ),
       body: WebView(
-        initialUrl:
-            'https://asb-service.de/wp-content/uploads/2022/06/speiseplan-as-kw25-26-ohne-salat.pdf',
+        initialUrl: 'https://asb-service.de/kita-schule/elisabethenschule/',
         javascriptMode: JavascriptMode.unrestricted,
         navigationDelegate: (NavigationRequest request) {
           if (request.url.contains('youtube.de')) {
