@@ -1,9 +1,11 @@
-import 'package:schooldex/db/accounts_services.dart';
+//import 'package:schooldex/db/accounts_services.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:password/password.dart';
 import 'registrieren_page.dart';
-import '../db/local_services.dart';
+import '../db/local_db/account_local.dart';
+import '../db/account_local_services.dart';
 import '../models/account.dart';
 
 class LoginPage extends StatefulWidget {
@@ -54,15 +56,19 @@ class _LoginPageState extends State<LoginPage> {
       benutzernamenController.text,
     ];
     LocalServices.instance.getAccount().then((accountlist) {
+      int salt = 1000;
       var index = accountlist
           .indexWhere((element) => matchingList.contains(element.benutzername));
+      String hash =
+          Password.hash(passwortController.text, PBKDF2(salt: salt.toString()));
       try {
-        if (passwortController.text == accountlist[index].passwort.toString()) {
+        if (passwortController.text == accountlist[index].hash.toString()) {
           LocalServices.instance
               .add(Account(
                   id: accountlist[index].id.toString(),
                   benutzername: benutzernamenController.text,
-                  passwort: passwortController.text,
+                  hash: passwortController.text,
+                  salt: salt.toString(),
                   status: accountlist[index].status.toString(),
                   schulname: schulController.text))
               .then((value) {

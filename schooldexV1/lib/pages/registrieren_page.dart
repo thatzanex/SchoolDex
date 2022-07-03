@@ -1,10 +1,12 @@
-import 'package:schooldex/db/accounts_services.dart';
+//import 'package:schooldex/db/accounts_services.dart';
 import 'package:schooldex/models/account.dart';
 import 'package:schooldex/pages/login_page.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import '../db/local_services.dart';
+import '../db/account_local_services.dart';
+import '../db/local_db/account_local.dart';
+import 'package:password/password.dart';
 
 class RegistrierenPage extends StatefulWidget {
   static const routeName = '/registrieren';
@@ -80,105 +82,114 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         codeController.text.isEmpty) {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
-      LocalServices.instance
-          .add(Account(
-              id: const Uuid().v1(),
+      String id = const Uuid().v4();
+      print(id);
+      // AccountLocalServices.instance
+      //     .add(Account(
+      //         id: id,
+      //         benutzername: benutzernamenController.text,
+      //         passwort: passwortController.text,
+      //         schulname: schulController.text,
+      //         status: codeController.text))
+      //     .then((value1) {
+      //   findAccounts();
+      //   Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+      //} else {
+      //  return;
+      //}
+      //;
+      // ServicesAccount.createTable(schulController.text).then((value) {
+      //   if (value == 'sucess') {
+      AccountLocalServices.instance.getAccount().then((accountlist) {
+        List<String> matchingList = [
+          benutzernamenController.text,
+        ];
+        int salt = 1000;
+        var index = accountlist.indexWhere(
+            (element) => matchingList.contains(element.benutzername));
+        String hashtest = Password.hash(
+            passwortController.text, PBKDF2(salt: salt.toString()));
+        try {
+          if (hashtest == accountlist[index].hash.toString()) {
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return popupdialog('Dieser Benutzername existert schon');
+                });
+            clarValues();
+          } else {
+            clarValues();
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return popupdialog('Dieser Benutzername existert schon');
+                });
+          }
+        } catch (e) {
+          if (codeController.text == 'L135' ||
+              codeController.text == 'S246' ||
+              codeController.text == 'Admin789') {
+            String hash = Password.hash(
+                passwortController.text, PBKDF2(salt: salt.toString()));
+            AccountLocalServices.instance
+                .add(Account(
+              id: id,
               benutzername: benutzernamenController.text,
-              passwort: passwortController.text,
+              hash: hash,
+              salt: salt.toString(),
+              status: codeController.text,
               schulname: schulController.text,
-              status: codeController.text))
-          .then((value1) {
-        //if (value1 == 'success') {
-        findAccounts();
-        Navigator.of(context).pushReplacementNamed(Newspage.routeName);
-        //} else {
-        //  return;
-        //}
-        //;
-        // ServicesAccount.createTable(schulController.text).then((value) {
-        //   if (value == 'sucess') {
-        // LocalServices.instance.getAccount().then((accountlist) {
-        //   String matchingList = benutzernamenController.text;
-        //   var index = accountlist.indexWhere(
-        //       (element) => matchingList.contains(element.benutzername));
-        //   try {
-        //     if (passwortController.text ==
-        //         accountlist[index].passwort.toString()) {
-        //       showModalBottomSheet(
-        //           context: context,
-        //           builder: (BuildContext context) {
-        //             return popupdialog('Dieser Benutzername existert schon');
-        //           });
-        //       clarValues();
-        //     } else {
-        //       clarValues();
-        //       showModalBottomSheet(
-        //           context: context,
-        //           builder: (BuildContext context) {
-        //             return popupdialog('Dieser Benutzername existert schon');
-        //           });
-        //     }
-        //   } catch (e) {
-        //     if (codeController.text == 'L135' ||
-        //         codeController.text == 'S246' ||
-        //         codeController.text == 'Admin789') {
-        //       LocalServices.instance
-        //           .add(Account(
-        //               benutzername: benutzernamenController.text,
-        //               passwort: passwortController.text,
-        //               schulname: schulController.text,
-        //               status: codeController.text))
-        //           .then((value1) {
-        //         List<String> matchingList = [
-        //           benutzernamenController.text,
-        //         ];
-        //         LocalServices.instance.getAccount().then((value2) {
-        //           var index = value2.indexWhere(
-        //               (element) => matchingList.contains(element.benutzername));
-        //           LocalServices.instance
-        //               .add(Account(
-        //                   id: accountlist[index].id.toString(),
-        //                   benutzername: benutzernamenController.text,
-        //                   passwort: passwortController.text,
-        //                   schulname: schulController.text,
-        //                   status: codeController.text))
-        //               .then((value) {
-        //             if (value1 == 'success') {
-        //               findAccounts();
-        //               Navigator.of(context)
-        //                   .pushReplacementNamed(Newspage.routeName);
-        //             } else {
-        //               return;
-        //             }
-        //           });
-        //         });
-        //       });
-        //     } else {
-        //       clarValues();
-        //       showModalBottomSheet(
-        //           context: context,
-        //           builder: (BuildContext context) {
-        //             return popupdialog('Geben sie einen gültigen Code ein');
-        //           });
-        //     }
-        //   }
-        // });
-        // //   } else {
-        // //     clarValues();
-        // //     showModalBottomSheet(
-        // //         context: context,
-        // //         builder: (BuildContext context) {
-        // //           return popupdialog('Die Schule konnte nicht gefunden werden');
-        // //         });
-        // //   }
-        // // });
-        // } else {
-        //   clarValues();
-        //   showModalBottomSheet(
-        //       context: context,
-        //       builder: (BuildContext context) {
-        //         return popupdialog('Geben Sie zwei gleiche Passwörter ein');
+            ))
+                .then((value1) {
+              List<String> matchingList = [
+                benutzernamenController.text,
+              ];
+              AccountLocalServices.instance.getAccount().then((value2) {
+                var index = value2.indexWhere(
+                    (element) => matchingList.contains(element.benutzername));
+                LocalServices.instance
+                    .add(Account(
+                  id: accountlist[index].id.toString(),
+                  benutzername: benutzernamenController.text,
+                  hash: hash,
+                  salt: salt.toString(),
+                  status: codeController.text,
+                  schulname: schulController.text,
+                ))
+                    .then((value) {
+                  findAccounts();
+                  Navigator.of(context)
+                      .pushReplacementNamed(Newspage.routeName);
+                });
+              });
+            });
+          } else {
+            clarValues();
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return popupdialog('Geben sie einen gültigen Code ein');
+                });
+          }
+        }
       });
+      //});
+      //   } else {
+      //     clarValues();
+      //     showModalBottomSheet(
+      //         context: context,
+      //         builder: (BuildContext context) {
+      //           return popupdialog('Die Schule konnte nicht gefunden werden');
+      //         });
+      //   }
+
+    } else {
+      clarValues();
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return popupdialog('Geben Sie zwei gleiche Passwörter ein');
+          });
     }
   }
 

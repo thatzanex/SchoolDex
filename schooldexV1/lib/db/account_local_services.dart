@@ -4,17 +4,18 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class LocalServices {
+class AccountLocalServices {
   // Singleton Pattern
-  LocalServices._privateConstructor();
-  static final LocalServices instance = LocalServices._privateConstructor();
+  AccountLocalServices._privateConstructor();
+  static final AccountLocalServices instance =
+      AccountLocalServices._privateConstructor();
 
   static Database? _database;
   Future<Database> get database async => _database ??= await _initDatabase();
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'schooldexaccount.db');
+    String path = join(documentsDirectory.path, 'accounts.db');
     return await openDatabase(
       path,
       version: 1,
@@ -27,7 +28,8 @@ class LocalServices {
       CREATE TABLE account(
         id TEXT PRIMARY KEY,
         benutzername TEXT,
-        passwort TEXT,
+        hash TEXT,
+        salt TEXT,
         status TEXT,
         schulname TEXT
       )

@@ -3,14 +3,16 @@ import 'dart:convert';
 class Account {
   String? id;
   String benutzername;
-  String passwort;
+  String hash;
+  String salt;
   String status;
   String schulname;
 
   Account({
     this.id,
     required this.benutzername,
-    required this.passwort,
+    required this.hash,
+    required this.salt,
     required this.schulname,
     required this.status,
   });
@@ -27,7 +29,8 @@ class Account {
     return Account(
       id: map['id'] as String,
       benutzername: map['benutzername'] as String,
-      passwort: map['passwort'] as String,
+      hash: map['hash'] as String,
+      salt: map['salt'] as String,
       status: map['status1'] as String,
       schulname: map['schulname'] as String,
     );
@@ -37,9 +40,10 @@ class Account {
     return Account(
       id: map['id'] as String,
       benutzername: map['benutzername'] as String,
-      passwort: map['passwort'] as String,
-      schulname: map['schulname'] as String,
+      hash: map['hash'] as String,
+      salt: map['salt'] as String,
       status: map['status'] as String,
+      schulname: map['schulname'] as String,
     );
   }
 
@@ -47,7 +51,8 @@ class Account {
     return {
       'id': id,
       'benutzername': benutzername,
-      'passwort': passwort,
+      'hash': hash,
+      'salt': salt,
       'status': status,
       'schulname': schulname,
     };

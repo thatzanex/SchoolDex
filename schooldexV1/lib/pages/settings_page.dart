@@ -3,7 +3,8 @@ import 'package:schooldex/pages/news_page.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
 import 'package:schooldex/widgets/mybottomnavigationbar.dart';
 import 'package:flutter/material.dart';
-import '../db/local_services.dart';
+import '../db/account_local_services.dart';
+import '../db/local_db/account_local.dart';
 
 class Settingspage extends StatelessWidget {
   static const routeName = '/settings';
