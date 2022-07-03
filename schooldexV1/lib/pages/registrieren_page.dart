@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../db/account_local_services.dart';
 import '../db/local_db/account_local.dart';
-import 'package:password/password.dart';
+import 'package:conduit_password_hash/conduit_password_hash.dart';
 
 class RegistrierenPage extends StatefulWidget {
   static const routeName = '/registrieren';
@@ -104,7 +104,6 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         List<String> matchingList = [
           benutzernamenController.text,
         ];
-        int salt = 1000;
         var index = accountlist.indexWhere(
             (element) => matchingList.contains(element.benutzername));
         String hashtest = Password.hash(
@@ -129,13 +128,15 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
           if (codeController.text == 'L135' ||
               codeController.text == 'S246' ||
               codeController.text == 'Admin789') {
-            String hash = Password.hash(
-                passwortController.text, PBKDF2(salt: salt.toString()));
+            var generator = PBKDF2();
+            var salt = generateAsBase64String();
+            var hash =
+                generator.generateKey("mytopsecretpassword", salt, 1000, 32);
             AccountLocalServices.instance
                 .add(Account(
               id: id,
               benutzername: benutzernamenController.text,
-              hash: hash,
+              hash: hash.toString(),
               salt: salt.toString(),
               status: codeController.text,
               schulname: schulController.text,
@@ -151,7 +152,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                     .add(Account(
                   id: accountlist[index].id.toString(),
                   benutzername: benutzernamenController.text,
-                  hash: hash,
+                  hash: hash.toString(),
                   salt: salt.toString(),
                   status: codeController.text,
                   schulname: schulController.text,

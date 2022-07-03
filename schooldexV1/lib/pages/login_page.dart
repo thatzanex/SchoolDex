@@ -2,7 +2,7 @@
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import 'package:password/password.dart';
+import 'package:conduit_password_hash/conduit_password_hash.dart';
 import 'registrieren_page.dart';
 import '../db/local_db/account_local.dart';
 import '../db/account_local_services.dart';

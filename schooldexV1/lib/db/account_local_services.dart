@@ -30,6 +30,7 @@ class AccountLocalServices {
         benutzername TEXT,
         hash TEXT,
         salt TEXT,
+        generator TEXT,
         status TEXT,
         schulname TEXT
       )

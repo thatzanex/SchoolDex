@@ -29,6 +29,7 @@ class LocalServices {
         benutzername TEXT,
         hash TEXT,
         salt TEXT,
+        generator TEXT,
         status TEXT,
         schulname TEXT
       )
