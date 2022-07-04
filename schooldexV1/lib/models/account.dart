@@ -5,6 +5,7 @@ class Account {
   String benutzername;
   String hash;
   String salt;
+  String generator;
   String status;
   String schulname;
 
@@ -13,6 +14,7 @@ class Account {
     required this.benutzername,
     required this.hash,
     required this.salt,
+    required this.generator,
     required this.schulname,
     required this.status,
   });
@@ -31,6 +33,7 @@ class Account {
       benutzername: map['benutzername'] as String,
       hash: map['hash'] as String,
       salt: map['salt'] as String,
+      generator: map['generator'] as String,
       status: map['status1'] as String,
       schulname: map['schulname'] as String,
     );
@@ -42,6 +45,7 @@ class Account {
       benutzername: map['benutzername'] as String,
       hash: map['hash'] as String,
       salt: map['salt'] as String,
+      generator: map['generator'] as String,
       status: map['status'] as String,
       schulname: map['schulname'] as String,
     );
@@ -53,6 +57,7 @@ class Account {
       'benutzername': benutzername,
       'hash': hash,
       'salt': salt,
+      'generator': generator,
       'status': status,
       'schulname': schulname,
     };

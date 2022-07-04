@@ -83,7 +83,6 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
       String id = const Uuid().v4();
-      print(id);
       // AccountLocalServices.instance
       //     .add(Account(
       //         id: id,
@@ -106,8 +105,12 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         ];
         var index = accountlist.indexWhere(
             (element) => matchingList.contains(element.benutzername));
-        String hashtest = Password.hash(
-            passwortController.text, PBKDF2(salt: salt.toString()));
+        var generator = //accountlist[index].generator.toString();
+            PBKDF2();
+        print(generator);
+        var salt = accountlist[index].salt.toString();
+        var hashtest = generator.generateBase64Key(
+            passwortController.text, salt, 1000, 32);
         try {
           if (hashtest == accountlist[index].hash.toString()) {
             showModalBottomSheet(
@@ -129,15 +132,17 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
               codeController.text == 'S246' ||
               codeController.text == 'Admin789') {
             var generator = PBKDF2();
-            var salt = generateAsBase64String();
-            var hash =
-                generator.generateKey("mytopsecretpassword", salt, 1000, 32);
+            print(generator);
+            var salt = generateAsBase64String(124);
+            var hash = generator.generateBase64Key(
+                passwortController.text, salt, 1000, 32);
             AccountLocalServices.instance
                 .add(Account(
               id: id,
               benutzername: benutzernamenController.text,
-              hash: hash.toString(),
-              salt: salt.toString(),
+              hash: hash,
+              salt: salt,
+              generator: generator.toString(),
               status: codeController.text,
               schulname: schulController.text,
             ))
@@ -153,7 +158,8 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                   id: accountlist[index].id.toString(),
                   benutzername: benutzernamenController.text,
                   hash: hash.toString(),
-                  salt: salt.toString(),
+                  salt: salt,
+                  generator: generator.toString(),
                   status: codeController.text,
                   schulname: schulController.text,
                 ))

@@ -56,19 +56,24 @@ class _LoginPageState extends State<LoginPage> {
       benutzernamenController.text,
     ];
     LocalServices.instance.getAccount().then((accountlist) {
-      int salt = 1000;
       var index = accountlist
           .indexWhere((element) => matchingList.contains(element.benutzername));
-      String hash =
-          Password.hash(passwortController.text, PBKDF2(salt: salt.toString()));
+      //var generator = accountlist[index].generator.toString();
+      PBKDF2
+          generator = //PBKDF2.parse(accountlist[index].generator.toString());
+          PBKDF2();
+      var salt = accountlist[index].salt.toString();
+      var hashtest =
+          generator.generateBase64Key(passwortController.text, salt, 1000, 32);
       try {
-        if (passwortController.text == accountlist[index].hash.toString()) {
+        if (hashtest == accountlist[index].hash.toString()) {
           LocalServices.instance
               .add(Account(
                   id: accountlist[index].id.toString(),
                   benutzername: benutzernamenController.text,
-                  hash: passwortController.text,
-                  salt: salt.toString(),
+                  hash: hashtest,
+                  salt: salt,
+                  generator: generator.toString(),
                   status: accountlist[index].status.toString(),
                   schulname: schulController.text))
               .then((value) {

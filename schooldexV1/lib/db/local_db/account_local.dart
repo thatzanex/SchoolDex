@@ -14,7 +14,7 @@ class LocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'schoolaccount.db');
+    String path = join(documentsDirectory.path, 'schoolaccounter.db');
     return await openDatabase(
       path,
       version: 1,
@@ -24,7 +24,7 @@ class LocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE accounts(
+      CREATE TABLE account(
         id TEXT PRIMARY KEY,
         benutzername TEXT,
         hash TEXT,
@@ -38,7 +38,7 @@ class LocalServices {
 
   Future<List<Account>> getAccount() async {
     Database db = await instance.database;
-    var accounts = await db.query('accounts', orderBy: 'id');
+    var accounts = await db.query('account', orderBy: 'id');
     List<Account> accountList =
         accounts.map((e) => Account.fromMapLocal(e)).toList();
     return accountList;
@@ -46,17 +46,17 @@ class LocalServices {
 
   Future<int> add(Account item) async {
     Database db = await instance.database;
-    return await db.insert('accounts', item.toMapLocal());
+    return await db.insert('account', item.toMapLocal());
   }
 
   Future<int> remove(String id) async {
     Database db = await instance.database;
-    return await db.delete('accounts', where: 'id = ?', whereArgs: [id]);
+    return await db.delete('account', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int> update(Account item) async {
     Database db = await instance.database;
-    return await db.update('accounts', item.toMapLocal(),
+    return await db.update('account', item.toMapLocal(),
         where: 'id = ?', whereArgs: [item.id]);
   }
 }

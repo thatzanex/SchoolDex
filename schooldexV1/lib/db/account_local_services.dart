@@ -15,7 +15,7 @@ class AccountLocalServices {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'accounts.db');
+    String path = join(documentsDirectory.path, 'accounter.db');
     return await openDatabase(
       path,
       version: 1,
