@@ -1,7 +1,7 @@
 import 'package:schooldex/db/ag_services.dart';
 import 'package:schooldex/widgets/popup.dart';
 import 'package:flutter/material.dart';
-import '../models/ag.dart';
+import '/models/ag.dart';
 import 'ag_update.dart';
 
 class AGliste extends StatefulWidget {
@@ -155,10 +155,19 @@ Widget buildPopupDialog(
   _startupdateAgs(BuildContext cnx) {
     Navigator.of(context).pop();
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return UpdateAGs(updateAgs, id, thema, jahrgang, beschreibung, termin,
-            schulname, userId);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: UpdateAGs(updateAgs, id, thema, jahrgang, beschreibung,
+                      termin, schulname, userId));
+            });
       },
     );
   }

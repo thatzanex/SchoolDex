@@ -14,6 +14,23 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    if('CREATE_TABLE' == $action){
+        $sql = "CREATE TABLE IF NOT EXISTS $table (
+            id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            benutzername TEXT NOT NULL,
+            passwort TEXT NOT NULL,
+            status1 TEXT NOT NULL,
+            schulname TEXT NOT NULL
+            )";
+        if ($conn->query($sql) === TRUE) {
+            echo "success";
+        } else {
+            echo "error";
+        }
+        $conn->close();
+        return;
+    }
+
     if('GET_ALL' == $action){
         $dbdata = array();
         $sql = "SELECT id, benutzername, passwort,  status1, schulname FROM $table ORDER BY id DESC";
@@ -23,7 +40,7 @@
                 $dbdata[]=$row;
             }
             $list = json_encode($dbdata);
-            echo $list;		 
+            echo $list;
         } else {
             echo "error";
         }
@@ -39,6 +56,24 @@
         $sql = "INSERT INTO $table (benutzername, passwort, status1, schulname) VALUES('$benutzername', '$passwort', '$status', '$schulname')";
         $result = $conn->query($sql);
         echo 'success';
+        return;
+    }
+
+    if('Check_Account' == $action){
+        $benutzername = $_POST['benutzername'];
+        $passwort = $_POST['passwort'];
+        $schulname = $_POST['schulname'];
+        $sql = "SELECT id, benutzername, passwort,  status1, schulname FROM $table ORDER BY id DESC";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0 && ) {
+            while($row = $result->fetch_assoc()) {
+                $dbdata[]=$row;
+            }
+            $list = json_encode($dbdata);
+            echo $list;		 
+        } else {
+            echo "error";
+        }
         return;
     }
 

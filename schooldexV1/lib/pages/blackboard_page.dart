@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/ag.dart';
-import 'package:schooldex/models/blackboard.dart';
+import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
-import '../db/nachhilfe_services.dart';
-import '../models/nachhilfe.dart';
-import '../widgets/nachhilfen/nachhilfe_list.dart';
-import '../widgets/nachhilfen/nachhilfe_new.dart';
+import '../db/blackboard_services.dart';
+import '../models/blackboard.dart';
+import '../widgets/blackboard/blackboard_list.dart';
+import '../widgets/blackboard/blackboard_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
+import 'package:intl/intl.dart';
 
-class Nachhilfepage extends StatefulWidget {
-  static const routeName = '/nachhilfe';
+class Blackboardpage extends StatefulWidget {
+  static const routeName = '/blackboard';
   String isTeacher;
   String benutzername;
   String userId;
   String schulname;
   final Function searchNachhilfen;
-  Nachhilfepage(this.isTeacher, this.userId, this.benutzername, this.schulname,
+  Blackboardpage(this.isTeacher, this.userId, this.benutzername, this.schulname,
       this.searchNachhilfen);
   @override
-  State<Nachhilfepage> createState() => _NachhilfepageState();
+  State<Blackboardpage> createState() => _BlackboardpageState();
 }
 
-class _NachhilfepageState extends State<Nachhilfepage> {
-  List<Nachhilfe> _userNachhilfen = [
-    Nachhilfe(
-        fach: 'Mathematik',
-        jahrgang: '8',
+class _BlackboardpageState extends State<Blackboardpage> {
+  List<Blackboard> _userBlackboard = [
+    Blackboard(
+        ueberschrift: 'Mathematik',
         beschreibung:
-            'Ich würde mich freuen, wenn ich euer neuer Nachhilfelehrer werden würde. Ihr könnt mich erreichen unter +49 123 4567890',
+            'Ich habe meinen Turnbeutel vergessen, hat ihn vielleicht jemand von euch gefunden?',
+        color: '5',
+        datum: DateFormat('dd.MM.yyyy').format(DateTime.now()),
         userId: '1',
         username: 'Max Mustermann',
         schulname: 'SchoolDex'),
@@ -36,46 +38,47 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   @override
   void initState() {
     super.initState();
-    _userNachhilfen = [];
+    _userBlackboard = [];
     _createTable();
-    _getNachhilfen();
+    _getBlackboards();
   }
 
   _createTable() {
-    ServicesNachhilfe.createTable(widget.schulname).then((result) {
+    ServicesBlackboard.createTable(widget.schulname).then((result) {
       if ('success' == result) {
-        _getNachhilfen();
+        _getBlackboards();
       }
     });
   }
 
-  _getNachhilfen() {
-    ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen) {
+  _getBlackboards() {
+    ServicesBlackboard.getBlackboard(widget.schulname).then((blackboard) {
       setState(() {
-        _userNachhilfen = nachhilfen;
+        _userBlackboard = blackboard;
       });
     });
   }
 
-  void _addNeueNachhilfe(
-      String nxFach,
-      String nxJahrgang,
+  void _addNeueBlackboards(
+      String nxUeberschrift,
       String nxBeschreibung,
+      String nxColor,
+      String nxDatum,
       String nxUserId,
       String nxUsername,
       String nxSchulname) {
-    ServicesNachhilfe.addNachhilfe(nxFach, nxJahrgang, nxBeschreibung, nxUserId,
-            nxUsername, nxSchulname)
+    ServicesBlackboard.addBlackboard(nxUeberschrift, nxBeschreibung, nxColor,
+            nxDatum, nxUserId, nxUsername, nxSchulname)
         .then((value) {
-      ServicesNachhilfe.getNachhilfe(nxSchulname).then((nachhilfen1) {
+      ServicesBlackboard.getBlackboard(nxSchulname).then((blackboard1) {
         setState(() {
-          _userNachhilfen = nachhilfen1;
+          _userBlackboard = blackboard1;
         });
       });
     });
   }
 
-  void _startAddNeueNachhilfe(BuildContext cnx) {
+  void _startAddNeueBlackboards(BuildContext cnx) {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
@@ -87,18 +90,18 @@ class _NachhilfepageState extends State<Nachhilfepage> {
             builder: (context, scrollController) {
               return SingleChildScrollView(
                   controller: scrollController,
-                  child: NeueNachhilfe(_addNeueNachhilfe, widget.userId,
+                  child: NeueBlackboard(_addNeueBlackboards, widget.userId,
                       widget.benutzername, widget.schulname));
             });
       },
     );
   }
 
-  void _startsearchNachhilfen(BuildContext ctx) {
+  void _startsearchBlackboards(BuildContext ctx) {
     List<AGs> listchen = [];
-    List<Blackboard> listchen1 = [];
+    List<Nachhilfe> listchen1 = [];
     widget.searchNachhilfen(
-        _userNachhilfen, listchen, listchen1, 'Nachhilfe durchsuchen');
+        listchen1, listchen, _userBlackboard, 'Suchen & Finden durchsuchen');
     Navigator.of(context).pushNamed(Searchpage.routeName);
   }
 
@@ -111,13 +114,13 @@ class _NachhilfepageState extends State<Nachhilfepage> {
               icon: const Icon(Icons.search),
               iconSize: 35,
               onPressed: () {
-                _startsearchNachhilfen(context);
+                _startsearchBlackboards(context);
               }),
           backgroundColor: const Color.fromARGB(255, 29, 44, 89),
-          title: const Text('Nachhilfeangebot'),
+          title: const Text('Suchen & Finden'),
           actions: <Widget>[
             IconButton(
-              onPressed: () => _getNachhilfen(),
+              onPressed: () => _getBlackboards(),
               icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
             ),
@@ -130,7 +133,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top,
-                child: NachhilfeListe(_userNachhilfen, widget.schulname,
+                child: BlackboardListe(_userBlackboard, widget.schulname,
                     widget.isTeacher, widget.userId),
               )
             ],
@@ -139,9 +142,14 @@ class _NachhilfepageState extends State<Nachhilfepage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 29, 44, 89),
           child: const Icon(Icons.add),
-          onPressed: () => _startAddNeueNachhilfe(context),
+          onPressed: () => _startAddNeueBlackboards(context),
         ),
-        bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.orange,
-            Colors.white, Colors.white, Colors.white));
+        bottomNavigationBar: MyBottomNavigationBar(
+          Colors.white,
+          Colors.white,
+          Colors.white,
+          Colors.orange,
+          Colors.white,
+        ));
   }
 }

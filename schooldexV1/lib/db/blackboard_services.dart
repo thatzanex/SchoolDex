@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '/models/ag.dart';
+import '/models/blackboard.dart';
 
-class ServicesAgs {
-  static final Uri root =
-      Uri.https('schooldex.gehronlein.de', '/SchoolDexDB/ag_actions.php');
+class ServicesBlackboard {
+  static final Uri root = Uri.https(
+      'schooldex.gehronlein.de', '/SchoolDexDB/blackboard_actions.php');
   static const getAllAction = 'GET_ALL';
   static const String creatTable = 'CREATE_TABLE';
-  static const String addAgsAction = 'ADD_Ags';
-  static const String updateAgsAction = 'UPDATE_Ags';
-  static const String deleteAgsAction = 'DELETE_Ags';
+  static const String addBlackboardAction = 'ADD_blackboard';
+  static const String updateBlackboardAction = 'UPDATE_blackboard';
+  static const String deleteBlackboardAction = 'DELETE_blackboard';
 
-  static Future<List<AGs>> getAgs(String schulname) async {
+  static Future<List<Blackboard>> getBlackboard(String schulname) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = getAllAction;
@@ -19,14 +19,14 @@ class ServicesAgs {
       final response = await http.post(root, body: map);
       if (200 == response.statusCode) {
         var resultsObjsJson = jsonDecode(response.body) as List;
-        List<AGs> listchen1 =
-            resultsObjsJson.map((e) => AGs.fromMap(e)).toList();
+        List<Blackboard> listchen1 =
+            resultsObjsJson.map((e) => Blackboard.fromMap(e)).toList();
         return listchen1;
       } else {
-        return <AGs>[];
+        return <Blackboard>[];
       }
     } catch (e) {
-      return <AGs>[];
+      return <Blackboard>[];
     }
   }
 
@@ -42,23 +42,24 @@ class ServicesAgs {
     }
   }
 
-  static Future<String> addAgs(
-    String thema,
-    String jahrgang,
-    String beschreibung,
-    String termin,
-    String schulname,
-    String userId,
-  ) async {
+  static Future<String> addBlackboard(
+      String ueberschrift,
+      String beschreibung,
+      String color,
+      String datum,
+      String userId,
+      String username,
+      String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = addAgsAction;
-      map["thema"] = thema;
-      map["jahrgang"] = jahrgang;
+      map["action"] = addBlackboardAction;
+      map["ueberschrift"] = ueberschrift;
       map["beschreibung"] = beschreibung;
-      map["termin"] = termin;
-      map["schulname"] = schulname;
+      map["color"] = color;
+      map["datum"] = datum;
       map["userId"] = userId;
+      map["benutzername"] = username;
+      map["schulname"] = schulname;
       final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
@@ -66,25 +67,26 @@ class ServicesAgs {
     }
   }
 
-  static Future<String> updateAgs(
-    String id,
-    String thema,
-    String jahrgang,
-    String beschreibung,
-    String termin,
-    String schulname,
-    String userId,
-  ) async {
+  static Future<String> updateBlackboard(
+      String id,
+      String ueberschrift,
+      String beschreibung,
+      String color,
+      String datum,
+      String userId,
+      String username,
+      String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = updateAgsAction;
+      map["action"] = updateBlackboardAction;
       map["id"] = id;
-      map["thema"] = thema;
-      map["jahrgang"] = jahrgang;
+      map["ueberschrift"] = ueberschrift;
       map["beschreibung"] = beschreibung;
-      map["termin"] = termin;
-      map["schulname"] = schulname;
+      map["color"] = color;
+      map["datum"] = datum;
       map["userId"] = userId;
+      map["benutzername"] = username;
+      map["schulname"] = schulname;
       final response = await http.post(root, body: map);
       return response.body;
     } catch (e) {
@@ -92,10 +94,10 @@ class ServicesAgs {
     }
   }
 
-  static Future<String> deleteAgs(String id, String schulname) async {
+  static Future<String> deleteBlackboard(String id, String schulname) async {
     try {
       var map = Map<String, dynamic>();
-      map["action"] = deleteAgsAction;
+      map["action"] = deleteBlackboardAction;
       map["id"] = id;
       map["schulname"] = schulname;
       final response = await http.post(root, body: map);

@@ -1,14 +1,16 @@
 import 'package:schooldex/db/nachhilfe_services.dart';
 import 'package:flutter/material.dart';
-import '../models/nachhilfe.dart';
+import '/models/nachhilfe.dart';
 import 'nachhilfe_update.dart';
-import 'popup.dart';
+import '../popup.dart';
 
 class NachhilfeListe extends StatefulWidget {
   final String schulname;
   final String isTeacher;
   final String userId;
-  NachhilfeListe(this.nachhilfen, this.schulname, this.isTeacher, this.userId);
+  NachhilfeListe(this.nachhilfen, this.schulname, this.isTeacher, this.userId,
+      {Key? key})
+      : super(key: key);
 
   List<Nachhilfe> nachhilfen;
   @override
@@ -176,10 +178,19 @@ Widget buildPopupDialog(
   _startupdateNachhilfe(BuildContext cnx) {
     Navigator.of(context).pop();
     showModalBottomSheet(
-      context: cnx,
+      backgroundColor: Colors.transparent,
+      context: context,
+      isScrollControlled: true,
       builder: (_) {
-        return UpdateNachhilfe(updateNachhilfe, id, fach, jahrgang,
-            beschreibung, userid, username, schulname);
+        return DraggableScrollableSheet(
+            maxChildSize: 0.88,
+            initialChildSize: 0.88,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                  controller: scrollController,
+                  child: UpdateNachhilfe(updateNachhilfe, id, fach, jahrgang,
+                      beschreibung, userid, username, schulname));
+            });
       },
     );
   }

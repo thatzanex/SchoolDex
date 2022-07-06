@@ -4,8 +4,9 @@ import '/models/account.dart';
 
 class ServicesAccount {
   static final Uri root =
-      Uri.http('localhost', '/SchoolDexDB/account_actions.php');
-  static const getAllAction = 'GET_ALL';
+      Uri.https('schooldex.gehronlein.de', '/SchoolDexDB/account_actions.php');
+  static const String getAllAction = 'GET_ALL';
+  static const String creatTables = 'CREATE_TABLE';
   static const String addAccountAction = 'ADD_Account';
   // static const String _UPDATE_Account_ACTION = 'UPDATE_Account';
   // static const String _DELETE_Account_ACTION = 'DELETE_Account';
@@ -27,6 +28,20 @@ class ServicesAccount {
       }
     } catch (e) {
       return <Account>[];
+    }
+  }
+
+  static Future<String> createTable(String schulname) async {
+    try {
+      var map = Map<String, dynamic>();
+      map["action"] = creatTables;
+      map["schulname"] = schulname;
+      final response = await http.post(root, body: map);
+      print(map);
+      print("createTable >> Response:: ${response.body}");
+      return response.body;
+    } catch (e) {
+      return 'error';
     }
   }
 

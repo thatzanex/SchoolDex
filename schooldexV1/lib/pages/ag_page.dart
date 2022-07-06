@@ -2,9 +2,11 @@ import 'package:schooldex/db/ag_services.dart';
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
-import '../widgets/ag_new.dart';
-import '../widgets/ag_list.dart';
+import 'package:schooldex/widgets/account_bottom.dart';
+import '../widgets/ag/ag_new.dart';
+import '../widgets/ag/ag_list.dart';
 import '../models/ag.dart';
+import '../models/blackboard.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 
 class AGPage extends StatefulWidget {
@@ -35,7 +37,16 @@ class _AGPageState extends State<AGPage> {
   void initState() {
     super.initState();
     _userAGs = [];
+    _createTable();
     _getAgs();
+  }
+
+  _createTable() {
+    ServicesAgs.createTable(widget.schulname).then((result) {
+      if ('success' == result) {
+        _getAgs();
+      }
+    });
   }
 
   _getAgs() {
@@ -79,7 +90,8 @@ class _AGPageState extends State<AGPage> {
 
   void _startsearchAgs(BuildContext ctx) {
     List<Nachhilfe> listchen = [];
-    widget.searchAgs(listchen, _userAGs, 'AG Angebote durchsuchen');
+    List<Blackboard> listchen1 = [];
+    widget.searchAgs(listchen, _userAGs, listchen1, 'AG Angebote durchsuchen');
     Navigator.of(context).pushNamed(Searchpage.routeName);
   }
 
@@ -87,6 +99,7 @@ class _AGPageState extends State<AGPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.search),
           iconSize: 35,
@@ -101,7 +114,8 @@ class _AGPageState extends State<AGPage> {
             onPressed: () => _getAgs(),
             icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
-          )
+          ),
+          const MyAccountbottom()
         ],
       ),
       body: SingleChildScrollView(

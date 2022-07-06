@@ -5,13 +5,13 @@ class Account {
   String benutzername;
   String passwort;
   String status;
-  String? schulname;
+  String schulname;
 
   Account({
     this.id,
     required this.benutzername,
     required this.passwort,
-    this.schulname,
+    required this.schulname,
     required this.status,
   });
 
@@ -20,8 +20,8 @@ class Account {
   factory Account.fromJson(String source) =>
       Account.fromMap(json.decode(source));
 
-  String toStringLocal() =>
-      'ShoppingItem(id: $id, benutzername: $benutzername, passwort: $passwort, status: $status, schulname: $schulname )';
+  // String toStringLocal() =>
+  //     'Account(id: $id, benutzername: $benutzername, passwort: $passwort, status: $status, schulname: $schulname )';
 
   factory Account.fromMap(Map<String, dynamic> map) {
     return Account(

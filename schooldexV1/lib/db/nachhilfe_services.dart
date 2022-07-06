@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 import '/models/nachhilfe.dart';
 
 class ServicesNachhilfe {
-  static final Uri root =
-      Uri.http('localhost', '/SchoolDexDB/nachhilfe_actions.php');
+  static final Uri root = Uri.https(
+      'schooldex.gehronlein.de', '/SchoolDexDB/nachhilfe_actions.php');
   static const getAllAction = 'GET_ALL';
+  static const String creatTable = 'CREATE_TABLE';
   static const String addNachhilfeAction = 'ADD_Nachhilfe';
   static const String updateNachhilfeAction = 'UPDATE_Nachhilfe';
   static const String deleteNachhilfeAction = 'DELETE_Nachhilfe';
@@ -26,6 +27,18 @@ class ServicesNachhilfe {
       }
     } catch (e) {
       return <Nachhilfe>[];
+    }
+  }
+
+  static Future<String> createTable(String schulname) async {
+    try {
+      var map = Map<String, dynamic>();
+      map["action"] = creatTable;
+      map["schulname"] = schulname;
+      final response = await http.post(root, body: map);
+      return response.body;
+    } catch (e) {
+      return 'error';
     }
   }
 
