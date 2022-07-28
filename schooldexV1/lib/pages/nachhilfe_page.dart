@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schooldex/db/local_db/nachhilfe_local.dart';
 import 'package:schooldex/models/ag.dart';
 import 'package:schooldex/models/blackboard.dart';
 import 'package:schooldex/pages/search_page.dart';
@@ -8,6 +9,7 @@ import '../models/nachhilfe.dart';
 import '../widgets/nachhilfen/nachhilfe_list.dart';
 import '../widgets/nachhilfen/nachhilfe_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
+import 'package:uuid/uuid.dart';
 
 class Nachhilfepage extends StatefulWidget {
   static const routeName = '/nachhilfe';
@@ -37,20 +39,20 @@ class _NachhilfepageState extends State<Nachhilfepage> {
   void initState() {
     super.initState();
     _userNachhilfen = [];
-    _createTable();
+    // _createTable();
     _getNachhilfen();
   }
 
-  _createTable() {
-    ServicesNachhilfe.createTable(widget.schulname).then((result) {
-      if ('success' == result) {
-        _getNachhilfen();
-      }
-    });
-  }
+  // _createTable() {
+  //   ServicesNachhilfe.createTable(widget.schulname).then((result) {
+  //     if ('success' == result) {
+  //       _getNachhilfen();
+  //     }
+  //   });
+  // }
 
   _getNachhilfen() {
-    ServicesNachhilfe.getNachhilfe(widget.schulname).then((nachhilfen) {
+    NachhilfeLocalServices.instance.getAccount().then((nachhilfen) {
       setState(() {
         _userNachhilfen = nachhilfen;
       });
@@ -64,10 +66,17 @@ class _NachhilfepageState extends State<Nachhilfepage> {
       String nxUserId,
       String nxUsername,
       String nxSchulname) {
-    ServicesNachhilfe.addNachhilfe(nxFach, nxJahrgang, nxBeschreibung, nxUserId,
-            nxUsername, nxSchulname)
+    NachhilfeLocalServices.instance
+        .add(Nachhilfe(
+            id: const Uuid().v1(),
+            fach: nxFach,
+            beschreibung: nxBeschreibung,
+            jahrgang: nxJahrgang,
+            userId: nxUserId,
+            username: nxUsername,
+            schulname: nxSchulname))
         .then((value) {
-      ServicesNachhilfe.getNachhilfe(nxSchulname).then((nachhilfen1) {
+      NachhilfeLocalServices.instance.getAccount().then((nachhilfen1) {
         setState(() {
           _userNachhilfen = nachhilfen1;
         });
@@ -121,7 +130,7 @@ class _NachhilfepageState extends State<Nachhilfepage> {
               icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
             ),
-            const MyAccountbottom(),
+            MyAccountbottom(),
           ],
         ),
         body: SingleChildScrollView(
@@ -141,7 +150,13 @@ class _NachhilfepageState extends State<Nachhilfepage> {
           child: const Icon(Icons.add),
           onPressed: () => _startAddNeueNachhilfe(context),
         ),
-        bottomNavigationBar: MyBottomNavigationBar(Colors.white, Colors.orange,
-            Colors.white, Colors.white, Colors.white));
+        bottomNavigationBar: MyBottomNavigationBar(
+          Colors.white,
+          Colors.orange,
+          Colors.white,
+          Colors.white,
+          Colors.white,
+          Colors.white,
+        ));
   }
 }

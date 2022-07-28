@@ -1,6 +1,7 @@
 import 'package:schooldex/db/accounts_services.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import 'registrieren_page.dart';
 import '../db/local_services.dart';
 import '../models/account.dart';
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       LocalServices.instance.getAccount().then((value) {
         try {
           widget.accountstatus(
-              value[0].id.toString(),
+              const Uuid().v1(),
               value[0].benutzername.toString(),
               value[0].schulname.toString(),
               value[0].status.toString());
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
     List<String> matchingList = [
       benutzernamenController.text,
     ];
-    ServicesAccount.getAccount(schulController.text).then((accountlist) {
+    LocalServices.instance.getAccount().then((accountlist) {
       var index = accountlist
           .indexWhere((element) => matchingList.contains(element.benutzername));
       try {
@@ -155,12 +156,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextButton(
-                  child: const Text('Einloggen'),
-                  onPressed: submitData,
+                  child: Text(
+                    'Einloggen',
+                    style: TextStyle(color: Colors.orange.shade700),
+                  ),
+                  onPressed: () => submitData,
                 ),
                 TextButton(
-                  child: const Text(
+                  child: Text(
                     'Du hast noch kein Konto, dann klicke hier',
+                    style: TextStyle(color: Colors.orange.shade700),
                   ),
                   onPressed: () => selectPagetoRegistrieren(context),
                 ),

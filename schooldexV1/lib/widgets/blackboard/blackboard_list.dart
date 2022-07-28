@@ -1,5 +1,6 @@
 import 'package:schooldex/db/blackboard_services.dart';
 import 'package:flutter/material.dart';
+import 'package:schooldex/db/local_db/blackboard_local.dart';
 import '/models/blackboard.dart';
 import 'blackboard_update.dart';
 import '../popup.dart';
@@ -20,8 +21,8 @@ class BlackboardListe extends StatefulWidget {
 class _BlackboardListeState extends State<BlackboardListe> {
   Color colorCard = Colors.grey.shade200;
   _deleteBlackboard(id) {
-    ServicesBlackboard.deleteBlackboard(id, widget.schulname).then((value) {
-      ServicesBlackboard.getBlackboard(widget.schulname).then((blackboard2) {
+    BlackboardLocalServices.instance.remove(id).then((value) {
+      BlackboardLocalServices.instance.getAccount().then((blackboard2) {
         setState(() {
           widget.blackboards = blackboard2;
         });
@@ -38,10 +39,18 @@ class _BlackboardListeState extends State<BlackboardListe> {
       String userId,
       String username,
       String schulname) {
-    ServicesBlackboard.updateBlackboard(id, ueberschrift, beschreibung, color,
-            datum, userId, username, schulname)
+    BlackboardLocalServices.instance
+        .update(Blackboard(
+            id: id,
+            ueberschrift: ueberschrift,
+            beschreibung: beschreibung,
+            color: color,
+            datum: datum,
+            userId: userId,
+            username: username,
+            schulname: schulname))
         .then((value) {
-      ServicesBlackboard.getBlackboard(schulname).then((blackboard1) {
+      BlackboardLocalServices.instance.getAccount().then((blackboard1) {
         setState(() {
           widget.blackboards = blackboard1;
         });

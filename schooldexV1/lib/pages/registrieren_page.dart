@@ -3,6 +3,7 @@ import 'package:schooldex/models/account.dart';
 import 'package:schooldex/pages/login_page.dart';
 import 'package:schooldex/pages/news_page.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import '../db/local_services.dart';
 
 class RegistrierenPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
   }
 
   findAccounts() {
-    //LocalServices.instance.remove('22');
+    //LocalServices.instance.remove('1');
     try {
       LocalServices.instance.getAccount().then((value) {
         try {
@@ -79,90 +80,105 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
         codeController.text.isEmpty) {
       return;
     } else if (wiederholungsController.text == passwortController.text) {
-      // ServicesAccount.createTable(schulController.text).then((value) {
-      //   if (value == 'sucess') {
-      ServicesAccount.getAccount(schulController.text).then((accountlist) {
-        print('hallo');
-        String matchingList = benutzernamenController.text;
-        var index = accountlist.indexWhere(
-            (element) => matchingList.contains(element.benutzername));
-        try {
-          if (passwortController.text ==
-              accountlist[index].passwort.toString()) {
-            showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return popupdialog('Dieser Benutzername existert schon');
-                });
-            clarValues();
-          } else {
-            clarValues();
-            showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return popupdialog('Dieser Benutzername existert schon');
-                });
-          }
-        } catch (e) {
-          if (codeController.text == 'L135' ||
-              codeController.text == 'S246' ||
-              codeController.text == 'Admin789') {
-            ServicesAccount.addAccount(
-                    benutzernamenController.text,
-                    passwortController.text,
-                    schulController.text,
-                    codeController.text)
-                .then((value1) {
-              List<String> matchingList = [
-                benutzernamenController.text,
-              ];
-              ServicesAccount.getAccount(schulController.text).then((value2) {
-                var index = value2.indexWhere(
-                    (element) => matchingList.contains(element.benutzername));
-                LocalServices.instance
-                    .add(Account(
-                        id: accountlist[index].id.toString(),
-                        benutzername: benutzernamenController.text,
-                        passwort: passwortController.text,
-                        schulname: schulController.text,
-                        status: codeController.text))
-                    .then((value) {
-                  if (value1 == 'success') {
-                    findAccounts();
-                    Navigator.of(context)
-                        .pushReplacementNamed(Newspage.routeName);
-                  } else {
-                    return;
-                  }
-                });
-              });
-            });
-          } else {
-            clarValues();
-            showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return popupdialog('Geben sie einen gültigen Code ein');
-                });
-          }
-        }
+      LocalServices.instance
+          .add(Account(
+              id: const Uuid().v1(),
+              benutzername: benutzernamenController.text,
+              passwort: passwortController.text,
+              schulname: schulController.text,
+              status: codeController.text))
+          .then((value1) {
+        //if (value1 == 'success') {
+        findAccounts();
+        Navigator.of(context).pushReplacementNamed(Newspage.routeName);
+        //} else {
+        //  return;
+        //}
+        //;
+        // ServicesAccount.createTable(schulController.text).then((value) {
+        //   if (value == 'sucess') {
+        // LocalServices.instance.getAccount().then((accountlist) {
+        //   String matchingList = benutzernamenController.text;
+        //   var index = accountlist.indexWhere(
+        //       (element) => matchingList.contains(element.benutzername));
+        //   try {
+        //     if (passwortController.text ==
+        //         accountlist[index].passwort.toString()) {
+        //       showModalBottomSheet(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return popupdialog('Dieser Benutzername existert schon');
+        //           });
+        //       clarValues();
+        //     } else {
+        //       clarValues();
+        //       showModalBottomSheet(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return popupdialog('Dieser Benutzername existert schon');
+        //           });
+        //     }
+        //   } catch (e) {
+        //     if (codeController.text == 'L135' ||
+        //         codeController.text == 'S246' ||
+        //         codeController.text == 'Admin789') {
+        //       LocalServices.instance
+        //           .add(Account(
+        //               benutzername: benutzernamenController.text,
+        //               passwort: passwortController.text,
+        //               schulname: schulController.text,
+        //               status: codeController.text))
+        //           .then((value1) {
+        //         List<String> matchingList = [
+        //           benutzernamenController.text,
+        //         ];
+        //         LocalServices.instance.getAccount().then((value2) {
+        //           var index = value2.indexWhere(
+        //               (element) => matchingList.contains(element.benutzername));
+        //           LocalServices.instance
+        //               .add(Account(
+        //                   id: accountlist[index].id.toString(),
+        //                   benutzername: benutzernamenController.text,
+        //                   passwort: passwortController.text,
+        //                   schulname: schulController.text,
+        //                   status: codeController.text))
+        //               .then((value) {
+        //             if (value1 == 'success') {
+        //               findAccounts();
+        //               Navigator.of(context)
+        //                   .pushReplacementNamed(Newspage.routeName);
+        //             } else {
+        //               return;
+        //             }
+        //           });
+        //         });
+        //       });
+        //     } else {
+        //       clarValues();
+        //       showModalBottomSheet(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return popupdialog('Geben sie einen gültigen Code ein');
+        //           });
+        //     }
+        //   }
+        // });
+        // //   } else {
+        // //     clarValues();
+        // //     showModalBottomSheet(
+        // //         context: context,
+        // //         builder: (BuildContext context) {
+        // //           return popupdialog('Die Schule konnte nicht gefunden werden');
+        // //         });
+        // //   }
+        // // });
+        // } else {
+        //   clarValues();
+        //   showModalBottomSheet(
+        //       context: context,
+        //       builder: (BuildContext context) {
+        //         return popupdialog('Geben Sie zwei gleiche Passwörter ein');
       });
-      //   } else {
-      //     clarValues();
-      //     showModalBottomSheet(
-      //         context: context,
-      //         builder: (BuildContext context) {
-      //           return popupdialog('Die Schule konnte nicht gefunden werden');
-      //         });
-      //   }
-      // });
-    } else {
-      clarValues();
-      showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return popupdialog('Geben Sie zwei gleiche Passwörter ein');
-          });
     }
   }
 
@@ -267,12 +283,17 @@ class _RegistrierenPageState extends State<RegistrierenPage> {
                   ),
                 ),
                 TextButton(
-                  child: const Text('Registrieren'),
+                  child: Text(
+                    'Registrieren',
+                    style: TextStyle(color: Colors.orange.shade700),
+                  ),
                   onPressed: () => submitData(),
                 ),
                 TextButton(
-                  child:
-                      const Text('Du hast schon ein Konto, dann klicke hier'),
+                  child: Text(
+                    'Du hast schon ein Konto, dann klicke hier',
+                    style: TextStyle(color: Colors.orange.shade700),
+                  ),
                   onPressed: () => selectPagetoLogin(context),
                 ),
               ],

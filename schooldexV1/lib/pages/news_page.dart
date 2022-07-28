@@ -1,3 +1,4 @@
+import 'package:schooldex/db/local_db/news_local.dart';
 import 'package:schooldex/db/news_services.dart';
 import 'package:flutter/material.dart';
 import 'package:schooldex/widgets/account_bottom.dart';
@@ -6,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import '../widgets/news/news_list.dart';
 import '../widgets/news/news_new.dart';
+import 'package:uuid/uuid.dart';
 
 class Newspage extends StatefulWidget {
   static const routeName = '/news';
@@ -32,20 +34,20 @@ class _NewspageState extends State<Newspage> {
   void initState() {
     super.initState();
     _userNews = [];
-    _createTable();
+    //_createTable();
     _getNews();
   }
 
-  _createTable() {
-    ServicesNews.createTable(widget.schulname).then((result) {
-      if ('success' == result) {
-        _getNews();
-      }
-    });
-  }
+  // _createTable() {
+  //   ServicesNews.createTable(widget.schulname).then((result) {
+  //     if ('success' == result) {
+  //       _getNews();
+  //     }
+  //   });
+  // }
 
   _getNews() {
-    ServicesNews.getNews(widget.schulname).then((news1) {
+    NewsLocalServices.instance.getAccount().then((news1) {
       setState(() {
         _userNews = news1;
       });
@@ -54,10 +56,16 @@ class _NewspageState extends State<Newspage> {
 
   void _addNeueNews(String nxUeberschrift, String nxInhalt, String nxDatum,
       String nxSchulname, String nxuserId) {
-    ServicesNews.addNews(
-            nxUeberschrift, nxInhalt, nxDatum, nxSchulname, nxuserId)
+    NewsLocalServices.instance
+        .add(News(
+            id: const Uuid().v1(),
+            ueberschrift: nxUeberschrift,
+            inhalt: nxInhalt,
+            datum: nxDatum,
+            schulname: nxSchulname,
+            userId: nxuserId))
         .then((value) {
-      ServicesNews.getNews(nxSchulname).then((news2) {
+      NewsLocalServices.instance.getAccount().then((news2) {
         setState(() {
           _userNews = news2;
         });
@@ -97,7 +105,7 @@ class _NewspageState extends State<Newspage> {
             icon: const Icon(Icons.replay_outlined),
             iconSize: 35,
           ),
-          const MyAccountbottom()
+          MyAccountbottom()
         ],
       ),
       body: SingleChildScrollView(
@@ -120,8 +128,14 @@ class _NewspageState extends State<Newspage> {
               onPressed: () => _startAddNeueNews(context),
             )
           : Container(),
-      bottomNavigationBar: MyBottomNavigationBar(Colors.orange, Colors.white,
-          Colors.white, Colors.white, Colors.white),
+      bottomNavigationBar: MyBottomNavigationBar(
+        Colors.orange,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+        Colors.white,
+      ),
     );
   }
 }

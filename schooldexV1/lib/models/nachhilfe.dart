@@ -27,4 +27,16 @@ class Nachhilfe {
       schulname: map['schulname'] as String,
     );
   }
+
+  Map<String, dynamic> toMapLocal() {
+    return {
+      'id': id,
+      'fach': fach,
+      'jahrgang': jahrgang,
+      'beschreibung': beschreibung,
+      'userId': userId,
+      'benutzername': username,
+      'schulname': schulname,
+    };
+  }
 }

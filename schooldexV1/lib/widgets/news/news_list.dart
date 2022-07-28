@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schooldex/db/local_db/news_local.dart';
 import '/models/news.dart';
 import 'news_update.dart';
 import '/db/news_services.dart';
@@ -17,8 +18,8 @@ class NewsListe extends StatefulWidget {
 
 class _NewsListeState extends State<NewsListe> {
   _deleteNews(id) {
-    ServicesNews.deleteNews(id, widget.schulname).then((value) {
-      ServicesNews.getNews(widget.schulname).then((news2) {
+    NewsLocalServices.instance.remove(id).then((value) {
+      NewsLocalServices.instance.getAccount().then((news2) {
         setState(() {
           widget.neuigkeiten = news2;
         });
@@ -28,9 +29,16 @@ class _NewsListeState extends State<NewsListe> {
 
   _updateNews(String id, String ueberschrift, String inhalt, String datum,
       String schulname, String userId) {
-    ServicesNews.updateNews(id, ueberschrift, inhalt, datum, schulname, userId)
+    NewsLocalServices.instance
+        .update(News(
+            id: id,
+            ueberschrift: ueberschrift,
+            inhalt: inhalt,
+            datum: datum,
+            schulname: schulname,
+            userId: userId))
         .then((value) {
-      ServicesNews.getNews(schulname).then((news1) {
+      NewsLocalServices.instance.getAccount().then((news1) {
         setState(() {
           widget.neuigkeiten = news1;
         });
@@ -40,7 +48,7 @@ class _NewsListeState extends State<NewsListe> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 700,
       child: ListView.builder(
         itemBuilder: (cnx, index) {

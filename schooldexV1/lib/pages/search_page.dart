@@ -130,7 +130,7 @@ class _SearchpageState extends State<Searchpage> {
                 ],
               ),
             )
-          : widget.title.startsWith('Ag')
+          : widget.title.startsWith('AG')
               ? SingleChildScrollView(
                   child: Column(
                     children: [
@@ -154,11 +154,11 @@ class _SearchpageState extends State<Searchpage> {
                                       MediaQuery.of(context).padding.top) *
                                   0.7,
                               child: AGliste(
-                                  agListecombiniert,
-                                  widget.schulname,
-                                  widget.isTeacher,
-                                  widget.userId,
-                                  258),
+                                agListecombiniert,
+                                widget.schulname,
+                                widget.isTeacher,
+                                widget.userId,
+                              ),
                             )
                           ],
                         ),
@@ -208,14 +208,25 @@ class _SearchpageState extends State<Searchpage> {
               Colors.white,
               Colors.white,
               Colors.white,
+              Colors.white,
             )
-          : MyBottomNavigationBar(
-              Colors.white,
-              Colors.white,
-              Colors.orange,
-              Colors.white,
-              Colors.white,
-            ),
+          : widget.title.startsWith('AG')
+              ? MyBottomNavigationBar(
+                  Colors.white,
+                  Colors.white,
+                  Colors.orange,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                )
+              : MyBottomNavigationBar(
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.orange,
+                  Colors.white,
+                  Colors.white,
+                ),
     );
   }
 }

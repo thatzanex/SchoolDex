@@ -1,20 +1,21 @@
 import 'dart:io';
-import '../models/account.dart';
+import '/models/blackboard.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class LocalServices {
+class BlackboardLocalServices {
   // Singleton Pattern
-  LocalServices._privateConstructor();
-  static final LocalServices instance = LocalServices._privateConstructor();
+  BlackboardLocalServices._privateConstructor();
+  static final BlackboardLocalServices instance =
+      BlackboardLocalServices._privateConstructor();
 
   static Database? _database;
   Future<Database> get database async => _database ??= await _initDatabase();
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'schooldexaccount.db');
+    String path = join(documentsDirectory.path, 'schoolblackboards.db');
     return await openDatabase(
       path,
       version: 1,
@@ -24,37 +25,40 @@ class LocalServices {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE account(
+      CREATE TABLE blackboard(
         id TEXT PRIMARY KEY,
+        ueberschrift TEXT,
+        beschreibung TEXT,
+        color TEXT,
+        datum TEXT,
+        userId TEXT,
         benutzername TEXT,
-        passwort TEXT,
-        status TEXT,
         schulname TEXT
       )
     ''');
   }
 
-  Future<List<Account>> getAccount() async {
+  Future<List<Blackboard>> getAccount() async {
     Database db = await instance.database;
-    var accounts = await db.query('account', orderBy: 'id');
-    List<Account> accountList =
-        accounts.map((e) => Account.fromMapLocal(e)).toList();
+    var accounts = await db.query('blackboard', orderBy: 'id');
+    List<Blackboard> accountList =
+        accounts.map((e) => Blackboard.fromMap(e)).toList();
     return accountList;
   }
 
-  Future<int> add(Account item) async {
+  Future<int> add(Blackboard item) async {
     Database db = await instance.database;
-    return await db.insert('account', item.toMapLocal());
+    return await db.insert('blackboard', item.toMapLocal());
   }
 
   Future<int> remove(String id) async {
     Database db = await instance.database;
-    return await db.delete('account', where: 'id = ?', whereArgs: [id]);
+    return await db.delete('blackboard', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> update(Account item) async {
+  Future<int> update(Blackboard item) async {
     Database db = await instance.database;
-    return await db.update('account', item.toMapLocal(),
+    return await db.update('blackboard', item.toMapLocal(),
         where: 'id = ?', whereArgs: [item.id]);
   }
 }

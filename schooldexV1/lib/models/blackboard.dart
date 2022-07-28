@@ -30,4 +30,17 @@ class Blackboard {
       schulname: map['schulname'] as String,
     );
   }
+
+  Map<String, dynamic> toMapLocal() {
+    return {
+      'id': id,
+      'ueberschrift': ueberschrift,
+      'beschreibung': beschreibung,
+      'color': color,
+      'datum': datum,
+      'userId': userId,
+      'benutzername': username,
+      'schulname': schulname
+    };
+  }
 }

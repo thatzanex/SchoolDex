@@ -114,8 +114,11 @@ class _UpdateAGsState extends State<UpdateAGs> {
             ),
           ),
           TextButton(
-            child: const Text('Hinzufügen'),
-            onPressed: submitData,
+            child: Text(
+              'Speichern',
+              style: TextStyle(color: Colors.orange.shade700),
+            ),
+            onPressed: () => submitData(),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schooldex/db/local_db/blackboard_local.dart';
 import 'package:schooldex/models/ag.dart';
 import 'package:schooldex/models/nachhilfe.dart';
 import 'package:schooldex/pages/search_page.dart';
@@ -9,6 +10,7 @@ import '../widgets/blackboard/blackboard_list.dart';
 import '../widgets/blackboard/blackboard_new.dart';
 import '../widgets/MyBottomNavigationBar.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class Blackboardpage extends StatefulWidget {
   static const routeName = '/blackboard';
@@ -26,6 +28,7 @@ class Blackboardpage extends StatefulWidget {
 class _BlackboardpageState extends State<Blackboardpage> {
   List<Blackboard> _userBlackboard = [
     Blackboard(
+        //id: '5',
         ueberschrift: 'Mathematik',
         beschreibung:
             'Ich habe meinen Turnbeutel vergessen, hat ihn vielleicht jemand von euch gefunden?',
@@ -35,24 +38,25 @@ class _BlackboardpageState extends State<Blackboardpage> {
         username: 'Max Mustermann',
         schulname: 'SchoolDex'),
   ];
+
   @override
   void initState() {
     super.initState();
     _userBlackboard = [];
-    _createTable();
+    //_createTable();
     _getBlackboards();
   }
 
-  _createTable() {
-    ServicesBlackboard.createTable(widget.schulname).then((result) {
-      if ('success' == result) {
-        _getBlackboards();
-      }
-    });
-  }
+  // _createTable() {
+  //   ServicesBlackboard.createTable(widget.schulname).then((result) {
+  //     if ('success' == result) {
+  //       _getBlackboards();
+  //     }
+  //   });
+  // }
 
   _getBlackboards() {
-    ServicesBlackboard.getBlackboard(widget.schulname).then((blackboard) {
+    BlackboardLocalServices.instance.getAccount().then((blackboard) {
       setState(() {
         _userBlackboard = blackboard;
       });
@@ -67,10 +71,18 @@ class _BlackboardpageState extends State<Blackboardpage> {
       String nxUserId,
       String nxUsername,
       String nxSchulname) {
-    ServicesBlackboard.addBlackboard(nxUeberschrift, nxBeschreibung, nxColor,
-            nxDatum, nxUserId, nxUsername, nxSchulname)
+    BlackboardLocalServices.instance
+        .add(Blackboard(
+            id: const Uuid().v1(),
+            ueberschrift: nxUeberschrift,
+            beschreibung: nxBeschreibung,
+            color: nxColor,
+            datum: nxDatum,
+            userId: nxUserId,
+            username: nxUsername,
+            schulname: nxSchulname))
         .then((value) {
-      ServicesBlackboard.getBlackboard(nxSchulname).then((blackboard1) {
+      BlackboardLocalServices.instance.getAccount().then((blackboard1) {
         setState(() {
           _userBlackboard = blackboard1;
         });
@@ -124,7 +136,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
               icon: const Icon(Icons.replay_outlined),
               iconSize: 35,
             ),
-            const MyAccountbottom(),
+            MyAccountbottom(),
           ],
         ),
         body: SingleChildScrollView(
@@ -149,6 +161,7 @@ class _BlackboardpageState extends State<Blackboardpage> {
           Colors.white,
           Colors.white,
           Colors.orange,
+          Colors.white,
           Colors.white,
         ));
   }

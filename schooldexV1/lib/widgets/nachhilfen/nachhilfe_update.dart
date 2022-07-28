@@ -102,8 +102,11 @@ class _UpdateNachhilfeState extends State<UpdateNachhilfe> {
             ),
           ),
           TextButton(
-            child: const Text('Speichern'),
-            onPressed: submitData,
+            child: Text(
+              'Speichern',
+              style: TextStyle(color: Colors.orange.shade700),
+            ),
+            onPressed: () => submitData(),
           ),
         ],
       ),

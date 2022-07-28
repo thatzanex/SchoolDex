@@ -27,4 +27,15 @@ class News {
       userId: map['userId'] as String,
     );
   }
+
+  Map<String, dynamic> toMapLocal() {
+    return {
+      'id': id,
+      'ueberschrift': ueberschrift,
+      'inhalt': inhalt,
+      'datum': datum,
+      'schulname': schulname,
+      'userId': userId,
+    };
+  }
 }

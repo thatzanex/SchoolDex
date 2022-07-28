@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schooldex/models/blackboard.dart';
+import 'package:schooldex/pages/mensa_page.dart';
 import 'package:schooldex/pages/search_page.dart';
 import 'models/ag.dart';
 import 'models/nachhilfe.dart';
@@ -55,11 +56,13 @@ class MyApp extends StatelessWidget {
         Blackboardpage.routeName: (ctx) =>
             Blackboardpage(status1, userId, username, dbname, searchItems),
         Vertretungspage.routeName: (ctx) => const Vertretungspage(),
-        Settingspage.routeName: (ctx) => Settingspage(username, dbname),
+        Settingspage.routeName: (ctx) =>
+            Settingspage(status1, userId, username, dbname),
         LoginPage.routeName: (ctx) => LoginPage(accountStatus),
         RegistrierenPage.routeName: (ctx) => RegistrierenPage(accountStatus),
         Searchpage.routeName: (ctx) => Searchpage(nachhilfeList, agList,
             blackboardlist, ueberschrift, dbname, userId, status1),
+        Mensapage.routeName: (context) => const Mensapage(),
       },
     );
   }
