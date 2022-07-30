@@ -48,13 +48,22 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.9.2
   flutter_lints: ^2.0.1
-
-  flutter_native_splash: ^2.0.1+1
+  flutter_native_splash: ^2.1.0
 
 flutter_native_splash:
   color: "F39018" #Orange
   image: images/Logo ohne Hintergrund.png
+  android_12:
+    # The image parameter sets the splash screen icon image.  If this parameter is not specified,
+    # the app's launcher icon will be used instead.
+    # App icon with an icon background: This should be 960×960 pixels, and fit within a circle
+    # 640 pixels in diameter.
+    # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
+    # 768 pixels in diameter.
+    image: images/android12splash.png
 
+    # Splash screen background color.
+    color: "#F39018"
   
 
 #flutter_icons:
