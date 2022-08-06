@@ -55,19 +55,21 @@ class _NachhilfeListeState extends State<NachhilfeListe> {
     return ListView.builder(
       itemBuilder: (cnx, index) {
         if (widget.nachhilfen[index].fach.startsWith('Mathe')) {
-          colorCard = Colors.blue.shade300;
+          colorCard = Color(0xFFA0C4FF);
         } else if (widget.nachhilfen[index].fach.startsWith('Deutsch')) {
-          colorCard = Colors.orange;
+          colorCard = Color(0xFFFD9E9E);
         } else if (widget.nachhilfen[index].fach.startsWith('Fran')) {
-          colorCard = Colors.red;
-        } else if (widget.nachhilfen[index].fach.startsWith('Englis')) {
-          colorCard = Colors.yellow.shade600;
+          colorCard = Color(0xFF86e7b8);
+        } else if (widget.nachhilfen[index].fach.startsWith('Englisch')) {
+          colorCard = Color(0xFFFAE38A);
         } else if (widget.nachhilfen[index].fach.startsWith('Bio')) {
-          colorCard = Colors.green.shade400;
+          colorCard = Color(0xFF91F5AD); //91F5AD; 93ff96
         } else if (widget.nachhilfen[index].fach.startsWith('Chemie')) {
-          colorCard = Colors.grey;
+          colorCard = Color(0xFF9BF6FF);
         } else if (widget.nachhilfen[index].fach.startsWith('Physik')) {
-          colorCard = Colors.blue.shade100;
+          colorCard = Color(0xFFBDB2FF);
+        } else if (widget.nachhilfen[index].fach.startsWith('Geschi')) {
+          colorCard = Color(0xFFFDCC90);
         }
         return GestureDetector(
           onTap: () => showDialog(

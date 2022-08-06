@@ -63,15 +63,15 @@ class _BlackboardListeState extends State<BlackboardListe> {
     return ListView.builder(
       itemBuilder: (cnx, index) {
         if (widget.blackboards[index].color.toString() == '1') {
-          colorCard = Colors.red;
+          colorCard = Color(0xFFFD9E9E);
         } else if (widget.blackboards[index].color.toString() == '2') {
-          colorCard = Colors.green.shade400;
+          colorCard = Color(0xFF86e7b8);
         } else if (widget.blackboards[index].color.toString() == '3') {
-          colorCard = Colors.blue.shade300;
+          colorCard = Color(0xFFA0C4FF);
         } else if (widget.blackboards[index].color.toString() == '4') {
-          colorCard = Colors.yellow.shade600;
+          colorCard = Color(0xFFFAE38A);
         } else if (widget.blackboards[index].color.toString() == '5') {
-          colorCard = Colors.orange;
+          colorCard = Color(0xFFFDCC90);
         }
         return GestureDetector(
           onTap: () => showDialog(

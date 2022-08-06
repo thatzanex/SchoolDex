@@ -100,7 +100,7 @@ class _NeueBlackboardState extends State<NeueBlackboard> {
                           value: 3,
                           child: Text(
                             'Blau',
-                            style: TextStyle(color: Colors.blue.shade300),
+                            style: TextStyle(color: Colors.indigo.shade400),
                           ),
                         ),
                         DropdownMenuItem(
